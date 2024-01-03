@@ -24,6 +24,12 @@ library(vusa)
 
 Once loaded, you can access the functions contained within the package. For detailed usage instructions and examples, please refer to the individual documentation for each function.
 
+Please note that there may be some untranslated words from Dutch and that running R-cmd-check may fail. However, as a collection, you might find one or two functions that are interesting to you. Feel free to copy the source code to your own projects.
+
+## Reference Page
+
+We are currently working on ordering the reference page on the [reference](https://vusaverse.github.io/vusa/reference/index.html) page to make it easier for users to find relevant functions. 
+
 ## Contributing
 
 Contributions to the VUSA package are welcome. If you have a function that you believe would be beneficial to others, feel free to submit a pull request. Please ensure that your function adheres to the guidelines and restrictions outlined above.
