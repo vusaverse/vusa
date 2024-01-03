@@ -10,9 +10,23 @@ Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 Imports: 
+    BurStMisc,
     cli,
+    data.table,
+    dataMaid,
+    digest,
+    dplyr,
+    fst,
+    janitor,
+    lubridate,
     magrittr,
+    purrr,
+    RCurl,
     readr,
+    rlang,
     rstudioapi,
     stringr,
-    this.path
+    this.path,
+    tibble,
+    vvconverter,
+    vvmover
