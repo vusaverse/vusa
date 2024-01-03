@@ -16,6 +16,9 @@
     <loc>/index.html</loc>
   </url>
   <url>
+    <loc>/reference/archive_script.html</loc>
+  </url>
+  <url>
     <loc>/reference/clear_global.html</loc>
   </url>
   <url>
@@ -25,10 +28,25 @@
     <loc>/reference/close_view.html</loc>
   </url>
   <url>
+    <loc>/reference/get_last_n_commit_date.html</loc>
+  </url>
+  <url>
+    <loc>/reference/get_last_n_commit_info.html</loc>
+  </url>
+  <url>
+    <loc>/reference/grapes-notin-grapes.html</loc>
+  </url>
+  <url>
     <loc>/reference/index.html</loc>
   </url>
   <url>
     <loc>/reference/insert_filepath_code.html</loc>
+  </url>
+  <url>
+    <loc>/reference/pipe.html</loc>
+  </url>
+  <url>
+    <loc>/reference/sa_voorbereidingen.html</loc>
   </url>
   <url>
     <loc>/reference/source_index.html</loc>
