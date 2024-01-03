@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>/404.html</loc>
+  </url>
+  <url>
+    <loc>/LICENSE-text.html</loc>
+  </url>
+  <url>
+    <loc>/LICENSE.html</loc>
+  </url>
+  <url>
+    <loc>/authors.html</loc>
+  </url>
+  <url>
+    <loc>/index.html</loc>
+  </url>
+  <url>
+    <loc>/reference/clear_global.html</loc>
+  </url>
+  <url>
+    <loc>/reference/clear_script_objects.html</loc>
+  </url>
+  <url>
+    <loc>/reference/close_view.html</loc>
+  </url>
+  <url>
+    <loc>/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>/reference/insert_filepath_code.html</loc>
+  </url>
+  <url>
+    <loc>/reference/source_index.html</loc>
+  </url>
+</urlset>
