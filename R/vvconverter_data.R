@@ -10,9 +10,9 @@
 #' vvconverter_data("Dates.csv")
 vvconverter_data <- function(file = NULL) {
   if (is.null(file)) {
-    dir(system.file("extdata", package = "vvconverter"))
+    dir(system.file("extdata", package = "vusa"))
   } else {
-    datafile <- system.file("extdata", file, package = "vvconverter", mustWork = TRUE)
+    datafile <- system.file("extdata", file, package = "vusa", mustWork = TRUE)
     dataframe <- utils::read.csv(datafile, sep = ";")
     return(dataframe)
   }
