@@ -3,14 +3,10 @@ template:
   bootstrap: 5
   
 reference:
-- title: Other methods.
+- title: Assertionmethods.
   desc: |
-    Methods that need to be indexed.
+    Methods that run assertions on objects.
   contents:
-  - "%notin%" 
-  - academic_period
-  - add_attribute
-  - archive_script
   - assert_aanwezige_kolommen
   - assert_character_named
   - assert_character_set_equal
@@ -27,13 +23,6 @@ reference:
   - assertion_geen_kolommen_met_enkel_na
   - assertion_meer_dan_0_rijen
   - assertion_message
-  - auto_document
-  - bepaal_doorstroom
-  - bepaal_subtotalen_met_transitiematrix
-  - bereken_na_waarden
-  - build_analysis_set
-  - build_as
-  - build_kolomwaarden
   - check_assertions
   - check_classes
   - check_columns_for_double_rows
@@ -41,6 +30,39 @@ reference:
   - check_education_name
   - check_name
   - check_variable
+  
+- title: Read and Write methods.
+  desc: |
+    Methods that read and write files.
+  contents:
+  - read_file_proj
+  - readrds_csv
+  - save_fst
+  - save_multiple_tableau
+  - savecsv
+  - savefst_csv
+  - saverda
+  - saverds_csv
+  - write_file
+  - write_file_proj
+
+
+
+- title: Other methods.
+  desc: |
+    Methods that need to be indexed.
+  contents:
+  - "%notin%" 
+  - academic_period
+  - add_attribute
+  - archive_script
+  - auto_document
+  - bepaal_doorstroom
+  - bepaal_subtotalen_met_transitiematrix
+  - bereken_na_waarden
+  - build_analysis_set
+  - build_as
+  - build_kolomwaarden
   - clear_global
   - clear_script_objects
   - close_view
@@ -124,10 +146,8 @@ reference:
   - rapport_result_test_introduction
   - ratio_df_columns
   - read_documentation
-  - read_file_proj
   - read_kolomwaarden
   - read_kolomwaarden_testen
-  - readrds_csv
   - regex_content_parameter
   - return_assertions_message
   - return_assertions_message_testen
@@ -140,12 +160,6 @@ reference:
   - sa_network_dir_set
   - sa_set_seed
   - sa_voorbereidingen
-  - save_fst
-  - save_multiple_tableau
-  - savecsv
-  - savefst_csv
-  - saverda
-  - saverds_csv
   - schedule_job
   - sculpt_analysis_set
   - sculpt_as
@@ -190,6 +204,4 @@ reference:
   - wrapper_determine_outflow_study_year
   - wrapper_translate_colnames_documentation
   - write_documentatie_tests
-  - write_file
-  - write_file_proj
   - write_pattern_table
