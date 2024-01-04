@@ -91,7 +91,6 @@ reference:
   - get_last_n_commit_date
   - get_last_n_commit_info
   - get_ratio
-  - grapes-notin-grapes
   - has_globale_identifiers
   - hash_var
   - insert_filepath_code
@@ -119,7 +118,6 @@ reference:
   - overwrite_dot_arguments
   - package_important_in_project
   - pas_doorstroomvariabele_aan
-  - pipe
   - print_last_used
   - random_string_vector
   - rapport_result_test_introduction
