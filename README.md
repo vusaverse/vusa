@@ -1,5 +1,6 @@
 # vusa
   <!-- badges: start -->
+  [![CodeFactor](https://www.codefactor.io/repository/github/vusaverse/vusa/badge)](https://www.codefactor.io/repository/github/vusaverse/vusa)
   [![R-CMD-check](https://github.com/vusaverse/vusa/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/vusaverse/vusa/actions/workflows/R-CMD-check.yaml)
   <!-- badges: end -->
 
