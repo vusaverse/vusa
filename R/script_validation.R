@@ -84,14 +84,14 @@ validate_script <- function(filepath = NULL, export_naar_dataframe = FALSE) {
     validate_write_files(filepath)
     validate_introduction(filepath, export_naar_dataframe)
     validate_clear_script_objects(filepath, export_naar_dataframe)
-    if (vvmover::check_installed_package("lintr", check = TRUE)) {
+    if (check_installed_package("lintr", check = TRUE)) {
       validate_style(filepath, export_naar_dataframe)
     } else {
       base::cat(cli::style_bold(cli::col_cyan("Instaleer lintr met \"library(\"lintr\")\" om te testen op stijl")))
     }
     compare_input_output(filepath, export_naar_dataframe)
     base::cat("\n")
-    vusa::Clear_script_objects(bestandspad = filepath, envir = globalenv())
+    Clear_script_objects(bestandspad = filepath, envir = globalenv())
   } else {
     Waarschuwingen_errors_messages <- validate_no_warning_errors(
       filepath,
@@ -293,7 +293,7 @@ generate_output_files_database <- function() {
   ## Alle ingelezen bestanden naar dataframe en vervolgens naar een RDS-bestand schrijven
   Database <-
     purrr::map_df(Write_scripts, extract_filepaths_readrds_csv)
-  vvmover::saverds_csv(Database,
+  saverds_csv(Database,
                        base::paste0("Overzicht ingelezen bestanden"),
                        "XX. Testbestanden/")
 }
@@ -629,7 +629,7 @@ compare_input_output <- function(filepath,
   Output <- determine_output_files(filepath)
   ## Achterhaal welke bestanden worden weggeschreven
   Scripts <-
-    vvmover::readrds_csv(output = "XX. Testbestanden/Overzicht ingelezen bestanden.rds")
+    readrds_csv(output = "XX. Testbestanden/Overzicht ingelezen bestanden.rds")
   Dependencies <- base::data.frame()
   ## Selecteer de bestanden uit de database die afhankelijk zijn van het script
   for (Script in Output)  {
@@ -901,10 +901,10 @@ test_file_on_documentation <-
     ## Maak voor het data bestand ook een volledig filepath aan
     Rds_path_volledig <-
       base::paste(
-        vvcommander::sa_network_dir_get(),
+        sa_network_dir_get(),
         base::paste(
           "Output",
-          vvcommander::sa_branch_get(),
+          sa_branch_get(),
           Naam_folder,
           Naam_document,
           sep = "/"
@@ -927,7 +927,7 @@ test_file_on_documentation <-
     } else {
       ## Lees documentatie bestand in
       Test_documentatie <-
-        vvmover::read_documentation(filename = Csv_path,
+        read_documentation(filename = Csv_path,
                                     readr = TRUE) %>%
         ## Extra kolom toevoegen om met de Assert_naming functie te kunnen testen
         dplyr::mutate(Veldnaam_export = Veldnaam)
@@ -948,7 +948,7 @@ test_file_on_documentation <-
     }
 
     ## Lees databestand in
-    data <- vvmover::readrds_csv(output = Rds_path, readr = TRUE)
+    data <- readrds_csv(output = Rds_path, readr = TRUE)
 
     ## Voer tests uit
     assertedData <- tryCatch({

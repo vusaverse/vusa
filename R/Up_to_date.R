@@ -78,7 +78,7 @@ up_to_date <- function(bestandspad, correctie_tijdstip, frequentie, contact, inl
     }
 
     # Lees documentatie in
-    Documentatie_uptodate <- vvmover::readrds_csv(
+    Documentatie_uptodate <- readrds_csv(
       "Tableau/177 VU-Datasets up to date/Data/Documentatie uptodate check.rds")
 
     # Verzamel metadata
@@ -147,7 +147,7 @@ up_to_date <- function(bestandspad, correctie_tijdstip, frequentie, contact, inl
       dplyr::ungroup()
 
     # Overwrite de documentatie
-    vvmover::saverds_csv(Documentatie_uptodate,
+    saverds_csv(Documentatie_uptodate,
                 "Documentatie uptodate check",
                 dataloc =  "Tableau/177 VU-Datasets up to date/Data/",
                 save_csv = TRUE)

@@ -10,7 +10,7 @@ get_analysisset <- function(columns = NULL, AS_path = NULL) {
 
     if (!any(Sys.getenv(c("OUTPUT_DIR", "AS_1_DIR")) == "")) {
 
-      AS <- paste0(Sys.getenv("OUTPUT_DIR"), vvcommander::sa_branch_get(), "/", Sys.getenv("AS_1_DIR"))
+      AS <- paste0(Sys.getenv("OUTPUT_DIR"), sa_branch_get(), "/", Sys.getenv("AS_1_DIR"))
     }
     else {
       stop("system variables for as_path are missing")

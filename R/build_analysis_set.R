@@ -69,7 +69,7 @@ build_analysis_set <- function(Analysis_set, file, Extra_sleutels = NULL, slack 
     ## Verwijder de nieuwe kolommen uit de verrijkte analyseset als die bestaan
     if (length(Verwijder_kolommen) > 0) {
         ## Print deze kolommen naar de console
-        vvauditor::md_list(Verwijder_kolommen, header = "Columns are already present in the analysis set. These will be overwritten:")
+        md_list(Verwijder_kolommen, header = "Columns are already present in the analysis set. These will be overwritten:")
 
         ## stuur bericht naar slack kanaal
         slackr::slackr(cat(paste("Columns are already present in the analysis set. These will be overwritten:"),
@@ -88,7 +88,7 @@ build_analysis_set <- function(Analysis_set, file, Extra_sleutels = NULL, slack 
 
     ## Tests uitvoeren op de analyseset
 
-    vvmover::count_rows_analysis_set(Analysis_set_compleet,
+    count_rows_analysis_set(Analysis_set_compleet,
                             file,
                             nrow(Analysis_set_voor),
                             slack = slack)

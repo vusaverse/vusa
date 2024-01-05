@@ -43,7 +43,7 @@ join_tkoppel <- function(df, faculteit = F) {
   }
 
   ## Read in the T couple isat table, to add the training name
-  Tkoppel_Z08 <- vvmover::readrds_csv(output = "2. Geprepareerde data/INS_Tkoppel_Z08.rds")
+  Tkoppel_Z08 <- readrds_csv(output = "2. Geprepareerde data/INS_Tkoppel_Z08.rds")
 
   ## Add education name to df: link df with Tkoppel_isat and remove factorial
   df <- df %>%

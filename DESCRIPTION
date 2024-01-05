@@ -40,7 +40,5 @@ Imports:
     tidyr,
     tidyselect,
     vroom,
-    vvconverter,
     vvfiller,
-    vvmover,
     xml2

@@ -13,7 +13,7 @@
 #' @export
 dump_subset_to_testfile <- function(df, studentnummer = NULL, output = "XX. Test/", dataloc, suffix = NULL){
   if(missing(dataloc) == TRUE) {
-    dataloc <- paste("Output/", vvcommander::sa_branch_get(), "/", output, sep = "")
+    dataloc <- paste("Output/", sa_branch_get(), "/", output, sep = "")
   }
   if(!is.null(studentnummer)){
     df <- subset(df, df[,"INS_Studentnummer"] %in% studentnummer)
@@ -24,5 +24,5 @@ dump_subset_to_testfile <- function(df, studentnummer = NULL, output = "XX. Test
   } else {
     filename <- paste("Dump_subset_", current_time, ".csv", sep = '')
   }
-  utils::write.csv2(df, paste(vvcommander::sa_network_dir_get(), dataloc, filename, sep = ""), col.names=FALSE, sep = ";")
+  utils::write.csv2(df, paste(sa_network_dir_get(), dataloc, filename, sep = ""), col.names=FALSE, sep = ";")
 }

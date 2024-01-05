@@ -55,10 +55,10 @@ write_file <- function(Object_to_save, Name_to_save, destination = NULL,
   }
 
   if (stringr::str_detect(destination, "Tableau")) {
-    dataloc <- paste0(vvcommander::sa_network_dir_get(), destination)
+    dataloc <- paste0(sa_network_dir_get(), destination)
   } else {
-    dataloc <- paste(vvcommander::sa_network_dir_get(),
-                     "Output/", vvcommander::sa_branch_get(),
+    dataloc <- paste(sa_network_dir_get(),
+                     "Output/", sa_branch_get(),
                      "/", destination,
                      sep = ""
     )

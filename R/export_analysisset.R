@@ -285,11 +285,11 @@ export_analysisset <- function(Faculty_selection = 'All',
   }
 
   ## Make the correct folders for saving the exports
-  # projectfolder <- paste(vvcommander::sa_branch_get(), Extract_location, Name_project, sep = '')
+  # projectfolder <- paste(sa_branch_get(), Extract_location, Name_project, sep = '')
   projectfolder <- paste(Extract_location, Name_project, sep = '')
   projectfolder_today <- paste0(projectfolder, current_date)
-  dir.create(paste0(Network_directory, vvcommander::sa_branch_get(), projectfolder))
-  dir.create(paste0(Network_directory, vvcommander::sa_branch_get(), projectfolder_today))
+  dir.create(paste0(Network_directory, sa_branch_get(), projectfolder))
+  dir.create(paste0(Network_directory, sa_branch_get(), projectfolder_today))
 
 
   ## Save hash mapping if present and indicated
@@ -324,14 +324,14 @@ export_analysisset <- function(Faculty_selection = 'All',
     create_quality_report(
       Analysis_set,
       ProjectName = Name_project,
-      path = paste0(vvcommander::sa_branch_get(), projectfolder_today))
+      path = paste0(sa_branch_get(), projectfolder_today))
   }
 
   # Save the results
   if (Export_results == TRUE) {
     # Create the correct folders to save the export
     Results_map <- paste0(projectfolder_today, "/Results")
-    dir.create(paste0(Network_directory, vvcommander::sa_branch_get(), Results_map))
+    dir.create(paste0(Network_directory, sa_branch_get(), Results_map))
     # Sla de export op
     saverds_csv(Results,
                 paste(Export_name, "Results_", Sys.Date(), "_", Filename, sep = ''),
@@ -344,9 +344,9 @@ export_analysisset <- function(Faculty_selection = 'All',
   ## NB: A zip from a can take a while.
   if(Make_zip == TRUE) {
     Zip_folder_target <- paste0("/", Sys.Date(), "_", Name_project, ".zip")
-    utils::zip(paste0(Network_directory, vvcommander::sa_branch_get(),
+    utils::zip(paste0(Network_directory, sa_branch_get(),
                       projectfolder, Zip_folder_target),
-               paste0(Network_directory, vvcommander::sa_branch_get(),
+               paste0(Network_directory, sa_branch_get(),
                       projectfolder_today),extras = '-j')
   }
 

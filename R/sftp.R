@@ -63,7 +63,7 @@ sftp_login_credentials_get <- function(){
 #'@return Een vector met de paden van alle bestanden in de opgegeven folder.
 sftp_list_dir <- function(remote_path, server, username, .opts) {
     ## Controleer of RCurl is geinstalleerd
-    vvmover::check_installed_package("RCurl")
+    check_installed_package("RCurl")
     ## Bepaal het sftp pad van de opgegeven server. De username moet in de url
     ## staan
     server_path <- paste0("sftp://",
@@ -155,7 +155,7 @@ sftp_vu_list_dir <- function(remote_path) {
 #'"ssh.public.keyfile" en "ssh.private.keyfile".
 sftp_download <- function(remote_path, server, username, .opts) {
     ## Controleer of RCurl is geinstalleerd
-    vvmover::check_installed_package("RCurl")
+    check_installed_package("RCurl")
     ## Bepaal het sftp pad van de opgegeven server. De username moet in de url
     ## staan
     server_path <- paste0("sftp://",
@@ -230,7 +230,7 @@ sftp_vu_download <- function(remote_path, local_path, return_bin = T) {
 #'"ssh.public.keyfile" en "ssh.private.keyfile".
 sftp_upload <- function(local_path, remote_path, server, username, .opts) {
     ## Controleer of RCurl is geinstalleerd
-    vvmover::check_installed_package("RCurl")
+    check_installed_package("RCurl")
     ## Bepaal het sftp pad van de opgegeven server. De username moet in de url
     ## staan
     server_path <- paste0("sftp://",
@@ -289,7 +289,7 @@ sftp_vu_upload <- function(local_path, remote_path) {
 #'"ssh.public.keyfile" en "ssh.private.keyfile".
 sftp_delete <- function(remote_path, server, username, .opts) {
     ## Controleer of RCurl is geinstalleerd
-    vvmover::check_installed_package("RCurl")
+    check_installed_package("RCurl")
     ## Bepaal het sftp pad van de opgegeven server. De username moet in de url
     ## staan
     server_path <- paste0("sftp://",

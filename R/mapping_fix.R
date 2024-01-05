@@ -24,7 +24,7 @@ mapping_fix <- function(x, mapping_table = NULL, mapping_table_name = NULL, merg
   if(is.null(mapping_table_name) & is.null(mapping_table)){
       stop("no mapping table is given")
   } else if (is.null(mapping_table) & !is.null(mapping_table_name)){
-    mapping_table <- vvmover::read_documentation(filename = paste0("Mapping Tables fixes/", mapping_table_name, ".csv"))
+    mapping_table <- read_documentation(filename = paste0("Mapping Tables fixes/", mapping_table_name, ".csv"))
   }
 
   if (!(any(names(mapping_table) == "from") &&

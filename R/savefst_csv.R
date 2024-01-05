@@ -23,7 +23,7 @@ savefst_csv <- function(Object_to_save, Name_to_save, output = "1. Ingelezen dat
                         session_info = FALSE, Test_documentatie = FALSE, Documentatie = FALSE,
                         overwrite = TRUE) {
   if (missing(dataloc) == TRUE) {
-    dataloc <- paste("Output/", vvcommander::sa_branch_get(),
+    dataloc <- paste("Output/", sa_branch_get(),
                      "/", output,
                      sep = ""
     )
@@ -42,18 +42,18 @@ savefst_csv <- function(Object_to_save, Name_to_save, output = "1. Ingelezen dat
     ), Limietwaarden_bestandspad = "Testdocumentatie/Numerieke_limietwaarden.csv")
   }
 
-  fst::write_fst(Object_to_save, paste(vvcommander::sa_network_dir_get(),
+  fst::write_fst(Object_to_save, paste(sa_network_dir_get(),
                                        dataloc, Name_to_save, ".fst",
                                        sep = ""
   ), compress = 100)
   if (length(dataloc) > 1) {
     for (location in dataloc[-1]) {
       file.copy(
-        paste(vvcommander::sa_network_dir_get(),
+        paste(sa_network_dir_get(),
               dataloc[1], Name_to_save, ".fst",
               sep = ""
         ),
-        paste(vvcommander::sa_network_dir_get(), location,
+        paste(sa_network_dir_get(), location,
               Name_to_save, ".fst",
               sep = ""
         ),
@@ -64,7 +64,7 @@ savefst_csv <- function(Object_to_save, Name_to_save, output = "1. Ingelezen dat
 
   if (save_csv == TRUE) {
     if (fileEncoding == "") {
-      data.table::fwrite(Object_to_save, paste(vvcommander::sa_network_dir_get(),
+      data.table::fwrite(Object_to_save, paste(sa_network_dir_get(),
                                                dataloc, Name_to_save, ".csv",
                                                sep = ""
       ),
@@ -75,7 +75,7 @@ savefst_csv <- function(Object_to_save, Name_to_save, output = "1. Ingelezen dat
       qmethod = "double"
       )
     } else {
-      data.table::fwrite(Object_to_save, paste(vvcommander::sa_network_dir_get(),
+      data.table::fwrite(Object_to_save, paste(sa_network_dir_get(),
                                                dataloc, Name_to_save, ".csv",
                                                sep = ""
       ),
@@ -89,11 +89,11 @@ savefst_csv <- function(Object_to_save, Name_to_save, output = "1. Ingelezen dat
     if (length(dataloc) > 1) {
       for (location in dataloc[-1]) {
         file.copy(
-          paste(vvcommander::sa_network_dir_get(),
+          paste(sa_network_dir_get(),
                 dataloc[1], Name_to_save, ".csv",
                 sep = ""
           ),
-          paste(vvcommander::sa_network_dir_get(), location,
+          paste(sa_network_dir_get(), location,
                 Name_to_save, ".csv",
                 sep = ""
           ),
@@ -103,7 +103,7 @@ savefst_csv <- function(Object_to_save, Name_to_save, output = "1. Ingelezen dat
     }
   }
   if (session_info == TRUE) {
-    save_sessioninfo(paste(vvcommander::sa_network_dir_get(),
+    save_sessioninfo(paste(sa_network_dir_get(),
                            dataloc, Name_to_save, "_",
                            sep = ""
     ))

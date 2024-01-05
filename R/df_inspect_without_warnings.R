@@ -5,6 +5,6 @@
 #' @examples \dontrun{df_inspect_without_warnings(df)}
 #' @export
 df_inspect_without_warnings <- function(df) {
-    dfInspect <- suppressWarnings(vvsculptor::df_inspect(df, print_results = F))
+    dfInspect <- suppressWarnings(df_inspect(df, print_results = F))
     return(dfInspect)
 }

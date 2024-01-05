@@ -15,7 +15,7 @@
 saverda <- function(Object_to_save, Name_to_save, output = "1. Ingelezen data/", dataloc, session_info = FALSE) {
   ## determine the dataloc based on the branch
   if(missing(dataloc) == TRUE) {
-    dataloc <- paste("Output/", vvcommander::sa_branch_get(), "/", output, sep = "")
+    dataloc <- paste("Output/", sa_branch_get(), "/", output, sep = "")
   }
 
   ## Tableau can only load data frames, therefore the data must be transformed first
@@ -24,10 +24,10 @@ saverda <- function(Object_to_save, Name_to_save, output = "1. Ingelezen data/",
 
   ##save RDA
   save(Object_to_save,
-       file = paste(vvcommander::sa_network_dir_get(),dataloc,Name_to_save,".rda",sep=""), version = 2)
+       file = paste(sa_network_dir_get(),dataloc,Name_to_save,".rda",sep=""), version = 2)
 
   ## save the Session info
   if(session_info == TRUE) {
-    save_sessioninfo(paste(vvcommander::sa_network_dir_get(),dataloc,Name_to_save, "_", sep=""))
+    save_sessioninfo(paste(sa_network_dir_get(),dataloc,Name_to_save, "_", sep=""))
   }
 }

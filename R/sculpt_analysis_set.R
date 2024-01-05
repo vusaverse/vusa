@@ -72,7 +72,7 @@ sculpt_analysis_set <- function(Analysis_set, file, Extra_sleutels = NULL, slack
     ## filter RES variabelen
     Verwijder_kolommen_zonder_RES <- Verwijder_kolommen[!grepl("^RES", Verwijder_kolommen)]
     ## Print deze kolommen naar de console
-    vvauditor::md_list(Verwijder_kolommen, header = "Columns are already present in the analysis set. These will be overwritten:")
+    md_list(Verwijder_kolommen, header = "Columns are already present in the analysis set. These will be overwritten:")
 
     ## stuur bericht naar slack kanaal
     if (length(Verwijder_kolommen_zonder_RES) > 0) {
@@ -95,7 +95,7 @@ sculpt_analysis_set <- function(Analysis_set, file, Extra_sleutels = NULL, slack
 
   ## Tests uitvoeren op de analyseset
 
-  vvmover::count_rows_analysis_set(Analysis_set_compleet,
+  count_rows_analysis_set(Analysis_set_compleet,
                                    file,
                                    nrow(Analysis_set_voor),
                                    slack = slack)

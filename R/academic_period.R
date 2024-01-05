@@ -28,7 +28,7 @@ academic_period <- function(x, type = "period", date_table = NULL){
   stopifnot(class(x) == "Date")
 
   if (is.null(date_table)) {
-    date_table <- vusa::vvconverter_data("Dates.csv")
+    date_table <- vvconverter_data("Dates.csv")
   }
 
   ## Add the temporary variable TMP = T so that a cartetic product

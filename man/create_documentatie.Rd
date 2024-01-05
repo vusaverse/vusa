@@ -11,7 +11,7 @@ create_documentatie(df, Naam, Limietwaarden_bestandspad = NA)
 
 \item{Naam}{Name of the documentation file to create}
 
-\item{Limietwaarden_bestandspad}{}
+\item{Limietwaarden_bestandspad}{File with limit values}
 }
 \value{
 Table

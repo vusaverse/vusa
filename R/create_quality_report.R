@@ -49,7 +49,7 @@ create_quality_report <- function(df, ProjectName, Network_directory = NULL,
 
   ## Create path with date if missing
   if (is.null(path)) {
-    path <- paste0(vvcommander::sa_branch_get(), export_map, ProjectName, "/", Sys.Date())
+    path <- paste0(sa_branch_get(), export_map, ProjectName, "/", Sys.Date())
   }
 
   ## Create quality report directory

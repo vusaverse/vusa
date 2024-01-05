@@ -34,7 +34,7 @@ check_education_name <- function(df, actual_edu_names = NULL, col_edu_names = NU
       print("system variables present, so these wil be used for actual_edu_names")
 
       # Read in edu_data to create a list of education names
-      edu_data <- vvmover::readrds_csv(output = Sys.getenv("EDU_DATA"))
+      edu_data <- readrds_csv(output = Sys.getenv("EDU_DATA"))
       actual_edu_names <- unique(edu_data$INS_Opleidingsnaam_Z08)
     }
     else {

@@ -39,7 +39,7 @@ join_tkoppel_isat <- function(df, faculteit = F) {
     }
 
     ## Lees de Tkoppel isat tabel in, om de opleidingsnaam toe te voegen
-    Tkoppel_isat <- vvmover::readrds_csv(output = "1. Ingelezen data/INS_Tkoppel_isat.rds")
+    Tkoppel_isat <- readrds_csv(output = "1. Ingelezen data/INS_Tkoppel_isat.rds")
 
     ## Voeg opleidingsnaam toe aan df: koppel df met Tkoppel_isat en verwijder faculteit
     df <- df %>%

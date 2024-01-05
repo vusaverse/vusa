@@ -10,10 +10,10 @@
 df_compare <- function(df1, df2) {
   type_df1 <- type_df2 <- variable <- Type_equal <- NULL
 
-  df1_inspect <- vvsculptor::df_inspect(df1, print_results = F) %>%
+  df1_inspect <- df_inspect(df1, print_results = F) %>%
     dplyr::mutate_if(is.factor, as.character)
 
-  df2_inspect <- vvsculptor::df_inspect(df2, print_results = F) %>%
+  df2_inspect <- df_inspect(df2, print_results = F) %>%
     dplyr::mutate_if(is.factor, as.character)
 
   ## apply join and add the suffixes _df1 and _df2

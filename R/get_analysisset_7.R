@@ -15,7 +15,7 @@ get_analysisset_7 <- function(cols = NULL, cols_match = c("INS_Studentnummer",
 
     if (!Sys.getenv("AS_7_DIR") == "") {
 
-      AS_7 <- paste0(Sys.getenv("OUTPUT_DIR"), vvcommander::sa_branch_get(), "/", Sys.getenv("AS_7_DIR"))
+      AS_7 <- paste0(Sys.getenv("OUTPUT_DIR"), sa_branch_get(), "/", Sys.getenv("AS_7_DIR"))
     }
     else {
       stop("system variables for AS_7 are missing")

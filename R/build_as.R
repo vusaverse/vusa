@@ -27,7 +27,7 @@ build_as <- function(Analysis_set, AS_archive, latest, files_list, complete_rebu
       ## Determine the last updated date of the main file
       main_file_date <- format(file.mtime(main_file), "%Y-%m-%d")
       ## determine the input files of the main_file
-      input_file <- vvauditor::determine_inputfiles(main_file)
+      input_file <- determine_inputfiles(main_file)
       ## Determine the last updated date of those input files
       input_date <- format(file.mtime(paste0(Network_directory, "Output/main/", input_file)), "%Y-%m-%d")
 
@@ -38,13 +38,13 @@ build_as <- function(Analysis_set, AS_archive, latest, files_list, complete_rebu
         # There may also be new code in the main file, so if it has been updated, run again
         if (main_file_date >= date_AS_archive) {
           print(paste0(main_file, " has been updated, meaning: run this data again"))
-          Analysis_set <- vusa::Build_Analysis_set(Analysis_set, main_file, new_columns)
+          Analysis_set <- Build_Analysis_set(Analysis_set, main_file, new_columns)
         }
         ##Update the AS because the input files have been updated
         ## (for loop because multiple input files can be used in a script and therefore also multiple data)
         else if (any(input_date >= date_AS_archive)) {
           print(paste0(main_file, " input file has been updated, meaning: run this data again"))
-          Analysis_set <- vusa::Build_Analysis_set(Analysis_set, main_file, new_columns)
+          Analysis_set <- Build_Analysis_set(Analysis_set, main_file, new_columns)
         }
         else {
           files_list_unchanged[[length(files_list_unchanged) +1 ]] <- file
@@ -55,11 +55,11 @@ build_as <- function(Analysis_set, AS_archive, latest, files_list, complete_rebu
       else {
         if (any(input_date >= date_AS_archive)) {
           print(paste0(file, "input file has been updated, meaning: run this data again"))
-          Analysis_set <- vusa::Build_Analysis_set(Analysis_set, main_file)
+          Analysis_set <- Build_Analysis_set(Analysis_set, main_file)
         }
         else if (main_file_date >= date_AS_archive) {
           print(paste0(main_file, " has been updated, meaning: run this data again"))
-          Analysis_set <- vusa::Build_Analysis_set(Analysis_set, main_file)
+          Analysis_set <- Build_Analysis_set(Analysis_set, main_file)
         }
         else {
           files_list_unchanged[[length(files_list_unchanged) +1 ]] <- file
@@ -78,10 +78,10 @@ build_as <- function(Analysis_set, AS_archive, latest, files_list, complete_rebu
     for (file in files_list) {
       # check again if it is a file where new columns are added
       if (length(file) > 1) {
-        Analysis_set <- vusa::Build_Analysis_set(Analysis_set, file[1], file[-1])
+        Analysis_set <- Build_Analysis_set(Analysis_set, file[1], file[-1])
 
       } else {
-        Analysis_set <- vusa::Build_Analysis_set(Analysis_set, file)
+        Analysis_set <- Build_Analysis_set(Analysis_set, file)
       }
     }
   }

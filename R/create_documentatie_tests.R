@@ -113,7 +113,7 @@ create_documentatie_tests <- function(df, Naam, Limietwaarden_bestandspad = NA) 
 #'
 #' @param df The dataframe
 #' @param Naam Name of the documentation file to create
-#' @param Limietwaarden_bestandspad
+#' @param Limietwaarden_bestandspad File with limit values
 #'
 #' @return Table
 #' @export

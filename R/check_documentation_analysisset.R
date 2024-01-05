@@ -8,7 +8,7 @@
 check_documentation_analysisset <- function(x) {
 
   ## read in the documentation file
-  Documentation <- vvmover::documentation_get()
+  Documentation <- documentation_get()
   ## Create empty data frame
   Differences <- tibble::tibble(Veldnaam = character(),
                                 Missing_in = character())

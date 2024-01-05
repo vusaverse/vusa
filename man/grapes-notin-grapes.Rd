@@ -6,6 +6,9 @@
 \usage{
 ... \%notin\% NA
 }
+\arguments{
+\item{...}{Other arguments passed to the function.}
+}
 \value{
 A logical value indicating if the element is not present in the vector.
 }

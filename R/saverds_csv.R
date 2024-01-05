@@ -26,7 +26,7 @@ saverds_csv <- function(Object_to_save, Name_to_save, output = "1. Ingelezen dat
                         Test_documentatie = FALSE, Documentatie = FALSE, overwrite = TRUE){
   ## bepaal de dataloc op basis van de branch
   if(missing(dataloc) == TRUE) {
-    dataloc <- paste("Output/", vvcommander::sa_branch_get(), "/", output, sep = "")
+    dataloc <- paste("Output/", sa_branch_get(), "/", output, sep = "")
   }
 
   ## Inlezen testdocumentatie
@@ -47,22 +47,22 @@ saverds_csv <- function(Object_to_save, Name_to_save, output = "1. Ingelezen dat
   }
 
   ##save RDS
-  saveRDS(Object_to_save, paste(vvcommander::sa_network_dir_get(),dataloc,Name_to_save,".rds",sep=""), version = 2)
+  saveRDS(Object_to_save, paste(sa_network_dir_get(),dataloc,Name_to_save,".rds",sep=""), version = 2)
   if (length(dataloc) > 1){
     for (location in dataloc[-1]) {
-      file.copy(paste(vvcommander::sa_network_dir_get(),
+      file.copy(paste(sa_network_dir_get(),
                       dataloc[1], Name_to_save, ".rds", sep = ""),
-                paste(vvcommander::sa_network_dir_get(),
+                paste(sa_network_dir_get(),
                       location, Name_to_save, ".rds", sep = ""),
                 overwrite = overwrite)
     }}
   if(save_fst == TRUE){
-    fst::write_fst(Object_to_save, paste(vvcommander::sa_network_dir_get(),dataloc,Name_to_save,".fst",sep=""), compress = 100)
+    fst::write_fst(Object_to_save, paste(sa_network_dir_get(),dataloc,Name_to_save,".fst",sep=""), compress = 100)
     if (length(dataloc) > 1){
       for (location in dataloc[-1]) {
-        file.copy(paste(vvcommander::sa_network_dir_get(),
+        file.copy(paste(sa_network_dir_get(),
                         dataloc[1], Name_to_save, ".fst", sep = ""),
-                  paste(vvcommander::sa_network_dir_get(),
+                  paste(sa_network_dir_get(),
                         location, Name_to_save, ".fst", sep = ""),
                   overwrite = overwrite)
       }}
@@ -71,22 +71,22 @@ saverds_csv <- function(Object_to_save, Name_to_save, output = "1. Ingelezen dat
   ##save CSV (staat standaard op FALSE)
   if(save_csv == TRUE){
     if(fileEncoding == '') {
-      utils::write.csv2(Object_to_save, paste(vvcommander::sa_network_dir_get(),dataloc,Name_to_save,".csv",sep=""),row.names=F,na="")
+      utils::write.csv2(Object_to_save, paste(sa_network_dir_get(),dataloc,Name_to_save,".csv",sep=""),row.names=F,na="")
     } else {
-      utils::write.csv2(Object_to_save, paste(vvcommander::sa_network_dir_get(),dataloc,Name_to_save,".csv",sep=""),row.names=F,na="", fileEncoding = fileEncoding)
+      utils::write.csv2(Object_to_save, paste(sa_network_dir_get(),dataloc,Name_to_save,".csv",sep=""),row.names=F,na="", fileEncoding = fileEncoding)
     }
     if (length(dataloc) > 1){
       for (location in dataloc[-1]) {
-        file.copy(paste(vvcommander::sa_network_dir_get(),
+        file.copy(paste(sa_network_dir_get(),
                         dataloc[1], Name_to_save, ".csv", sep = ""),
-                  paste(vvcommander::sa_network_dir_get(),
+                  paste(sa_network_dir_get(),
                         location, Name_to_save, ".csv", sep = ""),
                   overwrite = overwrite)
       }}
   }
   ## sla de Sessioninfo op
   if(session_info == TRUE) {
-    save_sessioninfo(paste(vvcommander::sa_network_dir_get(),dataloc,Name_to_save, "_", sep=""))
+    save_sessioninfo(paste(sa_network_dir_get(),dataloc,Name_to_save, "_", sep=""))
   }
 }
 

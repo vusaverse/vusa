@@ -34,7 +34,7 @@ auto_document <- function() {
     base::cat(paste("\n"))
 
     if (length(doc_not_in_analyse) > 0){
-        vusa::Documentatie_remove(doc_not_in_analyse)
+        Documentatie_remove(doc_not_in_analyse)
     }
 
     if (length(analyse_not_in_doc) > 0) {
@@ -42,7 +42,7 @@ auto_document <- function() {
         df <- data.frame(Veldnaam = analyse_not_in_doc)
 
         voorkomende_waarden <- purrr::map_chr(analyse_not_in_doc,
-                                       vusa::get_values,
+                                       get_values,
                                        analyseset = analyseset)
 
         df <- data.frame(Veldnaam = analyse_not_in_doc,
@@ -56,7 +56,7 @@ auto_document <- function() {
             dplyr::mutate(code = substr(Veldnaam, 1, 3))
 
         df <-
-            vvconverter::mapping_translate(df,
+            mapping_translate(df,
                               "code",
                               "Categorie",
                               mapping_table_name = "Mapping_Doc_Cat.csv",
@@ -73,7 +73,7 @@ auto_document <- function() {
                 dataloc = "Documentatie/",
                 output = "Documentatie")
 
-        shell.exec(paste0(vvcommander::sa_network_dir_get(),
+        shell.exec(paste0(sa_network_dir_get(),
                           "Documentatie/",
                           save_name,
                           ".csv"))
@@ -82,7 +82,7 @@ auto_document <- function() {
                            title="Have you finished editing?")
 
         if (ask == 1) {
-            vusa::Documentatie_add_csv(paste0("Documentatie/", save_name, ".csv"))
+            Documentatie_add_csv(paste0("Documentatie/", save_name, ".csv"))
             return(paste("Rows to add to the documentation: ", analyse_not_in_doc))
         } else {return()}
     }

@@ -7,17 +7,17 @@
 print_last_used <- function(path = NULL) {
   ## als het path niet is ingevuld, wordt het document dat in rstudio
   ## open staat gecontroleerd
-  if(is.null(path) & vvmover::check_installed_package("rstudioapi",
+  if(is.null(path) & check_installed_package("rstudioapi",
                                                     check = TRUE)) {
     path <- rstudioapi::getSourceEditorContext()$path
   }
   ## print de datum van het het laatste output bestand
   output_bestanden <- determine_output_files(path)
-  file_loc <- paste(vvcommander::sa_network_dir_get(),
+  file_loc <- paste(sa_network_dir_get(),
                     "Output/",
-                    vvcommander::sa_branch_get(),
+                    sa_branch_get(),
                     "/",
                     dplyr::last(output_bestanden),
                     sep = "")
-  vvmover::print_last_modified(file_loc)
+  print_last_modified(file_loc)
 }

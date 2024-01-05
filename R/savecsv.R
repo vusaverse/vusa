@@ -14,17 +14,17 @@ savecsv <- function(Object_to_save, Name_to_save, output = "1. Ingelezen data/",
 
   ## determine the dataloc based on the branch
   if(missing(dataloc) == TRUE) {
-    dataloc <- paste("Output/", vvcommander::sa_branch_get(), "/", output, sep = "")
+    dataloc <- paste("Output/", sa_branch_get(), "/", output, sep = "")
   }
   ##save CSV
   if(fileEncoding == '') {
-    utils::write.csv2(Object_to_save, paste(vvcommander::sa_network_dir_get(),dataloc,Name_to_save,".csv",sep=""),row.names=F,na="")
+    utils::write.csv2(Object_to_save, paste(sa_network_dir_get(),dataloc,Name_to_save,".csv",sep=""),row.names=F,na="")
   } else {
-    utils::write.csv2(Object_to_save, paste(vvcommander::sa_network_dir_get(),dataloc,Name_to_save,".csv",sep=""),row.names=F,na="", fileEncoding = fileEncoding)
+    utils::write.csv2(Object_to_save, paste(sa_network_dir_get(),dataloc,Name_to_save,".csv",sep=""),row.names=F,na="", fileEncoding = fileEncoding)
   }
 
   ## save the Session info
   if(session_info == TRUE) {
-    save_sessioninfo(paste(vvcommander::sa_network_dir_get(),dataloc,Name_to_save, "_", sep=""))
+    save_sessioninfo(paste(sa_network_dir_get(),dataloc,Name_to_save, "_", sep=""))
   }
 }

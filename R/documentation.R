@@ -71,7 +71,7 @@ documentation_save <- function(data) {
     ## Sorteer de tabel
     data <- data %>% dplyr::arrange(Veldnaam)
     ## Controleren op duplicates
-    duplicaten <- vvauditor::duplicates_in_column(data, "Veldnaam")
+    duplicaten <- duplicates_in_column(data, "Veldnaam")
 
     if (nrow(duplicaten) > 0) {
         savecsv(duplicaten, Name_to_save = paste0("Duplicaten", format(Sys.time(), "%Y-%M-%d_%H%M")), dataloc = "/documentation/")
