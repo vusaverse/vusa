@@ -93,6 +93,7 @@ reference:
   - write_file
   - write_file_proj
   - write_pattern_table
+  - write_tableau
 
 - title: Other methods.
   desc: |
@@ -165,6 +166,7 @@ reference:
   - rapport_result_test_introduction
   - ratio_df_columns
   - regex_content_parameter
+  - rename_columns
   - return_assertions_message
   - return_assertions_message_testen
   - round_values
