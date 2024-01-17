@@ -388,6 +388,9 @@
     <loc>https://vusaverse.github.io/vusa/reference/regex_content_parameter.html</loc>
   </url>
   <url>
+    <loc>https://vusaverse.github.io/vusa/reference/rename_columns.html</loc>
+  </url>
+  <url>
     <loc>https://vusaverse.github.io/vusa/reference/return_assertions_message.html</loc>
   </url>
   <url>
@@ -578,5 +581,8 @@
   </url>
   <url>
     <loc>https://vusaverse.github.io/vusa/reference/write_pattern_table.html</loc>
+  </url>
+  <url>
+    <loc>https://vusaverse.github.io/vusa/reference/write_tableau.html</loc>
   </url>
 </urlset>
