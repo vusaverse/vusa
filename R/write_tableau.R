@@ -11,14 +11,14 @@
 #' @param mapping_file Character string specifying the name of the mapping file. Default is "Documentatie_Tableau_vriendelijke_variabelnamen_UT.csv".
 #' @param save_csv Logical indicating whether to save the output as a CSV file. Default is TRUE.
 #' @param save_rds Logical indicating whether to save the output as an RDS file. Default is FALSE.
-#' @param offset_years An integer specifying the range of years to consider when filtering the 'INS_Inschrijvingsjaar_EOI' column. Default is 10.
+#' @param offset_years An integer specifying the range of years to consider when filtering the 'INS_Inschrijvingsjaar' column. Default is 10.
 #' @return The modified dataframe.
 #' @examples
 #' \dontrun{
 #' write_tableau(df, "output", "/path/to/directory", save_csv = TRUE, save_rds = FALSE, offset_years = 10)
 #' }
 write_tableau <- function(df, name, output_path, student_number_col = "INS_Studentnummer",
-                          enrolment_year_col = "INS_Inschrijvingsjaar_EOI",
+                          enrolment_year_col = "INS_Inschrijvingsjaar",
                           mapping_file = "Documentatie_Tableau_vriendelijke_variabelnamen_UT.csv",
                           save_csv = TRUE, save_rds = FALSE, offset_years = 10){
   
