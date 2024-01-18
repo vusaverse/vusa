@@ -6,8 +6,9 @@
 #' @param df A dataframe.
 #' @param name A character string specifying the name of the output files.
 #' @param output_path A character string specifying the directory where the output files should be saved.
+#' @param current_year An integer specifying the current year.
 #' @param student_number_col Character string specifying the column name for student numbers. Default is "INS_Studentnummer".
-#' @param enrolment_year_col Character string specifying the column name for enrolment years. Default is "INS_Inschrijvingsjaar_EOI".
+#' @param enrolment_year_col Character string specifying the column name for enrolment years. Default is "INS_Inschrijvingsjaar".
 #' @param mapping_file Character string specifying the name of the mapping file. Default is "Documentatie_Tableau_vriendelijke_variabelnamen_UT.csv".
 #' @param save_csv Logical indicating whether to save the output as a CSV file. Default is TRUE.
 #' @param save_rds Logical indicating whether to save the output as an RDS file. Default is FALSE.
@@ -15,9 +16,9 @@
 #' @return The modified dataframe.
 #' @examples
 #' \dontrun{
-#' write_tableau(df, "output", "/path/to/directory", save_csv = TRUE, save_rds = FALSE, offset_years = 10)
+#' write_tableau(df, "output", "/path/to/directory", 2024, save_csv = TRUE, save_rds = FALSE, offset_years = 10)
 #' }
-write_tableau <- function(df, name, output_path, student_number_col = "INS_Studentnummer",
+write_tableau <- function(df, name, output_path, current_year, student_number_col = "INS_Studentnummer",
                           enrolment_year_col = "INS_Inschrijvingsjaar",
                           mapping_file = "Documentatie_Tableau_vriendelijke_variabelnamen_UT.csv",
                           save_csv = TRUE, save_rds = FALSE, offset_years = 10){
@@ -33,7 +34,6 @@ write_tableau <- function(df, name, output_path, student_number_col = "INS_Stude
       mutate(!!sym(student_number_col) := hash_var(!!sym(student_number_col)))
   }
   
-  current_year <- year(now())
   if (enrolment_year_col %in% colnames(df)){
     df <- df %>%
       filter(!!sym(enrolment_year_col) %in% (current_year - offset_years):current_year)
@@ -47,6 +47,7 @@ write_tableau <- function(df, name, output_path, student_number_col = "INS_Stude
   
   return(df)
 }
+
 
 #' Rename columns in a dataframe
 #'

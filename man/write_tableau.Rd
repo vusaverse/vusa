@@ -8,6 +8,7 @@ write_tableau(
   df,
   name,
   output_path,
+  current_year,
   student_number_col = "INS_Studentnummer",
   enrolment_year_col = "INS_Inschrijvingsjaar",
   mapping_file = "Documentatie_Tableau_vriendelijke_variabelnamen_UT.csv",
@@ -23,9 +24,11 @@ write_tableau(
 
 \item{output_path}{A character string specifying the directory where the output files should be saved.}
 
+\item{current_year}{An integer specifying the current year.}
+
 \item{student_number_col}{Character string specifying the column name for student numbers. Default is "INS_Studentnummer".}
 
-\item{enrolment_year_col}{Character string specifying the column name for enrolment years. Default is "INS_Inschrijvingsjaar_EOI".}
+\item{enrolment_year_col}{Character string specifying the column name for enrolment years. Default is "INS_Inschrijvingsjaar".}
 
 \item{mapping_file}{Character string specifying the name of the mapping file. Default is "Documentatie_Tableau_vriendelijke_variabelnamen_UT.csv".}
 
@@ -44,6 +47,6 @@ applies some transformations, and saves the result in a specified location.
 }
 \examples{
 \dontrun{
-write_tableau(df, "output", "/path/to/directory", save_csv = TRUE, save_rds = FALSE, offset_years = 10)
+write_tableau(df, "output", "/path/to/directory", 2024, save_csv = TRUE, save_rds = FALSE, offset_years = 10)
 }
 }
