@@ -49,6 +49,7 @@ applies some transformations, and saves the result in a specified location.</p>
 <span>  <span class="va">df</span>,</span>
 <span>  <span class="va">name</span>,</span>
 <span>  <span class="va">output_path</span>,</span>
+<span>  <span class="va">current_year</span>,</span>
 <span>  student_number_col <span class="op">=</span> <span class="st">"INS_Studentnummer"</span>,</span>
 <span>  enrolment_year_col <span class="op">=</span> <span class="st">"INS_Inschrijvingsjaar"</span>,</span>
 <span>  mapping_file <span class="op">=</span> <span class="st">"Documentatie_Tableau_vriendelijke_variabelnamen_UT.csv"</span>,</span>
@@ -72,12 +73,16 @@ applies some transformations, and saves the result in a specified location.</p>
 <dd><p>A character string specifying the directory where the output files should be saved.</p></dd>
 
 
+<dt>current_year</dt>
+<dd><p>An integer specifying the current year.</p></dd>
+
+
 <dt>student_number_col</dt>
 <dd><p>Character string specifying the column name for student numbers. Default is "INS_Studentnummer".</p></dd>
 
 
 <dt>enrolment_year_col</dt>
-<dd><p>Character string specifying the column name for enrolment years. Default is "INS_Inschrijvingsjaar_EOI".</p></dd>
+<dd><p>Character string specifying the column name for enrolment years. Default is "INS_Inschrijvingsjaar".</p></dd>
 
 
 <dt>mapping_file</dt>
@@ -106,7 +111,7 @@ applies some transformations, and saves the result in a specified location.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span><span class="fu">write_tableau</span><span class="op">(</span><span class="va">df</span>, <span class="st">"output"</span>, <span class="st">"/path/to/directory"</span>, save_csv <span class="op">=</span> <span class="cn">TRUE</span>, save_rds <span class="op">=</span> <span class="cn">FALSE</span>, offset_years <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">write_tableau</span><span class="op">(</span><span class="va">df</span>, <span class="st">"output"</span>, <span class="st">"/path/to/directory"</span>, <span class="fl">2024</span>, save_csv <span class="op">=</span> <span class="cn">TRUE</span>, save_rds <span class="op">=</span> <span class="cn">FALSE</span>, offset_years <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
