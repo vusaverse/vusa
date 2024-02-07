@@ -20,7 +20,6 @@ Imports:
     findR,
     fs,
     fst,
-    janitor,
     lintr,
     lubridate,
     magrittr,

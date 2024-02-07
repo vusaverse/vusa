@@ -12,8 +12,6 @@ savefst_csv(
   fileEncoding = "",
   save_csv = FALSE,
   session_info = FALSE,
-  Test_documentatie = FALSE,
-  Documentatie = FALSE,
   overwrite = TRUE
 )
 }
@@ -35,10 +33,6 @@ zowel een .rds als een .csv weggeschreven.}
 
 \item{session_info}{Standaard FALSE. Moet de sessie-info in dezelfde folder
 weggeschreve worden}
-
-\item{Test_documentatie}{boolean die aangeeft of test documentatie gemaakt moet worden}
-
-\item{Documentatie}{boolean die aangeeft of documentatie gemaakt moet worden}
 
 \item{overwrite}{whether to overwrite existing file when copying to other directory.}
 }

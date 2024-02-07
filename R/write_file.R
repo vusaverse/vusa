@@ -10,14 +10,12 @@
 #' @param save_csv Default FALSE: whether to write file as a csv file.
 #' @param save_fst Default FALSE: whether to write file as a fst file.
 #' @param save_rds Default FALSE: whether to write file as a rds file.
-#' @param Documentatie whether to create a documentation file.
 #' @param show_rownames Whether to write row names in file
 #' @export
 write_file <- function(Object_to_save, Name_to_save, destination = NULL,
-                            save_csv = FALSE,
-                            save_fst = FALSE,
-                            save_rds = FALSE,
-                            Documentatie = FALSE,
+                       save_csv = FALSE,
+                       save_fst = FALSE,
+                       save_rds = FALSE,
                        show_rownames = FALSE) {
   if (Sys.getenv("RSTUDIO") == "1") {
     docname <- basename(rstudioapi::getActiveDocumentContext()$path)
@@ -25,13 +23,6 @@ write_file <- function(Object_to_save, Name_to_save, destination = NULL,
   } else {
     docname <- basename(scriptName::current_filename())
     directory <- this.path::this.dir()
-  }
-
-  if (Documentatie == TRUE) {
-    create_documentatie(df = Object_to_save, Naam = paste0(
-      "Documentatie_",
-      Name_to_save
-    ), Limietwaarden_bestandspad = "Testdocumentatie/Numerieke_limietwaarden.csv")
   }
 
   if (is.null(destination)) {
@@ -58,9 +49,9 @@ write_file <- function(Object_to_save, Name_to_save, destination = NULL,
     dataloc <- paste0(sa_network_dir_get(), destination)
   } else {
     dataloc <- paste(sa_network_dir_get(),
-                     "Output/", sa_branch_get(),
-                     "/", destination,
-                     sep = ""
+      "Output/", sa_branch_get(),
+      "/", destination,
+      sep = ""
     )
   }
 
@@ -71,7 +62,7 @@ write_file <- function(Object_to_save, Name_to_save, destination = NULL,
 
   if (save_csv) {
     data.table::fwrite(Object_to_save, paste(dataloc, Name_to_save, ".csv",
-                                             sep = ""
+      sep = ""
     ),
     row.names = show_rownames,
     na = "",
@@ -82,7 +73,7 @@ write_file <- function(Object_to_save, Name_to_save, destination = NULL,
 
   if (save_fst) {
     fst::write_fst(Object_to_save, paste(dataloc, Name_to_save, ".fst",
-                                         sep = ""
+      sep = ""
     ), compress = 100)
   }
 

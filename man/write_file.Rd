@@ -11,7 +11,6 @@ write_file(
   save_csv = FALSE,
   save_fst = FALSE,
   save_rds = FALSE,
-  Documentatie = FALSE,
   show_rownames = FALSE
 )
 }
@@ -27,8 +26,6 @@ write_file(
 \item{save_fst}{Default FALSE: whether to write file as a fst file.}
 
 \item{save_rds}{Default FALSE: whether to write file as a rds file.}
-
-\item{Documentatie}{whether to create a documentation file.}
 
 \item{show_rownames}{Whether to write row names in file}
 }

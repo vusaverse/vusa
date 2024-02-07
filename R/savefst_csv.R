@@ -14,48 +14,34 @@
 #' zowel een .rds als een .csv weggeschreven.
 #' @param session_info Standaard FALSE. Moet de sessie-info in dezelfde folder
 #' weggeschreve worden
-#' @param Test_documentatie boolean die aangeeft of test documentatie gemaakt moet worden
-#' @param Documentatie boolean die aangeeft of documentatie gemaakt moet worden
 #' @param overwrite whether to overwrite existing file when copying to other directory.
 #' @export
 savefst_csv <- function(Object_to_save, Name_to_save, output = "1. Ingelezen data/",
                         dataloc, fileEncoding = "", save_csv = FALSE,
-                        session_info = FALSE, Test_documentatie = FALSE, Documentatie = FALSE,
+                        session_info = FALSE,
                         overwrite = TRUE) {
   if (missing(dataloc) == TRUE) {
     dataloc <- paste("Output/", sa_branch_get(),
-                     "/", output,
-                     sep = ""
+      "/", output,
+      sep = ""
     )
-  }
-  if (Test_documentatie == TRUE) {
-    Naam_doc <- paste0(output, Name_to_save)
-    create_documentatie_tests(
-      df = Object_to_save, Naam = Naam_doc,
-      Limietwaarden_bestandspad = "Testdocumentatie/Numerieke_limietwaarden.csv"
-    )
-  }
-  if (Documentatie == TRUE) {
-    create_documentatie(df = Object_to_save, Naam = paste0(
-      "Documentatie_",
-      Name_to_save
-    ), Limietwaarden_bestandspad = "Testdocumentatie/Numerieke_limietwaarden.csv")
   }
 
+
   fst::write_fst(Object_to_save, paste(sa_network_dir_get(),
-                                       dataloc, Name_to_save, ".fst",
-                                       sep = ""
+    dataloc, Name_to_save, ".fst",
+    sep = ""
   ), compress = 100)
   if (length(dataloc) > 1) {
     for (location in dataloc[-1]) {
       file.copy(
         paste(sa_network_dir_get(),
-              dataloc[1], Name_to_save, ".fst",
-              sep = ""
+          dataloc[1], Name_to_save, ".fst",
+          sep = ""
         ),
         paste(sa_network_dir_get(), location,
-              Name_to_save, ".fst",
-              sep = ""
+          Name_to_save, ".fst",
+          sep = ""
         ),
         overwrite = overwrite
       )
@@ -65,8 +51,8 @@ savefst_csv <- function(Object_to_save, Name_to_save, output = "1. Ingelezen dat
   if (save_csv == TRUE) {
     if (fileEncoding == "") {
       data.table::fwrite(Object_to_save, paste(sa_network_dir_get(),
-                                               dataloc, Name_to_save, ".csv",
-                                               sep = ""
+        dataloc, Name_to_save, ".csv",
+        sep = ""
       ),
       row.names = F,
       na = "",
@@ -76,8 +62,8 @@ savefst_csv <- function(Object_to_save, Name_to_save, output = "1. Ingelezen dat
       )
     } else {
       data.table::fwrite(Object_to_save, paste(sa_network_dir_get(),
-                                               dataloc, Name_to_save, ".csv",
-                                               sep = ""
+        dataloc, Name_to_save, ".csv",
+        sep = ""
       ),
       row.names = F,
       na = "", fileEncoding = fileEncoding,
@@ -90,12 +76,12 @@ savefst_csv <- function(Object_to_save, Name_to_save, output = "1. Ingelezen dat
       for (location in dataloc[-1]) {
         file.copy(
           paste(sa_network_dir_get(),
-                dataloc[1], Name_to_save, ".csv",
-                sep = ""
+            dataloc[1], Name_to_save, ".csv",
+            sep = ""
           ),
           paste(sa_network_dir_get(), location,
-                Name_to_save, ".csv",
-                sep = ""
+            Name_to_save, ".csv",
+            sep = ""
           ),
           overwrite = overwrite
         )
@@ -104,8 +90,8 @@ savefst_csv <- function(Object_to_save, Name_to_save, output = "1. Ingelezen dat
   }
   if (session_info == TRUE) {
     save_sessioninfo(paste(sa_network_dir_get(),
-                           dataloc, Name_to_save, "_",
-                           sep = ""
+      dataloc, Name_to_save, "_",
+      sep = ""
     ))
   }
 }

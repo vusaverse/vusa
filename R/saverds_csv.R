@@ -17,76 +17,78 @@
 #' zowel een .rds als een .fst weggeschreven.
 #' @param session_info Standaard FALSE. Moet de sessie-info in dezelfde folder
 #' weggeschreve worden
-#' @param Test_documentatie boolean die aangeeft of test documentatie gemaakt moet worden
-#' @param Documentatie boolean die aangeeft of documentatie gemaakt moet worden
 #' @param overwrite whether to overwrite existing file when copying to other directory.
 #' @export
 saverds_csv <- function(Object_to_save, Name_to_save, output = "1. Ingelezen data/", dataloc, fileEncoding = "",
                         save_csv = FALSE, save_fst = FALSE, session_info = FALSE,
-                        Test_documentatie = FALSE, Documentatie = FALSE, overwrite = TRUE){
+                        overwrite = TRUE) {
   ## bepaal de dataloc op basis van de branch
-  if(missing(dataloc) == TRUE) {
+  if (missing(dataloc) == TRUE) {
     dataloc <- paste("Output/", sa_branch_get(), "/", output, sep = "")
   }
 
-  ## Inlezen testdocumentatie
-  if (Test_documentatie == TRUE | sa_defineer_test_documentatie_get()) {
-    Naam_doc <- paste0(output, Name_to_save)
-    ## Roep functie aan om testdocumentatie aan te maken
-    create_documentatie_tests(df = Object_to_save,
-                              Naam = Naam_doc,
-                              Limietwaarden_bestandspad = "Testdocumentatie/Numerieke_limietwaarden.csv")
-  }
-
-  ## Inlezen documentatie
-  if (Documentatie == TRUE) {
-    ## Roep functie aan om testdocumentatie aan te maken
-    create_documentatie(df = Object_to_save,
-                        Naam = paste0("Documentatie_",Name_to_save),
-                        Limietwaarden_bestandspad = "Testdocumentatie/Numerieke_limietwaarden.csv")
-  }
-
-  ##save RDS
-  saveRDS(Object_to_save, paste(sa_network_dir_get(),dataloc,Name_to_save,".rds",sep=""), version = 2)
-  if (length(dataloc) > 1){
+  ## save RDS
+  saveRDS(Object_to_save, paste(sa_network_dir_get(), dataloc, Name_to_save, ".rds", sep = ""), version = 2)
+  if (length(dataloc) > 1) {
     for (location in dataloc[-1]) {
-      file.copy(paste(sa_network_dir_get(),
-                      dataloc[1], Name_to_save, ".rds", sep = ""),
-                paste(sa_network_dir_get(),
-                      location, Name_to_save, ".rds", sep = ""),
-                overwrite = overwrite)
-    }}
-  if(save_fst == TRUE){
-    fst::write_fst(Object_to_save, paste(sa_network_dir_get(),dataloc,Name_to_save,".fst",sep=""), compress = 100)
-    if (length(dataloc) > 1){
+      file.copy(
+        paste(sa_network_dir_get(),
+          dataloc[1], Name_to_save, ".rds",
+          sep = ""
+        ),
+        paste(sa_network_dir_get(),
+          location, Name_to_save, ".rds",
+          sep = ""
+        ),
+        overwrite = overwrite
+      )
+    }
+  }
+  if (save_fst == TRUE) {
+    fst::write_fst(Object_to_save, paste(sa_network_dir_get(), dataloc, Name_to_save, ".fst", sep = ""), compress = 100)
+    if (length(dataloc) > 1) {
       for (location in dataloc[-1]) {
-        file.copy(paste(sa_network_dir_get(),
-                        dataloc[1], Name_to_save, ".fst", sep = ""),
-                  paste(sa_network_dir_get(),
-                        location, Name_to_save, ".fst", sep = ""),
-                  overwrite = overwrite)
-      }}
+        file.copy(
+          paste(sa_network_dir_get(),
+            dataloc[1], Name_to_save, ".fst",
+            sep = ""
+          ),
+          paste(sa_network_dir_get(),
+            location, Name_to_save, ".fst",
+            sep = ""
+          ),
+          overwrite = overwrite
+        )
+      }
+    }
   }
 
-  ##save CSV (staat standaard op FALSE)
-  if(save_csv == TRUE){
-    if(fileEncoding == '') {
-      utils::write.csv2(Object_to_save, paste(sa_network_dir_get(),dataloc,Name_to_save,".csv",sep=""),row.names=F,na="")
+  ## save CSV (staat standaard op FALSE)
+  if (save_csv == TRUE) {
+    if (fileEncoding == "") {
+      utils::write.csv2(Object_to_save, paste(sa_network_dir_get(), dataloc, Name_to_save, ".csv", sep = ""), row.names = F, na = "")
     } else {
-      utils::write.csv2(Object_to_save, paste(sa_network_dir_get(),dataloc,Name_to_save,".csv",sep=""),row.names=F,na="", fileEncoding = fileEncoding)
+      utils::write.csv2(Object_to_save, paste(sa_network_dir_get(), dataloc, Name_to_save, ".csv", sep = ""), row.names = F, na = "", fileEncoding = fileEncoding)
     }
-    if (length(dataloc) > 1){
+    if (length(dataloc) > 1) {
       for (location in dataloc[-1]) {
-        file.copy(paste(sa_network_dir_get(),
-                        dataloc[1], Name_to_save, ".csv", sep = ""),
-                  paste(sa_network_dir_get(),
-                        location, Name_to_save, ".csv", sep = ""),
-                  overwrite = overwrite)
-      }}
+        file.copy(
+          paste(sa_network_dir_get(),
+            dataloc[1], Name_to_save, ".csv",
+            sep = ""
+          ),
+          paste(sa_network_dir_get(),
+            location, Name_to_save, ".csv",
+            sep = ""
+          ),
+          overwrite = overwrite
+        )
+      }
+    }
   }
   ## sla de Sessioninfo op
-  if(session_info == TRUE) {
-    save_sessioninfo(paste(sa_network_dir_get(),dataloc,Name_to_save, "_", sep=""))
+  if (session_info == TRUE) {
+    save_sessioninfo(paste(sa_network_dir_get(), dataloc, Name_to_save, "_", sep = ""))
   }
 }
 
@@ -98,7 +100,9 @@ saverds_csv <- function(Object_to_save, Name_to_save, output = "1. Ingelezen dat
 sa_defineer_test_documentatie <- function(value = TRUE) {
   options(
     list(
-      VUStudentAnalytics.Defineer_test_documentatie = value))
+      VUStudentAnalytics.Defineer_test_documentatie = value
+    )
+  )
 }
 
 #' sa_defineer_test_documentatie

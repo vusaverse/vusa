@@ -16,35 +16,41 @@
 #' @return The modified dataframe.
 #' @examples
 #' \dontrun{
-#' write_tableau(df, "output", "/path/to/directory", 2024, save_csv = TRUE, save_rds = FALSE, offset_years = 10)
+#' write_tableau(df,
+#'   "output",
+#'   "/path/to/directory",
+#'   2024,
+#'   save_csv = TRUE,
+#'   save_rds = FALSE,
+#'   offset_years = 10
+#' )
 #' }
 write_tableau <- function(df, name, output_path, current_year, student_number_col = "INS_Studentnummer",
                           enrolment_year_col = "INS_Inschrijvingsjaar",
                           mapping_file = "Documentatie_Tableau_vriendelijke_variabelnamen_UT.csv",
-                          save_csv = TRUE, save_rds = FALSE, offset_years = 10){
-  
+                          save_csv = TRUE, save_rds = FALSE, offset_years = 10) {
   dfTableau_naming <- read_documentation(mapping_file)
-  
+
   matching_cols <- colnames(df)[colnames(df) %in% dfTableau_naming$Veldnaam_export]
-  
+
   df <- rename_columns(df, matching_cols, dfTableau_naming)
-  
-  if (student_number_col %in% colnames(df)){
+
+  if (student_number_col %in% colnames(df)) {
     df <- df %>%
       mutate(!!sym(student_number_col) := hash_var(!!sym(student_number_col)))
   }
-  
-  if (enrolment_year_col %in% colnames(df)){
+
+  if (enrolment_year_col %in% colnames(df)) {
     df <- df %>%
       filter(!!sym(enrolment_year_col) %in% (current_year - offset_years):current_year)
   }
-  
+
   write_file(df, name,
-             destination = output_path,
-             save_csv = save_csv,
-             save_rds = save_rds
+    destination = output_path,
+    save_csv = save_csv,
+    save_rds = save_rds
   )
-  
+
   return(df)
 }
 
@@ -62,17 +68,17 @@ write_tableau <- function(df, name, output_path, current_year, student_number_co
 #' \dontrun{
 #' df <- rename_columns(df, matching_cols, dfTableau_naming)
 #' }
-rename_columns <- function(df, matching_cols, dfTableau_naming){
+rename_columns <- function(df, matching_cols, dfTableau_naming) {
   # Create a named vector for renaming
   rename_vec <- setNames(dfTableau_naming$Veldnaam[match(matching_cols, dfTableau_naming$Veldnaam_export)], matching_cols)
-  
+
   # Loop through matching_cols and rename each column individually
-  for(col in matching_cols){
+  for (col in matching_cols) {
     new_name <- dfTableau_naming$Veldnaam[which(dfTableau_naming$Veldnaam_export == col)]
-    if(!is.na(new_name)){
+    if (!is.na(new_name)) {
       df <- rename(df, !!sym(new_name) := !!sym(col))
     }
   }
-  
+
   return(df)
 }
