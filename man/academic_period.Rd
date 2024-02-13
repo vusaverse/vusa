@@ -26,4 +26,8 @@ This information is entered manually maintained on the basis of the
 academic year calendar of the VU. However, the user can also use his own created
 dataset, with the same column names, by using the argument date_table
 }
+\seealso{
+Other vector calculations: 
+\code{\link{count_more_than_1}()}
+}
 \concept{vector calculations}
