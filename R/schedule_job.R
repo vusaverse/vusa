@@ -6,6 +6,6 @@
 #' @export
 schedule_job <- function(file) {
     write(x      = paste(file, "branch: ", current_git_branch()),
-          file   = paste0(sa_network_dir_get(), "Server_wachtrij/Wachtrij.txt"),
+          file   = paste0(Sys.getenv("NETWORK_DIR"), "Server_wachtrij/Wachtrij.txt"),
           append = TRUE)
 }

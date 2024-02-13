@@ -21,25 +21,25 @@ savefst_csv <- function(Object_to_save, Name_to_save, output = "1. Ingelezen dat
                         session_info = FALSE,
                         overwrite = TRUE) {
   if (missing(dataloc) == TRUE) {
-    dataloc <- paste("Output/", sa_branch_get(),
+    dataloc <- paste("Output/", Sys.getenv("BRANCH"),
       "/", output,
       sep = ""
     )
   }
 
 
-  fst::write_fst(Object_to_save, paste(sa_network_dir_get(),
+  fst::write_fst(Object_to_save, paste(Sys.getenv("NETWORK_DIR"),
     dataloc, Name_to_save, ".fst",
     sep = ""
   ), compress = 100)
   if (length(dataloc) > 1) {
     for (location in dataloc[-1]) {
       file.copy(
-        paste(sa_network_dir_get(),
+        paste(Sys.getenv("NETWORK_DIR"),
           dataloc[1], Name_to_save, ".fst",
           sep = ""
         ),
-        paste(sa_network_dir_get(), location,
+        paste(Sys.getenv("NETWORK_DIR"), location,
           Name_to_save, ".fst",
           sep = ""
         ),
@@ -50,7 +50,7 @@ savefst_csv <- function(Object_to_save, Name_to_save, output = "1. Ingelezen dat
 
   if (save_csv == TRUE) {
     if (fileEncoding == "") {
-      data.table::fwrite(Object_to_save, paste(sa_network_dir_get(),
+      data.table::fwrite(Object_to_save, paste(Sys.getenv("NETWORK_DIR"),
         dataloc, Name_to_save, ".csv",
         sep = ""
       ),
@@ -61,7 +61,7 @@ savefst_csv <- function(Object_to_save, Name_to_save, output = "1. Ingelezen dat
       qmethod = "double"
       )
     } else {
-      data.table::fwrite(Object_to_save, paste(sa_network_dir_get(),
+      data.table::fwrite(Object_to_save, paste(Sys.getenv("NETWORK_DIR"),
         dataloc, Name_to_save, ".csv",
         sep = ""
       ),
@@ -75,11 +75,11 @@ savefst_csv <- function(Object_to_save, Name_to_save, output = "1. Ingelezen dat
     if (length(dataloc) > 1) {
       for (location in dataloc[-1]) {
         file.copy(
-          paste(sa_network_dir_get(),
+          paste(Sys.getenv("NETWORK_DIR"),
             dataloc[1], Name_to_save, ".csv",
             sep = ""
           ),
-          paste(sa_network_dir_get(), location,
+          paste(Sys.getenv("NETWORK_DIR"), location,
             Name_to_save, ".csv",
             sep = ""
           ),
@@ -89,7 +89,7 @@ savefst_csv <- function(Object_to_save, Name_to_save, output = "1. Ingelezen dat
     }
   }
   if (session_info == TRUE) {
-    save_sessioninfo(paste(sa_network_dir_get(),
+    save_sessioninfo(paste(Sys.getenv("NETWORK_DIR"),
       dataloc, Name_to_save, "_",
       sep = ""
     ))

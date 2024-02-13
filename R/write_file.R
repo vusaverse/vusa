@@ -46,10 +46,10 @@ write_file <- function(Object_to_save, Name_to_save, destination = NULL,
   }
 
   if (stringr::str_detect(destination, "Tableau")) {
-    dataloc <- paste0(sa_network_dir_get(), destination)
+    dataloc <- paste0(Sys.getenv("NETWORK_DIR"), destination)
   } else {
-    dataloc <- paste(sa_network_dir_get(),
-      "Output/", sa_branch_get(),
+    dataloc <- paste(Sys.getenv("NETWORK_DIR"),
+      "Output/", Sys.getenv("BRANCH"),
       "/", destination,
       sep = ""
     )

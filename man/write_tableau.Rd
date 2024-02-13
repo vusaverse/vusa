@@ -47,6 +47,13 @@ applies some transformations, and saves the result in a specified location.
 }
 \examples{
 \dontrun{
-write_tableau(df, "output", "/path/to/directory", 2024, save_csv = TRUE, save_rds = FALSE, offset_years = 10)
+write_tableau(df,
+  "output",
+  "/path/to/directory",
+  2024,
+  save_csv = TRUE,
+  save_rds = FALSE,
+  offset_years = 10
+)
 }
 }

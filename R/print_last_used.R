@@ -13,9 +13,9 @@ print_last_used <- function(path = NULL) {
   }
   ## print de datum van het het laatste output bestand
   output_bestanden <- determine_output_files(path)
-  file_loc <- paste(sa_network_dir_get(),
+  file_loc <- paste(Sys.getenv("NETWORK_DIR"),
                     "Output/",
-                    sa_branch_get(),
+                    Sys.getenv("BRANCH"),
                     "/",
                     dplyr::last(output_bestanden),
                     sep = "")

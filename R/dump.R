@@ -19,7 +19,7 @@ dump_subset_to_file <- function(df, studentnummer, dataloc = "Exports/Student_Ex
     } else {
         filename <- paste("dump_subset_", current_time, ".xlsx", sep = '')
     }
-    utils::write.csv2(df, paste(sa_network_dir_get(), dataloc, filename, sep = ""), col.names=FALSE)
+    utils::write.csv2(df, paste(Sys.getenv("NETWORK_DIR"), dataloc, filename, sep = ""), col.names=FALSE)
 }
 
 
@@ -36,7 +36,7 @@ dump_subset_to_file <- function(df, studentnummer, dataloc = "Exports/Student_Ex
 #' @export
 dump_to_testfile <- function(df, output = "XX. Test/", dataloc, suffix = NULL){
     if(missing(dataloc) == TRUE) {
-        dataloc <- paste("Output/", sa_branch_get(), "/", output, sep = "")
+        dataloc <- paste("Output/", Sys.getenv("BRANCH"), "/", output, sep = "")
     }
     current_time <- format(Sys.time(), "%Y-%m-%d-%H-%M-%S")
     if(!is.null(suffix)){
@@ -44,5 +44,5 @@ dump_to_testfile <- function(df, output = "XX. Test/", dataloc, suffix = NULL){
     } else {
         filename <- paste("dump_subset_", current_time, ".csv", sep = '')
     }
-    utils::write.csv2(df, paste(sa_network_dir_get(), dataloc, filename, sep = ""), col.names=FALSE, sep = ";")
+    utils::write.csv2(df, paste(Sys.getenv("NETWORK_DIR"), dataloc, filename, sep = ""), col.names=FALSE, sep = ";")
 }

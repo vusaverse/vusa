@@ -24,19 +24,19 @@ saverds_csv <- function(Object_to_save, Name_to_save, output = "1. Ingelezen dat
                         overwrite = TRUE) {
   ## bepaal de dataloc op basis van de branch
   if (missing(dataloc) == TRUE) {
-    dataloc <- paste("Output/", sa_branch_get(), "/", output, sep = "")
+    dataloc <- paste("Output/", Sys.getenv("BRANCH"), "/", output, sep = "")
   }
 
   ## save RDS
-  saveRDS(Object_to_save, paste(sa_network_dir_get(), dataloc, Name_to_save, ".rds", sep = ""), version = 2)
+  saveRDS(Object_to_save, paste(Sys.getenv("NETWORK_DIR"), dataloc, Name_to_save, ".rds", sep = ""), version = 2)
   if (length(dataloc) > 1) {
     for (location in dataloc[-1]) {
       file.copy(
-        paste(sa_network_dir_get(),
+        paste(Sys.getenv("NETWORK_DIR"),
           dataloc[1], Name_to_save, ".rds",
           sep = ""
         ),
-        paste(sa_network_dir_get(),
+        paste(Sys.getenv("NETWORK_DIR"),
           location, Name_to_save, ".rds",
           sep = ""
         ),
@@ -45,15 +45,15 @@ saverds_csv <- function(Object_to_save, Name_to_save, output = "1. Ingelezen dat
     }
   }
   if (save_fst == TRUE) {
-    fst::write_fst(Object_to_save, paste(sa_network_dir_get(), dataloc, Name_to_save, ".fst", sep = ""), compress = 100)
+    fst::write_fst(Object_to_save, paste(Sys.getenv("NETWORK_DIR"), dataloc, Name_to_save, ".fst", sep = ""), compress = 100)
     if (length(dataloc) > 1) {
       for (location in dataloc[-1]) {
         file.copy(
-          paste(sa_network_dir_get(),
+          paste(Sys.getenv("NETWORK_DIR"),
             dataloc[1], Name_to_save, ".fst",
             sep = ""
           ),
-          paste(sa_network_dir_get(),
+          paste(Sys.getenv("NETWORK_DIR"),
             location, Name_to_save, ".fst",
             sep = ""
           ),
@@ -66,18 +66,18 @@ saverds_csv <- function(Object_to_save, Name_to_save, output = "1. Ingelezen dat
   ## save CSV (staat standaard op FALSE)
   if (save_csv == TRUE) {
     if (fileEncoding == "") {
-      utils::write.csv2(Object_to_save, paste(sa_network_dir_get(), dataloc, Name_to_save, ".csv", sep = ""), row.names = F, na = "")
+      utils::write.csv2(Object_to_save, paste(Sys.getenv("NETWORK_DIR"), dataloc, Name_to_save, ".csv", sep = ""), row.names = F, na = "")
     } else {
-      utils::write.csv2(Object_to_save, paste(sa_network_dir_get(), dataloc, Name_to_save, ".csv", sep = ""), row.names = F, na = "", fileEncoding = fileEncoding)
+      utils::write.csv2(Object_to_save, paste(Sys.getenv("NETWORK_DIR"), dataloc, Name_to_save, ".csv", sep = ""), row.names = F, na = "", fileEncoding = fileEncoding)
     }
     if (length(dataloc) > 1) {
       for (location in dataloc[-1]) {
         file.copy(
-          paste(sa_network_dir_get(),
+          paste(Sys.getenv("NETWORK_DIR"),
             dataloc[1], Name_to_save, ".csv",
             sep = ""
           ),
-          paste(sa_network_dir_get(),
+          paste(Sys.getenv("NETWORK_DIR"),
             location, Name_to_save, ".csv",
             sep = ""
           ),
@@ -88,7 +88,7 @@ saverds_csv <- function(Object_to_save, Name_to_save, output = "1. Ingelezen dat
   }
   ## sla de Sessioninfo op
   if (session_info == TRUE) {
-    save_sessioninfo(paste(sa_network_dir_get(), dataloc, Name_to_save, "_", sep = ""))
+    save_sessioninfo(paste(Sys.getenv("NETWORK_DIR"), dataloc, Name_to_save, "_", sep = ""))
   }
 }
 

@@ -13,10 +13,10 @@
 save_fst <- function(Object_to_save, Name_to_save, output = "1. Ingelezen data/", dataloc, session_info = FALSE, ...){
 
     if(missing(dataloc) == TRUE) {
-        dataloc <- paste("Output/", sa_branch_get(), "/", output, sep = "")
+        dataloc <- paste("Output/", Sys.getenv("BRANCH"), "/", output, sep = "")
     }
 
-    fst::write_fst(Object_to_save, paste(sa_network_dir_get(),
+    fst::write_fst(Object_to_save, paste(Sys.getenv("NETWORK_DIR"),
                                     dataloc,
                                     Name_to_save,
                                     ".fst",
@@ -25,7 +25,7 @@ save_fst <- function(Object_to_save, Name_to_save, output = "1. Ingelezen data/"
 
     ## Write session info
     if(session_info == TRUE) {
-        save_sessioninfo(paste(sa_network_dir_get(),
+        save_sessioninfo(paste(Sys.getenv("NETWORK_DIR"),
                                dataloc,
                                Name_to_save,
                                "_",

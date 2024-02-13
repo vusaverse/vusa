@@ -20,7 +20,7 @@ save_multiple_tableau <- function(Object_to_save,
                                   fileEncoding = "") {
 
   saveRDS(Object_to_save,
-          paste(sa_network_dir_get(),
+          paste(Sys.getenv("NETWORK_DIR"),
                 filepaths[1], ".rds", sep = ""),
           version = 2)
 
@@ -28,23 +28,23 @@ save_multiple_tableau <- function(Object_to_save,
   if (length(filepaths) > 1){
 
     for (location in filepaths[-1]) {
-      file.copy(paste(sa_network_dir_get(),
+      file.copy(paste(Sys.getenv("NETWORK_DIR"),
                       filepaths[1], ".rds", sep = ""),
-                paste(sa_network_dir_get(),
+                paste(Sys.getenv("NETWORK_DIR"),
                       location, ".rds", sep = ""),
                 overwrite = overwrite)
     }}
 
   if(save_fst == TRUE){
 
-    fst::write_fst(Object_to_save, paste(sa_network_dir_get(),
+    fst::write_fst(Object_to_save, paste(Sys.getenv("NETWORK_DIR"),
                                          filepaths[1], ".fst",sep=""), compress = 100)
     ## copy file to alternative locations
     if (length(filepaths) > 1){
       for (location in filepaths[-1]) {
-        file.copy(paste(sa_network_dir_get(),
+        file.copy(paste(Sys.getenv("NETWORK_DIR"),
                         filepaths[1], ".fst", sep = ""),
-                  paste(sa_network_dir_get(),
+                  paste(Sys.getenv("NETWORK_DIR"),
                         location, ".fst", sep = ""),
                   overwrite = overwrite)
       }}
@@ -53,13 +53,13 @@ save_multiple_tableau <- function(Object_to_save,
   if(save_csv == TRUE){
     if(fileEncoding == '') {
       utils::write.csv2(Object_to_save,
-                        paste(sa_network_dir_get(),
+                        paste(Sys.getenv("NETWORK_DIR"),
                               filepaths[1],".csv",sep=""),
                         row.names=F,
                         na="")
     } else {
       utils::write.csv2(Object_to_save,
-                        paste(sa_network_dir_get(),
+                        paste(Sys.getenv("NETWORK_DIR"),
                               filepaths[1],".csv",sep=""),
                         row.names=F,
                         na="",
@@ -68,9 +68,9 @@ save_multiple_tableau <- function(Object_to_save,
     ## copy file to alternative locations
     if (length(filepaths) > 1){
       for (location in filepaths[-1]) {
-        file.copy(paste(sa_network_dir_get(),
+        file.copy(paste(Sys.getenv("NETWORK_DIR"),
                         filepaths[1], ".csv", sep = ""),
-                  paste(sa_network_dir_get(),
+                  paste(Sys.getenv("NETWORK_DIR"),
                         location, ".csv", sep = ""),
                   overwrite = overwrite)
       }}

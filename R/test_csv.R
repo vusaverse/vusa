@@ -10,10 +10,10 @@
 #' inleesmethode weergeeft
 #' @export
 test_csv <- function(dataloc = ""){
-    df1 <- readr::read_csv2(paste(sa_network_dir_get(), dataloc, sep = ""))  %>%
+    df1 <- readr::read_csv2(paste(Sys.getenv("NETWORK_DIR"), dataloc, sep = ""))  %>%
         dplyr::mutate_if(is.character, factor) ## readr
 
-    df2 <- utils::read.csv2(paste(sa_network_dir_get(), dataloc, sep = "")) ## read.csv2
+    df2 <- utils::read.csv2(paste(Sys.getenv("NETWORK_DIR"), dataloc, sep = "")) ## read.csv2
 
     # maak een df van read_csv2
     class_df1               <- data.frame(unlist(lapply(df1, class)))

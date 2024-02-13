@@ -73,7 +73,7 @@ auto_document <- function() {
                 dataloc = "Documentatie/",
                 output = "Documentatie")
 
-        shell.exec(paste0(sa_network_dir_get(),
+        shell.exec(paste0(Sys.getenv("NETWORK_DIR"),
                           "Documentatie/",
                           save_name,
                           ".csv"))

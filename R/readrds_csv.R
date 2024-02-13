@@ -17,11 +17,11 @@
 readrds_csv <- function(dataloc = "", output, readr = FALSE, print = FALSE, fix.encoding = FALSE, encoding = "latin1", ...){
   if (missing(output) == FALSE) {
     ## The output is written per branch
-    dataloc <- paste("Output/", sa_branch_get(), "/", output, sep = "")
+    dataloc <- paste("Output/", Sys.getenv("BRANCH"), "/", output, sep = "")
   }
   ## determine the file path, by combining the network directory with
   ## the dataloc parameter.
-  file_loc <- paste(sa_network_dir_get(), dataloc, sep = "")
+  file_loc <- paste(Sys.getenv("NETWORK_DIR"), dataloc, sep = "")
 
   ## Print the date the file was last modified.
   if (print) {

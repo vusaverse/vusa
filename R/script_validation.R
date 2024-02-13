@@ -901,10 +901,10 @@ test_file_on_documentation <-
     ## Maak voor het data bestand ook een volledig filepath aan
     Rds_path_volledig <-
       base::paste(
-        sa_network_dir_get(),
+        Sys.getenv("NETWORK_DIR"),
         base::paste(
           "Output",
-          sa_branch_get(),
+          Sys.getenv("BRANCH"),
           Naam_folder,
           Naam_document,
           sep = "/"
