@@ -1,0 +1,5 @@
+Name: clear_global_proj
+Description: Clears All Objects From Global Environment Except For Those In System Variable DEFAULT_KEEP_LIST
+Binding: clear_global_proj
+Interactive: false
+
