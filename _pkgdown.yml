@@ -9,7 +9,7 @@ reference:
   contents:
   - archive_script
   - auto_document
-  - clear_global
+  - clear_global_proj
   - clear_script_objects
   - close_view
   - insert_filepath_code
