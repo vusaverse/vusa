@@ -67,7 +67,6 @@ reference:
   - get_analysisset_7
   - get_archived_result_files
   - read_documentation
-  - write_documentatie_tests
   
   
 - title: Read and Write methods.
@@ -109,6 +108,7 @@ reference:
   - controleer_na_waarden
   - correct_file_name
   - correct_var_name
+  - count_more_than_1
   - count_rows_analysis_set
   - create_quality_report
   - current_filename
@@ -116,10 +116,10 @@ reference:
   - determine_author
   - determine_data_files
   - determine_input_files
-  - determine_outflow_study_year
   - determine_output_files
   - df_compare
   - df_inspect_without_warnings
+  - drop_na_column_names
   - extract_filepaths_readrds_csv
   - extract_output_file
   - filter_settings_on_type
@@ -128,10 +128,8 @@ reference:
   - find_patterns
   - generate_introduction_validation
   - generate_output_files_database
-  - get_dist
   - get_last_n_commit_date
   - get_last_n_commit_info
-  - get_ratio
   - has_globale_identifiers
   - hash_var
   - join_tkoppel
@@ -147,7 +145,6 @@ reference:
   - mapping_category
   - mapping_fix
   - mapping_translate
-  - match_kolom_met_patroon
   - md_list
   - overwrite_dot_arguments
   - package_important_in_project
@@ -199,10 +196,8 @@ reference:
   - validate_style
   - validate_write_files
   - variable_name_lint
-  - veld_is_subset
   - vind_assertion_soort
   - vind_subset_kolommen
   - voeg_transitie_subtotalen_toe
   - vvconverter_data
-  - wrapper_determine_outflow_study_year
   - wrapper_translate_colnames_documentation
