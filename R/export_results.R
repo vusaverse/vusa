@@ -27,9 +27,9 @@ export_results <- function(Analysis_file, Results_location = NULL, Analysis_set 
 
   ## find system variables for Results location and Analysis_set
   if (is.null(Results_location)) {
-    print("No given Results_location, so looking for system variables")
+    message("No given Results_location, so looking for system variables")
     if (!Sys.getenv("RESULTS_DIR") == "") {
-      print("system variable present, so this will be used")
+      message("system variable present, so this will be used")
       Results_location <- Sys.getenv("RESULTS_DIR")
     }
     else {
@@ -38,9 +38,9 @@ export_results <- function(Analysis_file, Results_location = NULL, Analysis_set 
   }
 
   if (is.null(Analysis_set)) {
-    print("No given Analysis_set, so looking for system variables")
+    message("No given Analysis_set, so looking for system variables")
     if (!Sys.getenv("AS_1_DIR") == "") {
-      print("system variable present, so this will be used")
+      message("system variable present, so this will be used")
       Analysis_set <- Sys.getenv("AS_1_DIR")
     }
     else {

@@ -56,7 +56,7 @@ build_analysis_set <- function(Analysis_set, file, Extra_sleutels = NULL, slack 
     ## inherits = FALSE zorgt ervoor dat Analysis_set_7 geretourneerd wordt als deze
     ## binnen deze functie is gesourced cq opgebouwd
     if (exists("Analysis_set_7", inherits = FALSE)) {
-        print("Analyseset 7 generated")
+        message("Analyseset 7 generated")
         return(Analysis_set_7)
     }
 
@@ -68,7 +68,7 @@ build_analysis_set <- function(Analysis_set, file, Extra_sleutels = NULL, slack 
 
     ## Verwijder de nieuwe kolommen uit de verrijkte analyseset als die bestaan
     if (length(Verwijder_kolommen) > 0) {
-        ## Print deze kolommen naar de console
+        ## Message deze kolommen naar de console
         md_list(Verwijder_kolommen, header = "Columns are already present in the analysis set. These will be overwritten:")
 
         ## stuur bericht naar slack kanaal

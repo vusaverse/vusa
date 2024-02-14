@@ -196,7 +196,7 @@ pas_doorstroomvariabele_aan <- function(df1, df2, bachelor_naar_master = TRUE){
         dplyr::select(INS_Doorstroom_van_bachelor_naar_master_correct) %>%
         dplyr::filter(!is.na(INS_Doorstroom_van_bachelor_naar_master_correct))
 
-      print(paste0(nrow(Aantal_aanpassingen),
+      message(paste0(nrow(Aantal_aanpassingen),
                    " rijen van de originele variabele INS_Doorstroom_van_bachelor_naar_master zijn aangepast."))
 
       df2 <- df2 %>%
@@ -206,7 +206,7 @@ pas_doorstroomvariabele_aan <- function(df1, df2, bachelor_naar_master = TRUE){
       return(df2)
 
     } else {
-      print("INS_Doorstroom_van_bachelor_naar_master hoeft niet aangepast te worden omdat er geen discrepanties zijn.")
+      message("INS_Doorstroom_van_bachelor_naar_master hoeft niet aangepast te worden omdat er geen discrepanties zijn.")
     }
   }
 
@@ -262,7 +262,7 @@ pas_doorstroomvariabele_aan <- function(df1, df2, bachelor_naar_master = TRUE){
         dplyr::select(INS_Doorstroom_van_premaster_naar_master_correct) %>%
         dplyr::filter(!is.na(INS_Doorstroom_van_premaster_naar_master_correct))
 
-      print(paste0(nrow(Aantal_aanpassingen),
+      message(paste0(nrow(Aantal_aanpassingen),
                    " rijen van de originele variabele INS_Doorstroom_van_premaster_naar_master zijn aangepast."))
 
       df2 <- df2 %>%
@@ -272,7 +272,7 @@ pas_doorstroomvariabele_aan <- function(df1, df2, bachelor_naar_master = TRUE){
       return(df2)
 
     } else {
-      print("INS_Doorstroom_van_premaster_naar_master hoeft niet aangepast te worden omdat er geen discrepanties zijn.")
+      message("INS_Doorstroom_van_premaster_naar_master hoeft niet aangepast te worden omdat er geen discrepanties zijn.")
     }
   }
 

@@ -14,5 +14,5 @@ md_list(x, header = NULL, ordered = F)
 \item{ordered}{Defaults to FALSE, if TRUE then prefix is "." otherwise "-".}
 }
 \description{
-Print a list in markdown.
+message a list in markdown.
 }

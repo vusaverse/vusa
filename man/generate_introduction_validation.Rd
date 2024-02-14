@@ -9,11 +9,11 @@ generate_introduction_validation(Script, Rapportage = TRUE)
 \arguments{
 \item{Script}{List met filepath(en) van de/het script(s) die gevalideerd moeten worden}
 
-\item{Rapportage}{Mogelijkheid om samenvattende rapportage te printen bij het uitvoeren van het script}
+\item{Rapportage}{Mogelijkheid om samenvattende rapportage te message bij het uitvoeren van het script}
 }
 \description{
 Functie om scripts te testen op de volledigheid van de introductie. De functie geeft
 een dataframe terug met daarin de resultaten van de verschillende tests worden
-uitgevoerd. Optioneel kan er een kleine rapportage worden geprint. Deze functie wordt gebruikt
+uitgevoerd. Optioneel kan er een kleine rapportage worden gemessage. Deze functie wordt gebruikt
 in de validate_script functie en in 05. Rapporten/XX Rapport SA Controle introducties en bestandsnamen.R
 }

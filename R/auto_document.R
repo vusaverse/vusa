@@ -19,14 +19,14 @@ auto_document <- function() {
 
     ## 1.3 show columns in documentatie, but not in analyseset----
     doc_not_in_analyse <- setdiff(documentatie_names, analyseset_names)
-    print(paste("Number or rows to delete:", length(doc_not_in_analyse)))
+    message(paste("Number or rows to delete:", length(doc_not_in_analyse)))
 
     ## 1.4 Show columns present in the analyseset, but not in documentatie
     analyse_not_in_doc <- setdiff(analyseset_names, documentatie_names)
     base::cat(cli::style_bold(cli::col_red("The following variables are not present in the documentation: \n")))
     base::cat(cli::col_red(paste(analyse_not_in_doc, "\n")))
     base::cat(paste("\n"))
-    print(paste("aantal rijen om toe te voegen:", length(analyse_not_in_doc)))
+    message(paste("aantal rijen om toe te voegen:", length(analyse_not_in_doc)))
 
     doc_2 <- subset(Documentatie, !(Veldnaam %in% doc_not_in_analyse))
     base::cat(cli::style_bold(cli::col_red("The following variables must be deleted from the documentation: \n")))

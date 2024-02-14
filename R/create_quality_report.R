@@ -16,9 +16,9 @@ create_quality_report <- function(df, ProjectName, Network_directory = NULL,
                                   export_map = "/6. Exports/", path = NULL) {
 
   if (is.null(Network_directory)) {
-    print("No given Network_directory, so looking for system variables")
+    message("No given Network_directory, so looking for system variables")
     if (!Sys.getenv("OUTPUT_DIR") == "") {
-      print("system variable present, so this will be used")
+      message("system variable present, so this will be used")
       Network_directory <- Sys.getenv("OUTPUT_DIR")
     }
     else {
@@ -67,7 +67,7 @@ create_quality_report <- function(df, ProjectName, Network_directory = NULL,
                          replace = TRUE,
                          # output to be generated and saved
                          render = TRUE,
-                         # maximum unique values printed
+                         # maximum unique values message
                          maxProbVals = 10)
 
 }

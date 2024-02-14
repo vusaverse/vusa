@@ -155,7 +155,7 @@ up_to_date <- function(bestandspad, correctie_tijdstip, frequentie, contact, inl
   ,
   ## Indien er een error  is, wordt er een error message geprint
   error = function(e) {
-    print(e)
+    message(e)
     cat("Error met uitvoeren Up to date functie: Check input")
   })
 }

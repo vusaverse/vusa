@@ -13,9 +13,9 @@ hash_var <- function(Vector_to_hash, seed = NULL){
 
   ## Check if system variable exists, when argument for seed is NULL.
   if (is.null(seed)) {
-    print("Seed is missing, so checking for existing system variable for seed")
+    message("Seed is missing, so checking for existing system variable for seed")
     if (!Sys.getenv("LOCAL_SEED") == "") {
-      print("Neccesary system variable is present , this will be used for seed ")
+      message("Neccesary system variable is present , this will be used for seed ")
       seed <- getOption(Sys.getenv("LOCAL_SEED"))
     }
     else {

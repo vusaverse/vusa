@@ -78,7 +78,7 @@ readrds_csv <- function(dataloc = "", output, readr = FALSE, print = FALSE, fix.
       df <- readRDS(file_loc, ...)
       return(df)}
   } else {
-    print("abort")
+    message("abort")
   }
 
 }

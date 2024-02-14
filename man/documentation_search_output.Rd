@@ -16,6 +16,6 @@ een tabel met alleen Categorie, Veldnaam, en Omschrijving. "all" voor alle infor
 \item{search}{De zoekterm}
 }
 \description{
-Om de output van het documentatiebestand te printen.
+Om de output van het documentatiebestand te message.
 Deze functie wordt in principe alleen opgeroepen vanuit de functie documentation_search()
 }

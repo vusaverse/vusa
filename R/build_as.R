@@ -31,19 +31,19 @@ build_as <- function(Analysis_set, AS_archive, latest, files_list, complete_rebu
       ## Determine the last updated date of those input files
       input_date <- format(file.mtime(paste0(Network_directory, "Output/main/", input_file)), "%Y-%m-%d")
 
-      print(input_date)
+      message(input_date)
       ## check whether it is an input to which new columns are also added
       if (length(file) > 1) {
         new_columns <- file[-1]
         # There may also be new code in the main file, so if it has been updated, run again
         if (main_file_date >= date_AS_archive) {
-          print(paste0(main_file, " has been updated, meaning: run this data again"))
+          message(paste0(main_file, " has been updated, meaning: run this data again"))
           Analysis_set <- Build_Analysis_set(Analysis_set, main_file, new_columns)
         }
         ##Update the AS because the input files have been updated
         ## (for loop because multiple input files can be used in a script and therefore also multiple data)
         else if (any(input_date >= date_AS_archive)) {
-          print(paste0(main_file, " input file has been updated, meaning: run this data again"))
+          message(paste0(main_file, " input file has been updated, meaning: run this data again"))
           Analysis_set <- Build_Analysis_set(Analysis_set, main_file, new_columns)
         }
         else {
@@ -54,11 +54,11 @@ build_as <- function(Analysis_set, AS_archive, latest, files_list, complete_rebu
       ## input without new columns.
       else {
         if (any(input_date >= date_AS_archive)) {
-          print(paste0(file, "input file has been updated, meaning: run this data again"))
+          message(paste0(file, "input file has been updated, meaning: run this data again"))
           Analysis_set <- Build_Analysis_set(Analysis_set, main_file)
         }
         else if (main_file_date >= date_AS_archive) {
-          print(paste0(main_file, " has been updated, meaning: run this data again"))
+          message(paste0(main_file, " has been updated, meaning: run this data again"))
           Analysis_set <- Build_Analysis_set(Analysis_set, main_file)
         }
         else {
@@ -68,13 +68,13 @@ build_as <- function(Analysis_set, AS_archive, latest, files_list, complete_rebu
 
     }
     ##
-    print("the following scripts have no changed files:")
+    message("the following scripts have no changed files:")
     for (file in files_list_unchanged) {
-      print(file)
+      message(file)
     }
     # otherwise run all build files
   } else {
-    print("A new entry has been added, so everything has to be run again")
+    message("A new entry has been added, so everything has to be run again")
     for (file in files_list) {
       # check again if it is a file where new columns are added
       if (length(file) > 1) {

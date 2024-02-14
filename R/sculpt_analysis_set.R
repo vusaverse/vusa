@@ -56,7 +56,7 @@ sculpt_analysis_set <- function(Analysis_set, file, Extra_sleutels = NULL, slack
   ## inherits = FALSE zorgt ervoor dat Analysis_set_7 geretourneerd wordt als deze
   ## binnen deze functie is gesourced cq opgebouwd
   if (exists("Analysis_set_7", inherits = FALSE)) {
-    print("Analyseset 7 generated")
+    message("Analyseset 7 generated")
     return(Analysis_set_7)
   }
 
@@ -71,7 +71,7 @@ sculpt_analysis_set <- function(Analysis_set, file, Extra_sleutels = NULL, slack
 
     ## filter RES variabelen
     Verwijder_kolommen_zonder_RES <- Verwijder_kolommen[!grepl("^RES", Verwijder_kolommen)]
-    ## Print deze kolommen naar de console
+    ## message deze kolommen naar de console
     md_list(Verwijder_kolommen, header = "Columns are already present in the analysis set. These will be overwritten:")
 
     ## stuur bericht naar slack kanaal

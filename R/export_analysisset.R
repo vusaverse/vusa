@@ -103,9 +103,9 @@ export_analysisset <- function(Faculty_selection = 'All',
     INS_Studiejaar <- INS_Studentnummer <- INS_Inschrijvingsjaar_EOI <- NULL
 
   if (is.null(Network_directory)) {
-    print("No given Network_directory, so looking for system variables")
+    message("No given Network_directory, so looking for system variables")
     if (!Sys.getenv("OUTPUT_DIR") == "") {
-      print("system variable present, so this will be used")
+      message("system variable present, so this will be used")
       Network_directory <- Sys.getenv("OUTPUT_DIR")
     }
     else {
@@ -173,14 +173,14 @@ export_analysisset <- function(Faculty_selection = 'All',
   } else {
     Faculty_selection <- Faculty_selection
   }
-  print(Faculty_selection)
+  message(Faculty_selection)
 
   if (length(Study_selection) == 1) {
     if (Study_selection == 'All') {
       Study_selection <- unique(Analysis_set$INS_Opleidingsnaam_2002)
     }
   }
-  print(Study_selection)
+  message(Study_selection)
 
   if ('All' %in% Phase_selection) {
     Phase_selection <- unique(Analysis_set$INS_Opleidingsfase_BPM)
@@ -205,11 +205,11 @@ export_analysisset <- function(Faculty_selection = 'All',
   ## (De)select special personal data
   if (Special_personal_data == FALSE ) {
     Analysis_set_documentation <- Analysis_set_documentation_no_bpg
-    print('Analysisset contains no special personal data')
+    message('Analysisset contains no special personal data')
   } else {
     Analysis_set_documentation_bpg <- subset(Analysis_set_documentation, substr(Veldnaam,1,3) %in% Special_personal_data)
     Analysis_set_documentation <- rbind(Analysis_set_documentation_no_bpg, Analysis_set_documentation_bpg)
-    print(paste('Analysisset contains special personal data: ', paste(Special_personal_data, collapse = ", "), sep = ""))
+    message(paste('Analysisset contains special personal data: ', paste(Special_personal_data, collapse = ", "), sep = ""))
   }
 
   ## Select the necessary column names from the documentation and filter on this in the analysisset

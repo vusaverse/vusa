@@ -300,7 +300,7 @@ sftp_delete <- function(remote_path, server, username, .opts) {
     ## Bepaal de URL van het bestand
     file_url <- paste(server_path, remote_path, sep = "/")
 
-    print(file_url)
+    message(file_url)
     ## Upload het bestand.
     RCurl::curlPerform(url = server_path,
                        quote = paste0("rm \"", remote_path, "\""),
@@ -382,11 +382,11 @@ sftp_vu_download_and_delete <- function(remote_path, local_folder, overwrite = F
         ## Verwijder het bestand
         if (delete) {
             ## Toon een melding
-            print(paste(filename, "was succesfully downloaded from the server. The file will now be deleted from the server."))
+            message(paste(filename, "was succesfully downloaded from the server. The file will now be deleted from the server."))
             sftp_vu_delete(remote_path)
         } else {
             ## Toon een melding
-            print("The file was not deleted from the server, as the 'delete' argument is set to FALSE")
+            message("The file was not deleted from the server, as the 'delete' argument is set to FALSE")
         }
 
     }

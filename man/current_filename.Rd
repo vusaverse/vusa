@@ -40,6 +40,6 @@ there's been an intervening \code{\link[base]{source}}.
 # Put this in example.R and try running source("example.R")
 # and `Rscript example.R`
 filename <- current_filename()
-print(filename)
+message(filename)
 
 }

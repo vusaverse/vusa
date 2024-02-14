@@ -27,7 +27,7 @@ documentation_search <- function(search, output = "veldnaam", omschrijving = T, 
 
 #'documentation search output
 #'
-#'Om de output van het documentatiebestand te printen.
+#'Om de output van het documentatiebestand te message.
 #'Deze functie wordt in principe alleen opgeroepen vanuit de functie documentation_search()
 #'
 #'@param Zoekresultaat Een data frame met de variabelen die als output geleverd moeten
@@ -83,7 +83,7 @@ documentation_save <- function(data) {
     ## Sla de documentatie op
     saverds_csv(data, Name_to_save = "documentation Analyseset", dataloc = "/documentation/", save_csv = T)
     saverds_csv(data, Name_to_save = paste0("documentation Analyseset_", Sys.Date()), dataloc = "/documentation/XX. Archief/", save_csv = T)
-    print("Nieuwe versie van de documentatie is opgeslagen")
+    message("Nieuwe versie van de documentatie is opgeslagen")
 
 }
 

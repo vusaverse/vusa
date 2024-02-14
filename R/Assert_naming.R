@@ -350,7 +350,7 @@ assert_aanwezige_kolommen <- function(Naming, df, Collectie) {
                           paste(Kolommen_niet_in_df, collapse = "\n\t"),
                           '\n Op deze kolommen wordt niet geassert; ze zitten niet in de data, maar wel in de documentatie.'))
     Kolommen_niet_in_doc <- setdiff(names(df), Naming$Kolom)
-    # print(paste0('Variable \n\t',
+    # message(paste0('Variable \n\t',
     #              paste(Kolommen_niet_in_doc, collapse = "\n\t"),
     #              '\n Op deze kolommen wordt niet geassert; ze zitten niet in de documentatie, maar wel in de data.\n'))
 
@@ -602,7 +602,7 @@ write_pattern_table <- function(pattern) {
   for (Single_pattern in pattern) {
     if (!is.null(Single_pattern) & !is.na(Single_pattern) & !(Single_pattern %in% Pattern_bestand$Pattern)) {
       utils::write.table(Single_pattern, file = path, row.names = F, col.names = F, append = T)
-      print(paste("Pattern added to testpatterns:", Single_pattern))
+      message(paste("Pattern added to testpatterns:", Single_pattern))
     }
   }
 }

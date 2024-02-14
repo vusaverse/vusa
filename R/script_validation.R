@@ -190,7 +190,7 @@ validate_no_warning_errors <- function(filepath,
     errors <-
       catchToList(eval(parse(text = lines), envir = globalenv()))
 
-    ## Print in de consonle het resultaat van de test
+    ## message in de consonle het resultaat van de test
     base::cat("Waarschuwingen/ errors/ messages: ")
     for (message in na.omit(errors$warning)) {
       cat(base::cat(cli::col_red(message)), "\n")
@@ -242,14 +242,14 @@ validate_assertions_present <-
     if (TRUE %in% base::grepl("01.", filepath)) {
       ## Check of Assert_naming functie wordt aangeroepen in het script
       if (TRUE %in% base::grepl("assert_naming\\(", Regels)) {
-        ## Als aanwezig print dat de test is geslaagd
+        ## Als aanwezig message dat de test is geslaagd
         if (export_naar_dataframe == TRUE) {
           return("Geslaagd")
         } else{
           base::cat(cli::style_bold(cli::col_green("Geslaagd\n")))
         }
       } else{
-        ## Als er geen assertions aanwezig zijn, print dat deze moeten worden toegevoegd
+        ## Als er geen assertions aanwezig zijn, message dat deze moeten worden toegevoegd
         if (export_naar_dataframe == TRUE) {
           return("Niet geslaagd, voeg deze toe aan het script")
         } else{
@@ -262,7 +262,7 @@ validate_assertions_present <-
       if (export_naar_dataframe == TRUE) {
         return("Overgeslagen")
       } else{
-        ## Als er geen output bestanden zijn print dat deze zijn overgeslagen
+        ## Als er geen output bestanden zijn message dat deze zijn overgeslagen
         base::cat(cli::col_black("Overgeslagen\n"))
       }
     }
@@ -360,7 +360,7 @@ validate_clear_script_objects <-
     )
     hasClearScript <- any(grepl("clear_script_object", lines))
     if (!hasClearScript) {
-      ## Als er variabelen niet worden opgeruimd print deze dan
+      ## Als er variabelen niet worden opgeruimd message deze dan
       if (export_naar_dataframe == TRUE) {
         return(
           "clear_script_objects() ontbreekt. Stijl van variabelname kan niet worden gecheckt."
@@ -395,7 +395,7 @@ validate_clear_script_objects <-
 #' @family Script validatie
 #'
 validate_rm_objects <- function(filepath, export_naar_dataframe = FALSE) {
-  ## Print om welke test het gaat
+  ## message om welke test het gaat
   if(export_naar_dataframe == FALSE){
     base::cat("Opruimen variabelen: ")
   }
@@ -445,9 +445,9 @@ validate_rm_objects <- function(filepath, export_naar_dataframe = FALSE) {
       base::grep(base::paste(Delete_patterns, collapse = "|"), Verschil)
     Verschil <- Verschil[-Delete]
   }
-  ## Print het resultaat van deze test
+  ## message het resultaat van deze test
   if (length(Verschil > 0)) {
-    ## Als er variabelen niet worden opgeruimd print deze dan
+    ## Als er variabelen niet worden opgeruimd message deze dan
     if (export_naar_dataframe == TRUE) {
       return(paste0("Ruim de volgende variabelen op: ", Verschil))
     } else{
@@ -621,7 +621,7 @@ extract_output_file <- function(regel, testString) {
 #'
 compare_input_output <- function(filepath,
                                  export_naar_dataframe = FALSE) {
-  ## Print om welke test het gaat
+  ## message om welke test het gaat
   if (export_naar_dataframe == FALSE) {
     base::cat("Afhankelijkheden: ")
   }
@@ -641,12 +641,12 @@ compare_input_output <- function(filepath,
   }
   ## Filter op unieke waarden
   Dependencies <- unique(Dependencies$Afhankelijkheid)
-  ## Print het resultaat van de test
+  ## message het resultaat van de test
   if (length(Dependencies) > 0) {
     if (export_naar_dataframe == TRUE) {
       return(Dependencies)
     } else{
-      ## Print de dependensies wanneer deze aanwezig zijn
+      ## message de dependensies wanneer deze aanwezig zijn
       base::cat(cli::style_bold(cli::col_cyan(paste(
         Dependencies, "\n"
       ))))
@@ -655,7 +655,7 @@ compare_input_output <- function(filepath,
     if (export_naar_dataframe == TRUE) {
       return("Geen scripts die afhankelijk zijn")
     } else{
-      ## Print dat er geen scripts afhankelijk zijn wanneer dit geld
+      ## message dat er geen scripts afhankelijk zijn wanneer dit geld
       base::cat(cli::style_bold(cli::col_green(
         "Geen scripts die afhankelijk zijn\n"
       )))
@@ -675,7 +675,7 @@ compare_input_output <- function(filepath,
 #'
 validate_style <-
   function(filepath, export_naar_dataframe = FALSE) {
-    ## Print om welke test het gaat
+    ## message om welke test het gaat
     if (export_naar_dataframe == FALSE) {
       base::cat("Stijl: ")
     }
@@ -737,7 +737,7 @@ validate_style <-
 
 
 
-    ## Check of er stijlfouten zijn en print het resultaat van de test
+    ## Check of er stijlfouten zijn en message het resultaat van de test
     ## als marker
     if (base::nrow(output) > 0) {
       if (export_naar_dataframe == FALSE) {
@@ -779,7 +779,7 @@ validate_style <-
 #'
 validate_write_files <- function(filepath,
                                  export_naar_dataframe = FALSE) {
-  ## Print om welke test het gaat
+  ## message om welke test het gaat
   if (export_naar_dataframe == FALSE) {
     base::cat("Test bij wegschrijven bestanden op documentatie: \n")
   }
@@ -837,13 +837,13 @@ validate_write_files <- function(filepath,
     if (base::nrow(Test_scripts != 0)) {
       ## Check of alle tests zijn geslaagd
       if (base::any(Test_scripts$Geslaagd == FALSE)) {
-        ## Selecteer gegevens die geprint moeten worden als een tests niet is geslaagd
+        ## Selecteer gegevens die gemessage moeten worden als een tests niet is geslaagd
         Meldingen_tests <- Test_scripts %>%
           dplyr::filter(Geslaagd == FALSE) %>%
           dplyr::select(Bestand, Message) %>%
           dplyr::distinct() %>%
           base::toString()
-        ## Print resultaat van de test
+        ## message resultaat van de test
         base::cat(cli::style_bold(cli::col_red(unlist(
           Meldingen_tests
         ))))
@@ -916,7 +916,7 @@ test_file_on_documentation <-
     ## Check of documentatie bestand aanwezig is en lees deze in
     if (!base::file.exists(base::paste0("XX. Documentatie/", Csv_path))) {
       if (export_naar_dataframe == FALSE) {
-        ## Print wanneer documentatie niet aanwezig
+        ## message wanneer documentatie niet aanwezig
         base::cat(cli::style_bold(cli::col_red(
           base::paste0(Naam_document, ": er is geen documentatie aanwezig\n")
         )))
@@ -987,7 +987,7 @@ test_file_on_documentation <-
 #'
 validate_introduction <-
   function(filepath, export_naar_dataframe = FALSE) {
-    ## Print welke test wordt uitgevoerd
+    ## message welke test wordt uitgevoerd
     if (export_naar_dataframe == FALSE) {
       base::cat("Introductie: ")
     }
@@ -997,13 +997,13 @@ validate_introduction <-
     ## Filter de enventuele fouten en sla deze op
     fouten <-
       colnames(rapportage)[which(rapportage == "TRUE")]
-    ## Print resultaat van de test
+    ## message resultaat van de test
     if (base::length(fouten) > 0) {
       if (export_naar_dataframe == TRUE) {
         return(paste0(fouten, collapse = "; "))
       } else{
         base::cat(cli::style_bold(cli::col_red("Onvolledig: ")))
-        ## Print de fouten
+        ## message de fouten
         base::cat(cli::style_bold(cli::col_red(paste(fouten, "\n"))))
       }
     } else {
@@ -1019,11 +1019,11 @@ validate_introduction <-
 #'
 #' Functie om scripts te testen op de volledigheid van de introductie. De functie geeft
 #' een dataframe terug met daarin de resultaten van de verschillende tests worden
-#' uitgevoerd. Optioneel kan er een kleine rapportage worden geprint. Deze functie wordt gebruikt
+#' uitgevoerd. Optioneel kan er een kleine rapportage worden gemessage. Deze functie wordt gebruikt
 #' in de validate_script functie en in 05. Rapporten/XX Rapport SA Controle introducties en bestandsnamen.R
 #'
 #' @param Script List met filepath(en) van de/het script(s) die gevalideerd moeten worden
-#' @param Rapportage Mogelijkheid om samenvattende rapportage te printen bij het uitvoeren van het script
+#' @param Rapportage Mogelijkheid om samenvattende rapportage te message bij het uitvoeren van het script
 #'
 #' @export
 generate_introduction_validation <-
@@ -1106,7 +1106,7 @@ generate_introduction_validation <-
     #     lBestandsnaam[3]
     #     str_detect(lBestandsnaam[3], "^[:lower:].+$") | str_detect(lBestandsnaam[3], "^[:upper:]+$")
     # } else {
-    #     print("Bestandsnaam bestaat uit minder dan 3 woorden")
+    #     message("Bestandsnaam bestaat uit minder dan 3 woorden")
     # }
 
     check_naam_conventie_incorrect <- function(x) {
@@ -1379,7 +1379,7 @@ determine_author <- function(x) {
 #' @param melding Melding die moet worden weergeven
 #'
 rapport_result_test_introduction <- function(obj, melding) {
-  base::print(base::paste(
+  base::message(base::paste(
     base::length(obj),
     dplyr::if_else(base::length(obj) == 1, "bestand", "bestanden"),
     melding

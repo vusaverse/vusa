@@ -17,13 +17,13 @@ archive_script <- function(File_path, Archive_path = NULL) {
   
   for (file in File_paths) {
     if (!file.exists(file)) {
-      print("File not found in current directory")
+      message("File not found in current directory")
       next
     } else {
       if (is.null(Archive_path)) {
-        print("No input for Archive_path, so looking for system variables")
+        message("No input for Archive_path, so looking for system variables")
         if (!Sys.getenv("ARCHIVE_DIR") == "") {
-          print("system variables present, so this will be used for Archive_path")
+          message("system variables present, so this will be used for Archive_path")
           Archive_path = Sys.getenv("ARCHIVE_DIR")
         }
         else {
@@ -37,19 +37,19 @@ archive_script <- function(File_path, Archive_path = NULL) {
           dir.create(archive_directory, recursive = TRUE)
           file.copy(from = file,
                     to = new_path)
-          print(paste0("File ", file, " has been archived succesfully"))
+          message(paste0("File ", file, " has been archived succesfully"))
           file.remove(file)
-          print(paste0("File ", file, " has been removed from the current repository"))
+          message(paste0("File ", file, " has been removed from the current repository"))
         } else {
           file.copy(from = file,
                     to = new_path)
-          print(paste0("File ", file, " has been archived succesfully"))
+          message(paste0("File ", file, " has been archived succesfully"))
           file.remove(file)
-          print(paste0("File ", file, " has been removed from the current "))
+          message(paste0("File ", file, " has been removed from the current "))
         }
         
       } else {
-        print("Archive repository not found, have you cloned it locally?")
+        message("Archive repository not found, have you cloned it locally?")
       }
     }
     
