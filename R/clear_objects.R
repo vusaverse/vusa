@@ -48,7 +48,7 @@ clear_global_proj <- function() {
 #' @export
 clear_script_objects <- function (..., filepath = NULL, list = character(), pos = -1, envir = as.environment(pos), line_start = 0, line_end = -1L, silent = TRUE){
   if (missing(filepath)){
-    filepath <- this.path::Sys.path()
+    filepath <- this.path::sys.path()
   }
   
   dots <- match.call(expand.dots=FALSE)$...
