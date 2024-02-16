@@ -196,6 +196,9 @@
     <loc>https://vusaverse.github.io/vusa/reference/documentation_search_output.html</loc>
   </url>
   <url>
+    <loc>https://vusaverse.github.io/vusa/reference/download_github_file.html</loc>
+  </url>
+  <url>
     <loc>https://vusaverse.github.io/vusa/reference/drop_na_column_names.html</loc>
   </url>
   <url>
@@ -251,6 +254,9 @@
   </url>
   <url>
     <loc>https://vusaverse.github.io/vusa/reference/get_last_n_commit_info.html</loc>
+  </url>
+  <url>
+    <loc>https://vusaverse.github.io/vusa/reference/get_snippets_file.html</loc>
   </url>
   <url>
     <loc>https://vusaverse.github.io/vusa/reference/grapes-notin-grapes.html</loc>
@@ -455,6 +461,9 @@
   </url>
   <url>
     <loc>https://vusaverse.github.io/vusa/reference/source_index.html</loc>
+  </url>
+  <url>
+    <loc>https://vusaverse.github.io/vusa/reference/split_file.html</loc>
   </url>
   <url>
     <loc>https://vusaverse.github.io/vusa/reference/src_clean.html</loc>
