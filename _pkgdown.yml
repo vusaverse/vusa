@@ -68,6 +68,13 @@ reference:
   - get_archived_result_files
   - read_documentation
   
+- title: Snippets methods.
+  desc: |
+    Methods to work with RStudio snippets.
+  contents:  
+  - download_github_file
+  - get_snippets_file
+  - split_file
   
 - title: Read and Write methods.
   desc: |
