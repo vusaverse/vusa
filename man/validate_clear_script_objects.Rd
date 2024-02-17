@@ -20,10 +20,8 @@ Other Script validatie:
 \code{\link{compare_input_output}()},
 \code{\link{validate_assertions_present}()},
 \code{\link{validate_introduction}()},
-\code{\link{validate_no_warning_errors}()},
 \code{\link{validate_rm_objects}()},
 \code{\link{validate_script}()},
-\code{\link{validate_style}()},
 \code{\link{validate_write_files}()}
 }
 \concept{Script validatie}

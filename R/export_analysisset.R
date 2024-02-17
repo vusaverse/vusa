@@ -285,7 +285,6 @@ export_analysisset <- function(Faculty_selection = 'All',
   }
 
   ## Make the correct folders for saving the exports
-  # projectfolder <- paste(sa_branch_get(), Extract_location, Name_project, sep = '')
   projectfolder <- paste(Extract_location, Name_project, sep = '')
   projectfolder_today <- paste0(projectfolder, current_date)
   dir.create(paste0(Network_directory, Sys.getenv("BRANCH"), projectfolder))

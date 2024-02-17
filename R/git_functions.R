@@ -8,21 +8,17 @@ get_last_n_commit_date <- function(filepath, n = 1) {
                       '"  -- "', filepath, '"'), intern = T))
 }
 
-
-#' Retrieve the last n commits of a file
+#'Current git branch
 #'
-#' @param filepath Path to file
-#' @param type The type of commit, according to commit style guide
-#' @param n Integer number to look back in the git log
-#' @examples
-#' \dontrun{
-#' # get the last three commits which were bug fixes
-#' get_last_n_commit_info("01. Inlezen/Inlezen Aanmeldingen.R", type = "fix", n = 3)
-#' }
-#' @export
-get_last_n_commit_info <- function(filepath, type = "", n = 1) {
-  if (type == ""){
-    return(shell(paste0('git log --follow -', n, ' "', filepath, '"')))
-  } else {
-    return(shell(paste0('git log --follow --grep=', type, ' -n', n, ' "', filepath, '"')))
-  }}
+#'Determine the current git branch
+#'@export
+current_git_branch <- function() {
+  ## Get a list of all available branches
+  Branches <- system("git branch", intern = TRUE)
+  ## The branch with the asterisk before the name is the current branch
+  Current_Branch <- Branches[grepl("\\* ", Branches)]
+  ## Remove the asterisks from the text
+  Branch <- gsub("\\* ", "", Current_Branch)
+  ## Return the branch name
+  return(Branch)
+}

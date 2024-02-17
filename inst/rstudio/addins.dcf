@@ -3,3 +3,13 @@ Description: Clears All Objects From Global Environment Except For Those In Syst
 Binding: clear_global_proj
 Interactive: false
 
+Name: validate_script
+Description: Validates R script
+Binding: validate_script
+Interactive: false
+
+Name: close_view
+Description: Closes All View Panes And Unsaved Files
+Binding: close_view
+Interactive: false
+

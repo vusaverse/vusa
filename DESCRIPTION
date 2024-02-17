@@ -34,6 +34,7 @@ Imports:
     rstudioapi,
     scriptName,
     slackr,
+    stats,
     stringi,
     stringr,
     this.path,
@@ -41,5 +42,4 @@ Imports:
     tidyr,
     tidyselect,
     vroom,
-    vvfiller,
     xml2

@@ -18,6 +18,25 @@ reference:
   - src_clean
   - validate_script
   
+- title: Git methods.
+  desc: |
+    Methods that use underlying git methods.
+  contents:
+  - current_git_branch
+  - get_last_n_commit_date
+  - get_last_n_commit_info
+  
+- title: Script validation methods.
+  desc: |
+    Methods that run validation on R scripts.
+  contents:
+  - make_lint_object
+  - strip_names
+  - validate_no_warning_errors
+  - validate_script_addin
+  - validate_script_proj
+  - validate_style
+  - variable_name_lint
 
 - title: Assertion methods.
   desc: |
@@ -106,7 +125,6 @@ reference:
   - "%notin%" 
   - academic_period
   - add_attribute
-  - bepaal_doorstroom
   - bepaal_subtotalen_met_transitiematrix
   - build_analysis_set
   - build_as
@@ -119,7 +137,6 @@ reference:
   - count_rows_analysis_set
   - create_quality_report
   - current_filename
-  - current_git_branch
   - determine_author
   - determine_data_files
   - determine_input_files
@@ -135,27 +152,22 @@ reference:
   - find_patterns
   - generate_introduction_validation
   - generate_output_files_database
-  - get_last_n_commit_date
-  - get_last_n_commit_info
   - has_globale_identifiers
   - hash_var
   - join_tkoppel
   - join_tkoppel_isat
-  - maak_doorstroomvar_premaster_master
   - maak_inschrijvingen_grid
   - maak_instroomscenario_met_subtotalen_tableau
   - maak_transitiematrix_grid
   - maak_transitiematrix_uitstroom
   - maak_transitiematrix_uitstroom_met_subtotalen
   - maak_transitiematrix_voor_prognosejaren
-  - make_lint_object
   - mapping_category
   - mapping_fix
   - mapping_translate
   - md_list
   - overwrite_dot_arguments
   - package_important_in_project
-  - pas_doorstroomvariabele_aan
   - print_last_used
   - random_string_vector
   - rapport_result_test_introduction
@@ -164,12 +176,8 @@ reference:
   - rename_columns
   - return_assertions_message
   - return_assertions_message_testen
-  - sa_branch_get
-  - sa_branch_set
   - sa_defineer_test_documentatie
   - sa_defineer_test_documentatie_get
-  - sa_network_dir_get
-  - sa_network_dir_set
   - sa_set_seed
   - sculpt_analysis_set
   - sculpt_as
@@ -187,7 +195,6 @@ reference:
   - sort_columnnames
   - sort_columnnames_analysis_set
   - source_index
-  - strip_names
   - subassertfunctie
   - tableau_colnames
   - test_csv
@@ -198,11 +205,8 @@ reference:
   - validate_assertions_present
   - validate_clear_script_objects
   - validate_introduction
-  - validate_no_warning_errors
   - validate_rm_objects
-  - validate_style
   - validate_write_files
-  - variable_name_lint
   - vind_assertion_soort
   - vind_subset_kolommen
   - voeg_transitie_subtotalen_toe
