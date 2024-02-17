@@ -76,9 +76,6 @@
     <loc>https://vusaverse.github.io/vusa/reference/auto_document.html</loc>
   </url>
   <url>
-    <loc>https://vusaverse.github.io/vusa/reference/bepaal_doorstroom.html</loc>
-  </url>
-  <url>
     <loc>https://vusaverse.github.io/vusa/reference/bepaal_subtotalen_met_transitiematrix.html</loc>
   </url>
   <url>
@@ -283,9 +280,6 @@
     <loc>https://vusaverse.github.io/vusa/reference/load_and_save_config_proj.html</loc>
   </url>
   <url>
-    <loc>https://vusaverse.github.io/vusa/reference/maak_doorstroomvar_premaster_master.html</loc>
-  </url>
-  <url>
     <loc>https://vusaverse.github.io/vusa/reference/maak_inschrijvingen_grid.html</loc>
   </url>
   <url>
@@ -323,9 +317,6 @@
   </url>
   <url>
     <loc>https://vusaverse.github.io/vusa/reference/package_important_in_project.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/pas_doorstroomvariabele_aan.html</loc>
   </url>
   <url>
     <loc>https://vusaverse.github.io/vusa/reference/pipe.html</loc>
@@ -370,22 +361,10 @@
     <loc>https://vusaverse.github.io/vusa/reference/return_assertions_message_testen.html</loc>
   </url>
   <url>
-    <loc>https://vusaverse.github.io/vusa/reference/sa_branch_get.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/sa_branch_set.html</loc>
-  </url>
-  <url>
     <loc>https://vusaverse.github.io/vusa/reference/sa_defineer_test_documentatie.html</loc>
   </url>
   <url>
     <loc>https://vusaverse.github.io/vusa/reference/sa_defineer_test_documentatie_get.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/sa_network_dir_get.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/sa_network_dir_set.html</loc>
   </url>
   <url>
     <loc>https://vusaverse.github.io/vusa/reference/sa_set_seed.html</loc>
@@ -509,6 +488,12 @@
   </url>
   <url>
     <loc>https://vusaverse.github.io/vusa/reference/validate_script.html</loc>
+  </url>
+  <url>
+    <loc>https://vusaverse.github.io/vusa/reference/validate_script_addin.html</loc>
+  </url>
+  <url>
+    <loc>https://vusaverse.github.io/vusa/reference/validate_script_proj.html</loc>
   </url>
   <url>
     <loc>https://vusaverse.github.io/vusa/reference/validate_style.html</loc>
