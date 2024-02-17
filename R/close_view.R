@@ -11,13 +11,13 @@ close_view <- function() {
   
   doc <- rstudioapi::getSourceEditorContext()
   
-  while (is.null(doc) || !doc$path %in% Tabs) {
+  while (is.null(doc) || !doc$id %in% Tabs) {
     if (is.null(doc)) {
       rstudioapi::executeCommand('closeSourceDoc')
     }
     rstudioapi::executeCommand('nextTab')
     
-    Tabs <- c(Tabs, doc$path);
+    Tabs <- c(Tabs, doc$id);
     
     doc <- rstudioapi::getSourceEditorContext()
   }
