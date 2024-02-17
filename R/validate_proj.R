@@ -27,7 +27,7 @@ validate_script_proj <- function(filepath = NULL, export_to_dataframe = FALSE) {
   start.time <- Sys.time()
   
   if (is.null(filepath)) {
-    filepath <- this.path::this.path()
+    filepath <- this.path::sys.path()
   }
   
   if (export_to_dataframe == FALSE) {

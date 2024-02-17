@@ -76,7 +76,7 @@
 validate_script <- function(filepath = NULL, export_naar_dataframe = FALSE) {
   start.time <- Sys.time()
   if (is.null(filepath)) {
-    filepath <- this.path::this.path()
+    filepath <- this.path::sys.path()
   }
   if (export_naar_dataframe == FALSE) {
     validate_no_warning_errors(filepath, export_naar_dataframe)

@@ -26,7 +26,7 @@ up_to_date <- function(bestandspad, correctie_tijdstip, frequentie, contact, inl
   if (!Sys.getenv("RSTUDIO") == "1") {
     naam <- basename(current_filename())
   } else {
-    naam <- tools::file_path_sans_ext(basename(this.path::this.path()))
+    naam <- tools::file_path_sans_ext(basename(this.path::sys.path()))
   }
   Naam <- Inleesscript <- Frequentie <- NULL
   # Bij het uitvoeren van deze functie wordt een trycatch gebruikt zodat excecutie van
