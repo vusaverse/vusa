@@ -2,12 +2,12 @@
 % Please edit documentation in R/close_view.R
 \name{close_view}
 \alias{close_view}
-\title{close_view.}
+\title{Close all tabs that are not already in the Tabs vector and close view panes}
 \usage{
 close_view()
 }
 \description{
-Close all view tabs.
-Note: this also closes unsaved files.
-You will be prompted to save before these files are closed.
+This function iterates through all tabs in RStudio, closing those that are not
+already listed in the Tabs vector. It also handles view panes by closing them
+if they do not have a corresponding document context.
 }

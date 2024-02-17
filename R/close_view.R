@@ -1,23 +1,24 @@
-#' close_view.
+#' Close all tabs that are not already in the Tabs vector and close view panes
 #'
-#' Close all view tabs.
-#' Note: this also closes unsaved files.
-#' You will be prompted to save before these files are closed.
+#' This function iterates through all tabs in RStudio, closing those that are not
+#' already listed in the Tabs vector. It also handles view panes by closing them
+#' if they do not have a corresponding document context.
 #'
+#' @return NULL
 #' @export
 close_view <- function() {
   Tabs <- c()
-
-  doc <- rstudioapi::documentPath()
-
-  while (is.null(doc)||!doc%in% Tabs) {
+  
+  doc <- rstudioapi::getSourceEditorContext()
+  
+  while (is.null(doc) || !doc$path %in% Tabs) {
     if (is.null(doc)) {
       rstudioapi::executeCommand('closeSourceDoc')
     }
     rstudioapi::executeCommand('nextTab')
-
-    Tabs <- c(Tabs, doc);
-
-    doc <- rstudioapi::documentPath()
+    
+    Tabs <- c(Tabs, doc$path);
+    
+    doc <- rstudioapi::getSourceEditorContext()
   }
 }
