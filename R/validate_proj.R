@@ -179,7 +179,7 @@ get_last_n_commit_info <- function(filepath, n = 1) {
       # Add the commit information to the data frame
       commit_info_df <- rbind(commit_info_df, data.frame(
         hash = git_output[i],
-        Nauthor = git_output[i + 1],
+        author = git_output[i + 1],
         message = git_output[i + 2],
         stringsAsFactors = FALSE
       ))
