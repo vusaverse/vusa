@@ -25,6 +25,7 @@ Imports:
     lubridate,
     magrittr,
     plyr,
+    pryr,
     purrr,
     RCurl,
     readr,
