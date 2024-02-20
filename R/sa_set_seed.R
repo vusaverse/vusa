@@ -6,7 +6,9 @@
 #'
 #' @export
 sa_set_seed <- function(seed) {
-    options(
-        list(
-            VUStudentAnalytics.seed = seed))
+  options(
+    list(
+      VUStudentAnalytics.seed = seed
+    )
+  )
 }

@@ -38,10 +38,9 @@ find_pattern_r <- function(pattern, path = ".", case.sensitive = TRUE, comments 
 #' find_pattern_csv("croho", case.sensitive = FALSE)
 #' }
 find_pattern_csv <- function(pattern = "Hello World",
-                    path = ".",
-                    case.sensitive = TRUE,
-                    show.results = TRUE) {
-
+                             path = ".",
+                             case.sensitive = TRUE,
+                             show.results = TRUE) {
   if ("renv" %in% fs::dir_ls(path)) {
     path <<- fs::dir_ls(type = "directory", regexp = "renv", invert = T)
   }

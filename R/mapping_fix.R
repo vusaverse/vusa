@@ -21,14 +21,14 @@ mapping_fix <- function(x, mapping_table = NULL, mapping_table_name = NULL, merg
   ## Check that mapping_table contains the columns "from" and "to". If that
   ## is not so, an error message is given
 
-  if(is.null(mapping_table_name) & is.null(mapping_table)){
-      stop("no mapping table is given")
-  } else if (is.null(mapping_table) & !is.null(mapping_table_name)){
+  if (is.null(mapping_table_name) & is.null(mapping_table)) {
+    stop("no mapping table is given")
+  } else if (is.null(mapping_table) & !is.null(mapping_table_name)) {
     mapping_table <- read_documentation(filename = paste0("Mapping Tables fixes/", mapping_table_name, ".csv"))
   }
 
   if (!(any(names(mapping_table) == "from") &&
-        any(names(mapping_table) == "to"))) {
+    any(names(mapping_table) == "to"))) {
     stop("mapping_table must contain the columns 'from' and 'to'.")
   }
 
@@ -37,7 +37,7 @@ mapping_fix <- function(x, mapping_table = NULL, mapping_table_name = NULL, merg
   }
 
   ## Check if the classes of the vectors match
-  if (class(x) != class(mapping_table$from)){
+  if (class(x) != class(mapping_table$from)) {
     stop("class of 'x' does not match class of mapping_table$from")
   }
   if (class(x) != class(mapping_table$to)) {
@@ -60,5 +60,4 @@ mapping_fix <- function(x, mapping_table = NULL, mapping_table_name = NULL, merg
   } else {
     return(Mapping$to)
   }
-
 }

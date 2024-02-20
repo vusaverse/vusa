@@ -18,7 +18,7 @@
 #' load_and_save_config_proj()
 #'
 #'
-#' Create a data frame with the given column names
+#' ## Create a data frame with the given column names
 #' colnames_config <- c(
 #'   "script_dir",
 #'   "type",
@@ -35,6 +35,7 @@
 #'   "save_message",
 #'   "notes"
 #' )
+#' }
 
 #' # Initialize a data frame
 #' load_and_save_config_df <- data.frame(matrix(ncol = length(colnames_config), nrow = 0))
@@ -60,10 +61,9 @@
 #' }
 
 load_and_save_config_proj <- function(find_loc_in_env = TRUE) {
-
   # set variables
   script_dir <- type <- n <- non_unique <- save_rds <- save_csv <- NULL
-    read_extension <- supported_extension <- NULL
+  read_extension <- supported_extension <- NULL
 
   load_and_save_config_path <- Sys.getenv("load_and_save_config")
 
@@ -74,27 +74,33 @@ load_and_save_config_proj <- function(find_loc_in_env = TRUE) {
 
   if (load_and_save_config_path == "") {
     rlang::warn("You have not set load and save settings",
-                .frequency = "once", .frequency_id =
-                  "load_and_save_config_no_env_var")
+      .frequency = "once", .frequency_id =
+        "load_and_save_config_no_env_var"
+    )
     return(NULL)
   }
 
   tryCatch(
     error = function(e) {
-      rlang::warn(paste0("Your load_and_save_config_path doesn't lead to a correct semicolon separated csv.\n",
-                         documentation_reference,
-      ),
-      .frequency = "once",
-      .frequency_id = "load_and_save_config_file_path")
+      rlang::warn(
+        paste0(
+          "Your load_and_save_config_path doesn't lead to a correct semicolon separated csv.\n",
+          documentation_reference,
+        ),
+        .frequency = "once",
+        .frequency_id = "load_and_save_config_file_path"
+      )
       return(NULL)
-    }, {
+    },
+    {
       load_and_save_config_df <- readr::read_delim(load_and_save_config_path, delim = ";", show_col_types = FALSE)
 
       if (find_loc_in_env == TRUE) {
         load_and_save_config_df <- load_and_save_config_df %>%
-          dplyr::mutate(dplyr::across(dplyr::ends_with("data_dir"), ~dplyr::if_else(.x %in% names(Sys.getenv()),
-                                                        Sys.getenv(.x),
-                                                        .x)))
+          dplyr::mutate(dplyr::across(dplyr::ends_with("data_dir"), ~ dplyr::if_else(.x %in% names(Sys.getenv()),
+            Sys.getenv(.x),
+            .x
+          )))
       }
     }
   )
@@ -121,20 +127,23 @@ load_and_save_config_proj <- function(find_loc_in_env = TRUE) {
   ## Two potential issues with colnames
   colnames_config_warning <- FALSE
   if (length(colnames_config) != length(names(load_and_save_config_df))) {
-    colnames_config_warning = TRUE
-
+    colnames_config_warning <- TRUE
   } else if (all(names(load_and_save_config_df) != colnames_config)) {
-    colnames_config_warning = TRUE
+    colnames_config_warning <- TRUE
   }
 
   if (colnames_config_warning == TRUE) {
-    rlang::warn(paste0("Your load and save config file has other column names than expected.\n",
-                       "See the config file at:\n",
-                       load_and_save_config_path,
-                       "\n",
-                       documentation_reference),
-                .frequency = "once",
-                .frequency_id = "load_and_save_config_colnames")
+    rlang::warn(
+      paste0(
+        "Your load and save config file has other column names than expected.\n",
+        "See the config file at:\n",
+        load_and_save_config_path,
+        "\n",
+        documentation_reference
+      ),
+      .frequency = "once",
+      .frequency_id = "load_and_save_config_colnames"
+    )
     return(NULL)
   }
 
@@ -151,12 +160,16 @@ load_and_save_config_proj <- function(find_loc_in_env = TRUE) {
 
     duplication_info_single_str <- paste(duplications_str, collapse = " | ")
 
-    rlang::warn(paste0("The following directory-types appear more than once:\n",
-                       duplication_info_single_str,
-                       "\n",
-                       documentation_reference),
-                .frequency = "once",
-                .frequency_id = "load_and_save_config_duplicated")
+    rlang::warn(
+      paste0(
+        "The following directory-types appear more than once:\n",
+        duplication_info_single_str,
+        "\n",
+        documentation_reference
+      ),
+      .frequency = "once",
+      .frequency_id = "load_and_save_config_duplicated"
+    )
     return(NULL)
   }
 
@@ -166,38 +179,43 @@ load_and_save_config_proj <- function(find_loc_in_env = TRUE) {
     dplyr::pull(script_dir)
 
   if (length(script_dirs_without_save > 0)) {
-    rlang::warn(paste0("The following directories don't have any save_* argument on TRUE:\n",
-                       script_dirs_without_save,
-                       "\n",
-                       documentation_reference),
-                .frequency = "once",
-                .frequency_id = "load_and_save_config_")
+    rlang::warn(
+      paste0(
+        "The following directories don't have any save_* argument on TRUE:\n",
+        script_dirs_without_save,
+        "\n",
+        documentation_reference
+      ),
+      .frequency = "once",
+      .frequency_id = "load_and_save_config_"
+    )
     return(NULL)
-
   }
 
   script_dirs_without_supported_read_extension <- load_and_save_config_df %>%
-    dplyr::mutate(supported_extension = read_extension %in% supported_read_extensions)  %>%
+    dplyr::mutate(supported_extension = read_extension %in% supported_read_extensions) %>%
     dplyr::filter(supported_extension == FALSE) %>%
     dplyr::pull(script_dir)
 
   if (length(script_dirs_without_supported_read_extension > 0)) {
-    rlang::warn(paste0("The following directories don't have a supported read extension:",
-                       paste(script_dirs_without_supported_read_extension),
-                       "\n",
-                       "Supported read extension are:",
-                       paste(supported_read_extensions),
-                       "\n",
-                       documentation_reference),
-                .frequency = "once",
-                .frequency_id = "load_and_save_config_duplicated")
+    rlang::warn(
+      paste0(
+        "The following directories don't have a supported read extension:",
+        paste(script_dirs_without_supported_read_extension),
+        "\n",
+        "Supported read extension are:",
+        paste(supported_read_extensions),
+        "\n",
+        documentation_reference
+      ),
+      .frequency = "once",
+      .frequency_id = "load_and_save_config_duplicated"
+    )
     return(NULL)
-
   }
 
 
   return(load_and_save_config_df)
-
 }
 
 
@@ -211,42 +229,46 @@ load_and_save_config_proj <- function(find_loc_in_env = TRUE) {
 #'
 #' @return A data frame containing the filtered settings script directory.
 #' @export
-filter_settings_on_type <- function (settings_script_dir, settings_type) {
-
+filter_settings_on_type <- function(settings_script_dir, settings_type) {
   if (is.null(settings_type)) {
     # No settings
     if (nrow(settings_script_dir) > 1) {
-
-      rlang::inform(paste0("The first type is selected from the following possibilties:\n",
-                            dplyr::pull(settings_script_dir$type)),
-                     .frequency = "once",
-                     .frequency_id = "write_file_proj_type")
+      rlang::inform(
+        paste0(
+          "The first type is selected from the following possibilties:\n",
+          dplyr::pull(settings_script_dir$type)
+        ),
+        .frequency = "once",
+        .frequency_id = "write_file_proj_type"
+      )
 
       settings_script_dir <- settings_script_dir %>%
         dplyr::slice_head(n = 1)
     }
   } else if (!is.null(settings_type)) {
-
     settings_script_dir_type <- settings_script_dir %>%
       dplyr::filter(type = settings_type)
 
     ## Guard clause
     if (nrow(settings_script_dir_type) == 0) {
       if (nrow(settings_script_dir == 1)) {
-        rlang::abort("The supplied type is not available. Please remove the type parameter.\n",
-                     "This will select the only values for this script directory.")
+        rlang::abort(
+          "The supplied type is not available. Please remove the type parameter.\n",
+          "This will select the only values for this script directory."
+        )
       }
       if (nrow(settings_script_dir >= 1)) {
-        rlang::abort(paste0("The supplied type is not available. The available types are:\n",
-                            dplyr::pull(settings_script_dir$type),
-                            "\n",
-                            "Remove the type parameter for the first choice or provide one of the given values."))
+        rlang::abort(paste0(
+          "The supplied type is not available. The available types are:\n",
+          dplyr::pull(settings_script_dir$type),
+          "\n",
+          "Remove the type parameter for the first choice or provide one of the given values."
+        ))
       }
     }
 
     # The good case
     settings_script_dir <- settings_script_dir_type
-
   }
   return(settings_script_dir)
 }
@@ -279,13 +301,15 @@ read_file_proj <- function(
     fix_encoding = FALSE,
     encoding = "latin1",
     sub_dir = NA_character_,
-    csv_readr_function_args = list(trim_ws = T,
-                                   delim = ";",
-                                   locale = readr::locale(decimal_mark = ",",
-                                                          grouping_mark = ".")),
-    ...
-) {
-
+    csv_readr_function_args = list(
+      trim_ws = T,
+      delim = ";",
+      locale = readr::locale(
+        decimal_mark = ",",
+        grouping_mark = "."
+      )
+    ),
+    ...) {
   # set variables
   script_dir <- NULL
 
@@ -293,8 +317,7 @@ read_file_proj <- function(
     docname <- basename(rstudioapi::getActiveDocumentContext()$path)
     path <- rstudioapi::getActiveDocumentContext()$path
     directory <- stringr::str_remove(path, docname)
-  }
-  else {
+  } else {
     docname <- basename(scriptName::current_filename())
     directory <- this.path::this.dir()
   }
@@ -303,7 +326,7 @@ read_file_proj <- function(
   manual_settings <- FALSE
   config_settings <- TRUE
 
-  if (sum(!is.null(dir),!is.null(extension)) < 2) {
+  if (sum(!is.null(dir), !is.null(extension)) < 2) {
     manual_settings <- FALSE
   }
 
@@ -320,27 +343,28 @@ read_file_proj <- function(
     } else {
       settings_script_dir <- filter_settings_on_type(settings_script_dir, settings_type)
 
-      if(!is.na(settings_script_dir$load_message)) {
+      if (!is.na(settings_script_dir$load_message)) {
         rlang::inform(settings_script_dir$load_message,
-                      .frequency = "once",
-                      .frequency_id = "read_file_proj_message")
-
+          .frequency = "once",
+          .frequency_id = "read_file_proj_message"
+        )
       }
     }
   }
 
   if (sum(manual_settings, config_settings) == 0) {
-    rlang::abort(paste0("You have not given enough variables to save the file properly.\n",
-                        "Either add a correct config with current directory in it or set at least",
-                        "the dir and one of the save_* arguments"))
+    rlang::abort(paste0(
+      "You have not given enough variables to save the file properly.\n",
+      "Either add a correct config with current directory in it or set at least",
+      "the dir and one of the save_* arguments"
+    ))
   }
 
 
-  #dir_final <- NULL
+  # dir_final <- NULL
 
   # Set full path for read
   if (is.null(dir)) {
-
     base_data_dir <- settings_script_dir[["load_base_data_dir"]]
     data_sub_dir <- settings_script_dir[["load_data_dir"]]
 
@@ -351,13 +375,11 @@ read_file_proj <- function(
       dir_elements <- dir_elements[!is.na(dir_elements)]
 
       dir <- paste(dir_elements, collapse = "/")
-
-    }
-    else {
+    } else {
       dir_elements <- c(base_data_dir, data_sub_dir, sub_dir)
       dir_elements <- dir_elements[!is.na(dir_elements)]
 
-      dir <-  paste(base_data_dir, data_sub_dir, sep = "/")
+      dir <- paste(base_data_dir, data_sub_dir, sep = "/")
     }
   }
 
@@ -372,46 +394,46 @@ read_file_proj <- function(
   if (extension == "rds") {
     if (fix_encoding == TRUE) {
       df <- fixencoding(readRDS(full_path, ...), encoding)
-    }
-    else {
+    } else {
       df <- readRDS(full_path, ...)
     }
   }
 
   if (extension == "csv") {
     if (fix_encoding) {
-      df <- fixencoding(readr::read_delim(file = full_path,
-                                          csv_readr_function_args,
-                                          ...),
-                        encoding)
+      df <- fixencoding(
+        readr::read_delim(
+          file = full_path,
+          csv_readr_function_args,
+          ...
+        ),
+        encoding
+      )
+    } else {
+      df <- readr::read_delim(
+        file = full_path,
+        csv_readr_function_args,
+        ...
+      )
     }
-    else {
-      df <- readr::read_delim(file = full_path,
-                              csv_readr_function_args,
-                              ...)
-    }
-
   }
 
   if (extension == "fst") {
     if (fix_encoding) {
       df <- fixencoding(fst::read_fst(full_path, ...) %>%
-                          dplyr::mutate_if(is.character, .funs = function(x) {
-                            return(`Encoding<-`(x, "UTF-8"))
-                          }), encoding)
-    }
-    else {
+        dplyr::mutate_if(is.character, .funs = function(x) {
+          return(`Encoding<-`(x, "UTF-8"))
+        }), encoding)
+    } else {
       df <- fst::read_fst(full_path, ...) %>% dplyr::mutate_if(is.character,
-                                                               .funs = function(x) {
-                                                                 return(`Encoding<-`(x, "UTF-8"))
-                                                               })
+        .funs = function(x) {
+          return(`Encoding<-`(x, "UTF-8"))
+        }
+      )
     }
   }
 
   return(df)
-
-
-
 }
 
 
@@ -453,9 +475,7 @@ write_file_proj <- function(
     csv_sep = ";",
     csv_dec = ",",
     fst_compress = 100,
-    ...
-) {
-
+    ...) {
   # set variables
   script_dir <- NULL
 
@@ -463,8 +483,7 @@ write_file_proj <- function(
     docname <- basename(rstudioapi::getActiveDocumentContext()$path)
     path <- rstudioapi::getActiveDocumentContext()$path
     directory <- stringr::str_remove(path, docname)
-  }
-  else {
+  } else {
     docname <- basename(scriptName::current_filename())
     directory <- this.path::this.dir()
   }
@@ -493,11 +512,11 @@ write_file_proj <- function(
       # Deal with type, this generates an error if type is incorrectly supplied
       settings_script_dir <- filter_settings_on_type(settings_script_dir, settings_type)
 
-      if(!is.na(settings_script_dir$save_message)) {
+      if (!is.na(settings_script_dir$save_message)) {
         rlang::inform(settings_script_dir$save_message,
-                      .frequency = "once",
-                      .frequency_id = "write_file_proj_message")
-
+          .frequency = "once",
+          .frequency_id = "write_file_proj_message"
+        )
       }
     }
   }
@@ -511,7 +530,6 @@ write_file_proj <- function(
 
   # Set save variables
   if (is.null(dir)) {
-
     base_data_dir <- settings_script_dir[["save_base_data_dir"]]
     data_sub_dir <- settings_script_dir[["save_data_dir"]]
 
@@ -522,63 +540,64 @@ write_file_proj <- function(
       dir_elements <- dir_elements[!is.na(dir_elements)]
 
       dir <- paste(dir_elements, collapse = "/")
-    }
-    else {
+    } else {
       dir_elements <- c(base_data_dir, data_sub_dir, sub_dir)
       dir_elements <- dir_elements[!is.na(dir_elements)]
 
-      dir <-  paste(dir_elements, collapse = "/")
+      dir <- paste(dir_elements, collapse = "/")
     }
   }
 
   if (dir.exists(dir) == FALSE) {
-    rlang::abort(paste0("The constructed directory doesn't exist.\n",
-                        "Run dir.create(",dir, ", recursive = TRUE) or change the input or config file.")
-    )
+    rlang::abort(paste0(
+      "The constructed directory doesn't exist.\n",
+      "Run dir.create(", dir, ", recursive = TRUE) or change the input or config file."
+    ))
   }
 
   name <- paste(dir, name, sep = "/")
 
   if (is.null(save_csv) && config_settings) {
-    save_rds = settings_script_dir[["save_rds"]]
-  } else{
-    save_rds = FALSE
+    save_rds <- settings_script_dir[["save_rds"]]
+  } else {
+    save_rds <- FALSE
   }
 
   if (is.null(save_csv) && config_settings) {
-    save_csv = settings_script_dir[["save_csv"]]
-  } else{
-    save_csv = FALSE
+    save_csv <- settings_script_dir[["save_csv"]]
+  } else {
+    save_csv <- FALSE
   }
 
   if (is.null(save_csv) && config_settings) {
-    save_fst = settings_script_dir[["save_fst"]]
-  } else{
-    save_fst = FALSE
+    save_fst <- settings_script_dir[["save_fst"]]
+  } else {
+    save_fst <- FALSE
   }
 
 
   if (save_csv) {
     data.table::fwrite(object,
-                       paste0(name, ".csv"),
-                       na = csv_na,
-                       sep = csv_sep,
-                       dec = csv_dec
+      paste0(name, ".csv"),
+      na = csv_na,
+      sep = csv_sep,
+      dec = csv_dec
     )
   }
 
   if (save_fst) {
     fst::write_fst(object,
-                   paste0(name, ".fst"),
-                   compress = fst_compress,
-                   ...)
+      paste0(name, ".fst"),
+      compress = fst_compress,
+      ...
+    )
   }
 
   if (save_rds) {
     saveRDS(object,
-            paste0(name,".rds"),
-            version = rds_version,
-            ...)
+      paste0(name, ".rds"),
+      version = rds_version,
+      ...
+    )
   }
 }
-

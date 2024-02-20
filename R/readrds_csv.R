@@ -14,7 +14,7 @@
 #' @return Dataframe
 #' @importFrom dplyr %>%
 #' @export
-readrds_csv <- function(dataloc = "", output, readr = FALSE, print = FALSE, fix.encoding = FALSE, encoding = "latin1", ...){
+readrds_csv <- function(dataloc = "", output, readr = FALSE, print = FALSE, fix.encoding = FALSE, encoding = "latin1", ...) {
   if (missing(output) == FALSE) {
     ## The output is written per branch
     dataloc <- paste("Output/", Sys.getenv("BRANCH"), "/", output, sep = "")
@@ -29,26 +29,29 @@ readrds_csv <- function(dataloc = "", output, readr = FALSE, print = FALSE, fix.
   }
 
   ## Determine the file extension
-  extension <- sub('.*\\.', '', dataloc)
+  extension <- sub(".*\\.", "", dataloc)
   if (extension == "csv") {
     if (readr == TRUE) {
       ## Use readr if specified. It is hereby possible to
       ## override the function arguments with the ... arguments
-      function_args <- list(file = file_loc,
-                            trim_ws = T,
-                            delim = ";",
-                            locale = readr::locale(decimal_mark = ",",
-                                             grouping_mark = "."))
+      function_args <- list(
+        file = file_loc,
+        trim_ws = T,
+        delim = ";",
+        locale = readr::locale(
+          decimal_mark = ",",
+          grouping_mark = "."
+        )
+      )
       ## overwrite the ... arguments and then run the function
       function_args <- overwrite_dot_arguments(function_args, ...)
       if (fix.encoding) {
         df <- fixencoding(do.call(readr::read_delim, function_args), encoding)
         return(df)
-      } else{
+      } else {
         df <- do.call(readr::read_delim, function_args)
         return(df)
       }
-
     } else {
       if (fix.encoding) {
         df <- fixencoding(utils::read.csv2(file_loc, ...), encoding)
@@ -58,27 +61,29 @@ readrds_csv <- function(dataloc = "", output, readr = FALSE, print = FALSE, fix.
         return(df)
       }
     }
-  }
-  else if (extension == "fst") {
+  } else if (extension == "fst") {
     if (fix.encoding) {
       df <- fixencoding(fst::read_fst(file_loc, ...) %>%
-                    dplyr::mutate_if(is.character, .funs = function(x){return(`Encoding<-`(x, "UTF-8"))}), encoding)
+        dplyr::mutate_if(is.character, .funs = function(x) {
+          return(`Encoding<-`(x, "UTF-8"))
+        }), encoding)
       return(df)
-    } else{
+    } else {
       df <- fst::read_fst(file_loc, ...) %>%
-        dplyr::mutate_if(is.character, .funs = function(x){return(`Encoding<-`(x, "UTF-8"))})
+        dplyr::mutate_if(is.character, .funs = function(x) {
+          return(`Encoding<-`(x, "UTF-8"))
+        })
       return(df)
     }
-  }
-  else if (extension == "rds") {
+  } else if (extension == "rds") {
     if (fix.encoding) {
       df <- fixencoding(readRDS(file_loc, ...), encoding)
       return(df)
     } else {
       df <- readRDS(file_loc, ...)
-      return(df)}
+      return(df)
+    }
   } else {
     message("abort")
   }
-
 }

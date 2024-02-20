@@ -11,7 +11,7 @@
 #'
 #' @return a dataframe with translated column names
 #' @export
-translate_colnames_documentation <- function(data, fieldname, fieldname_export, drop_na = T){
+translate_colnames_documentation <- function(data, fieldname, fieldname_export, drop_na = T) {
   ## Translate the column names
   colnames(data) <- fieldname[match(colnames(data), fieldname_export)]
   if (drop_na == T) {
@@ -52,17 +52,17 @@ wrapper_translate_colnames_documentation <- function(data, documentatie_df, drop
 #' @param fieldname_export a column with the original names of the dataframe, that wil be changed
 #' @return a dataframe with translated column names
 #' @export
-tableau_colnames <- function(dataframe, fieldname, fieldname_export, keep_other_colnames = T)
-{
-
+tableau_colnames <- function(dataframe, fieldname, fieldname_export, keep_other_colnames = T) {
   if (keep_other_colnames == T) {
     index_check <- which(names(dataframe) %in% fieldname_export)
     for (col in index_check) {
       colnames(dataframe)[col] <- fieldname[match(colnames(dataframe)[col], fieldname_export)]
     }
   } else {
-    colnames(dataframe) <- fieldname[match(colnames(dataframe),
-                                                    fieldname_export)]
+    colnames(dataframe) <- fieldname[match(
+      colnames(dataframe),
+      fieldname_export
+    )]
   }
   return(dataframe)
 }

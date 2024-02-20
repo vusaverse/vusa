@@ -151,14 +151,14 @@ validate_assertions_present <-
         ## Als aanwezig message dat de test is geslaagd
         if (export_naar_dataframe == TRUE) {
           return("Geslaagd")
-        } else{
+        } else {
           base::cat(cli::style_bold(cli::col_green("Geslaagd\n")))
         }
-      } else{
+      } else {
         ## Als er geen assertions aanwezig zijn, message dat deze moeten worden toegevoegd
         if (export_naar_dataframe == TRUE) {
           return("Niet geslaagd, voeg deze toe aan het script")
-        } else{
+        } else {
           base::cat(cli::style_bold(
             cli::col_red("Niet geslaagd, voeg deze toe aan het script\n")
           ))
@@ -167,7 +167,7 @@ validate_assertions_present <-
     } else {
       if (export_naar_dataframe == TRUE) {
         return("Overgeslagen")
-      } else{
+      } else {
         ## Als er geen output bestanden zijn message dat deze zijn overgeslagen
         base::cat(cli::col_black("Overgeslagen\n"))
       }
@@ -188,20 +188,23 @@ generate_output_files_database <- function() {
     base::list.files(pattern = "\\.R$|\\.Rproj$", recursive = T)
   ## Kijk voor alle bestanden of de methode ReadRDS_CSV wordt aangeroepen
   Opslaan <- purrr::map_lgl(Scripts_bron,
-                            str_detect_in_file,
-                            pattern = "readrds_csv\\(",
-                            collapse = T)
+    str_detect_in_file,
+    pattern = "readrds_csv\\(",
+    collapse = T
+  )
   ## Filter de scripts op stappen 1,2,3 en 5
   Opslaan <-
     Opslaan &
-    stringr::str_detect(Scripts_bron, "^01\\.|^02\\.|^03\\.|^05\\.")
+      stringr::str_detect(Scripts_bron, "^01\\.|^02\\.|^03\\.|^05\\.")
   Write_scripts <- Scripts_bron[Opslaan]
   ## Alle ingelezen bestanden naar dataframe en vervolgens naar een RDS-bestand schrijven
   Database <-
     purrr::map_df(Write_scripts, extract_filepaths_readrds_csv)
-  saverds_csv(Database,
-                       base::paste0("Overzicht ingelezen bestanden"),
-                       "XX. Testbestanden/")
+  saverds_csv(
+    Database,
+    base::paste0("Overzicht ingelezen bestanden"),
+    "XX. Testbestanden/"
+  )
 }
 
 #' Extraheer bestandspaden ReadRDS CSV
@@ -222,8 +225,10 @@ extract_filepaths_readrds_csv <- function(bestandspad) {
   ## en sla voor alle overeenkomsten alles tussen de () op in Regels_read.
   Regels_read <-
     unlist(
-      stringr::str_extract_all(Regels_collapsed,
-                               '(?<=readrds_csv\\()(.*?)(?=(\\)))')
+      stringr::str_extract_all(
+        Regels_collapsed,
+        "(?<=readrds_csv\\()(.*?)(?=(\\)))"
+      )
     )
   ## Extraheer het bestandspad uit de gevonden ReadRDS_CSV regels
   ## met een regex die kijkt naar bestandspaden die beginnen met een nummer en punt en
@@ -237,9 +242,13 @@ extract_filepaths_readrds_csv <- function(bestandspad) {
   dependencies <- NULL
   for (pad in Rds_paden) {
     dependencies <-
-      base::rbind(dependencies,
-                  base::data.frame(Bestand = bestandspad,
-                                   Afhankelijkheid = pad))
+      base::rbind(
+        dependencies,
+        base::data.frame(
+          Bestand = bestandspad,
+          Afhankelijkheid = pad
+        )
+      )
   }
   return(dependencies)
 }
@@ -260,9 +269,9 @@ validate_clear_script_objects <-
       base::cat("Opruimen variabelen: ")
     }
     lines <- scan(filepath,
-                  what = character(),
-                  sep = "\n",
-                  quiet = TRUE
+      what = character(),
+      sep = "\n",
+      quiet = TRUE
     )
     hasClearScript <- any(grepl("clear_script_object", lines))
     if (!hasClearScript) {
@@ -302,15 +311,17 @@ validate_clear_script_objects <-
 #'
 validate_rm_objects <- function(filepath, export_naar_dataframe = FALSE) {
   ## message om welke test het gaat
-  if(export_naar_dataframe == FALSE){
+  if (export_naar_dataframe == FALSE) {
     base::cat("Opruimen variabelen: ")
   }
   ## Regex voor het vinden van aanmaken van variabel namen: variable <- ...
   Teststring_assignment <- "^[a-zA-Z_0-9]*(?=(\\s<-))"
   ## Vind alle variabel namen in het script
   Regels <-
-    stringr::str_extract(base::readLines(filepath, warn = FALSE),
-                         Teststring_assignment)
+    stringr::str_extract(
+      base::readLines(filepath, warn = FALSE),
+      Teststring_assignment
+    )
   Regels <- base::unique(Regels[!base::is.na(Regels)])
   ## Regex voor het vinden van verwijden van variabelen in script: rm(variable)
   Teststring_rm <- "(?<=rm\\()(.+?)(?=(\\)))"
@@ -332,13 +343,17 @@ validate_rm_objects <- function(filepath, export_naar_dataframe = FALSE) {
     ## Check of er verwijdert wordt op een patroon, zo ja: sla deze op in Delete_patterns
     if (TRUE %in% grepl("pattern", i)) {
       Delete_patterns <-
-        base::c(Delete_patterns,
-                stringr::str_extract_all(i, Teststring_pattern))
+        base::c(
+          Delete_patterns,
+          stringr::str_extract_all(i, Teststring_pattern)
+        )
     } else {
       ## Anders sla de variabele op in Delete_variables om later te verwijderen
       Delete_variables <-
-        base::c(Delete_variables,
-                stringr::str_extract_all(i, "([a-zA-Z0-9_]+)"))
+        base::c(
+          Delete_variables,
+          stringr::str_extract_all(i, "([a-zA-Z0-9_]+)")
+        )
     }
   }
   ## Bepaal het Verschil tussen de variabelen die zijn aangemaakt en de variabelen
@@ -356,7 +371,7 @@ validate_rm_objects <- function(filepath, export_naar_dataframe = FALSE) {
     ## Als er variabelen niet worden opgeruimd message deze dan
     if (export_naar_dataframe == TRUE) {
       return(paste0("Ruim de volgende variabelen op: ", Verschil))
-    } else{
+    } else {
       base::cat(cli::style_bold(cli::col_red("Ruim de volgende variabelen op: \n")))
       base::cat(cli::style_bold(cli::col_red(paste(Verschil, collapse = ", \n"))))
       base::cat(paste("\n"))
@@ -364,7 +379,7 @@ validate_rm_objects <- function(filepath, export_naar_dataframe = FALSE) {
   } else {
     if (export_naar_dataframe == TRUE) {
       return("Geslaagd")
-    } else{
+    } else {
       base::cat(cli::style_bold(cli::col_green("Geslaagd\n")))
     }
   }
@@ -383,15 +398,19 @@ determine_data_files <- function(filepath, testString) {
   Regels_collapsed <-
     base::paste(c(Regels, ""), collapse = "")
   Regels_RDS_CSV <-
-    stringr::str_extract_all(Regels_collapsed,
-                             paste0('(?<=', testString, '\\()(.*?)(?=(\\)))'))
+    stringr::str_extract_all(
+      Regels_collapsed,
+      paste0("(?<=", testString, "\\()(.*?)(?=(\\)))")
+    )
   Results_list <- NULL
 
   ## Vertaal de opgeslagen regels naar filepathen en sla deze op in Results_list
   for (Regel in Regels_RDS_CSV[[1]]) {
     Results_list <-
-      base::c(Results_list,
-              extract_output_file(Regel, testString))
+      base::c(
+        Results_list,
+        extract_output_file(Regel, testString)
+      )
   }
   return(Results_list)
 }
@@ -407,8 +426,10 @@ determine_input_files <- function(filepath) {
   ## Check of ReadRDS_CSV  wordt gebruikt in het bestand, ga daarna verder naar
   ## bepaal_databestanden.
   testString <- "readrds_csv|ReadRDS_CSV"
-  if (TRUE %in% base::grepl(testString,
-                            base::readLines(filepath, warn = FALSE))) {
+  if (TRUE %in% base::grepl(
+    testString,
+    base::readLines(filepath, warn = FALSE)
+  )) {
     determine_data_files(filepath, testString)
   }
 }
@@ -424,8 +445,10 @@ determine_output_files <- function(filepath) {
   ## Check of SaveRDS_CSV  wordt gebruikt in het bestand, ga daarna verder naar
   ## bepaal_databestanden.
   testString <- "SaveRDS_CSV|saverds_csv"
-  if (TRUE %in% base::grepl(testString,
-                            base::readLines(filepath, warn = FALSE))) {
+  if (TRUE %in% base::grepl(
+    testString,
+    base::readLines(filepath, warn = FALSE)
+  )) {
     determine_data_files(filepath, testString)
   }
 }
@@ -440,9 +463,11 @@ determine_output_files <- function(filepath) {
 #' @export
 #'
 regex_content_parameter <- function(parameter) {
-  base::paste0("(?<=",
-               parameter,
-               "\\s{0,20}\\=\\s{0,20}\").*")
+  base::paste0(
+    "(?<=",
+    parameter,
+    "\\s{0,20}\\=\\s{0,20}\").*"
+  )
 }
 
 #' Extraheer output filepath
@@ -464,14 +489,16 @@ extract_output_file <- function(regel, testString) {
     ## derde variabele aangeeft in welke map het bestand moet worden opgeslagen door middel
     ## van output parameter
     if ((base::length(elementen) > 2) &
-        (stringr::str_detect(elementen[3], "output"))) {
+      (stringr::str_detect(elementen[3], "output"))) {
       ## Extraheer de bestandsmap door middel van een regex. De regex wordt geconstrueert
       ## met behulp van de regex_content_parameter() functie en wordt uit elementen[3]
       ## gehaald. Vervolgens wordt "\"" uit deze string verwijdert.
       pad <-
-        base::gsub("\\\"",
-                   "",
-                   stringr::str_extract(elementen[3], regex_content_parameter("output")))
+        base::gsub(
+          "\\\"",
+          "",
+          stringr::str_extract(elementen[3], regex_content_parameter("output"))
+        )
       ## plak de map en bestandsnaam aan elkaar en .rds achteraan
       path <- base::paste(pad, naam, ".rds", sep = "")
     }
@@ -479,11 +506,13 @@ extract_output_file <- function(regel, testString) {
     ## derde variabele het opgeslagen bestand aangeeft doormiddel van dataloc. Doe vervolgens
     ## hetzelfde als bij de output parameter.
     if ((base::length(elementen) > 2) &
-        (stringr::str_detect(elementen[3], "dataloc"))) {
+      (stringr::str_detect(elementen[3], "dataloc"))) {
       pad <-
-        base::gsub("\\\"",
-                   "",
-                   stringr::str_extract(elementen[3], regex_content_parameter("dataloc")))
+        base::gsub(
+          "\\\"",
+          "",
+          stringr::str_extract(elementen[3], regex_content_parameter("dataloc"))
+        )
       path <- base::paste(pad, naam, ".rds", sep = "")
     } else {
       ## Anders: construeer het pad met als map: 1. Ingelezen data. Deze map staat
@@ -499,16 +528,20 @@ extract_output_file <- function(regel, testString) {
     ## check of het eertse element gebruik maakt van de parameter output, zo ja:
     ## dan is dit de naam van het ingelezen bestand.
     if (stringr::str_detect(elementen[1], "output")) {
-      path <- base::gsub("\\\"",
-                         "",
-                         stringr::str_extract(elementen[1], regex_content_parameter("output")))
+      path <- base::gsub(
+        "\\\"",
+        "",
+        stringr::str_extract(elementen[1], regex_content_parameter("output"))
+      )
     }
     ## check ander of het eertse element gebruik maakt van de parameter dataloc,
     ## dan is dit namelijk de naam van het ingelezen bestand.
     if (stringr::str_detect(elementen[1], "dataloc")) {
-      path <- base::gsub("\\\"",
-                         "",
-                         stringr::str_extract(elementen[1], regex_content_parameter("dataloc")))
+      path <- base::gsub(
+        "\\\"",
+        "",
+        stringr::str_extract(elementen[1], regex_content_parameter("dataloc"))
+      )
     }
   }
   return(path)
@@ -538,7 +571,7 @@ compare_input_output <- function(filepath,
     readrds_csv(output = "XX. Testbestanden/Overzicht ingelezen bestanden.rds")
   Dependencies <- base::data.frame()
   ## Selecteer de bestanden uit de database die afhankelijk zijn van het script
-  for (Script in Output)  {
+  for (Script in Output) {
     results <- Scripts %>%
       dplyr::filter(Bestand == filepath) %>%
       dplyr::select(Afhankelijkheid)
@@ -551,7 +584,7 @@ compare_input_output <- function(filepath,
   if (length(Dependencies) > 0) {
     if (export_naar_dataframe == TRUE) {
       return(Dependencies)
-    } else{
+    } else {
       ## message de dependensies wanneer deze aanwezig zijn
       base::cat(cli::style_bold(cli::col_cyan(paste(
         Dependencies, "\n"
@@ -560,7 +593,7 @@ compare_input_output <- function(filepath,
   } else {
     if (export_naar_dataframe == TRUE) {
       return("Geen scripts die afhankelijk zijn")
-    } else{
+    } else {
       ## message dat er geen scripts afhankelijk zijn wanneer dit geld
       base::cat(cli::style_bold(cli::col_green(
         "Geen scripts die afhankelijk zijn\n"
@@ -601,33 +634,39 @@ validate_write_files <- function(filepath,
     ## Test de bestanden die worden weggeschreven op documentatie door de
     ## test_file_on_documentation te mappen op de bestanden
     if (export_naar_dataframe == FALSE) {
-      Test_scripts <- purrr::map_dfr(Output_bestanden,
-                                     ## .x ipv Output_bestanden
-                                     ~ test_file_on_documentation(.x))
+      Test_scripts <- purrr::map_dfr(
+        Output_bestanden,
+        ## .x ipv Output_bestanden
+        ~ test_file_on_documentation(.x)
+      )
     } else if (export_naar_dataframe == TRUE) {
-      Test_scripts <- purrr::map(Output_bestanden,
-                                 ~ test_file_on_documentation(.x, TRUE))
+      Test_scripts <- purrr::map(
+        Output_bestanden,
+        ~ test_file_on_documentation(.x, TRUE)
+      )
       class <- Test_scripts[[1]] %>% class()
       if (class == "character") {
         return(Test_scripts)
-      } else{
+      } else {
         for (test in Test_scripts) {
           if (grepl("geen", test[1, 1])) {
             return(test %>% dplyr::distinct() %>%
-                     base::toString())
+              base::toString())
           }
           if (!grepl("geen", test[1, 1])) {
             Meldingen_tests <- test %>%
               dplyr::select(Bestand, Variabele, Message) %>%
               dplyr::group_by(Bestand, Variabele) %>%
               dplyr::summarise_all(~ (trimws(paste(
-                ., collapse = ', '
+                .,
+                collapse = ", "
               )))) %>%
               dplyr::ungroup() %>%
               dplyr::mutate(Message = paste0(Variabele, ": ", Message)) %>%
               dplyr::group_by(Bestand) %>%
               dplyr::summarise_all(~ (trimws(paste(
-                ., collapse = ', '
+                .,
+                collapse = ", "
               )))) %>%
               dplyr::pull(Message)
             return(Meldingen_tests)
@@ -682,7 +721,7 @@ test_file_on_documentation <-
            processbar = NULL) {
     ## Zet een tick op de progress bar
     if ((!is.null(processbar)) &&
-        inherits(processbar, "progress_bar")) {
+      inherits(processbar, "progress_bar")) {
       processbar$tick()
     }
     ## Bepaal naam en folder van filepath
@@ -692,11 +731,13 @@ test_file_on_documentation <-
 
     ## Maak van het bestand de paden naar het documentatie(.csv) en het data(.rds) bestand
     Csv_path <-
-      base::paste0("Testdocumentatie/",
-                   Naam_folder,
-                   "/",
-                   Naam_document,
-                   ".csv")
+      base::paste0(
+        "Testdocumentatie/",
+        Naam_folder,
+        "/",
+        Naam_document,
+        ".csv"
+      )
     Rds_path <-
       base::paste0(Naam_folder, "/", Naam_document, ".rds")
 
@@ -729,8 +770,10 @@ test_file_on_documentation <-
     } else {
       ## Lees documentatie bestand in
       Test_documentatie <-
-        read_documentation(filename = Csv_path,
-                                    readr = TRUE) %>%
+        read_documentation(
+          filename = Csv_path,
+          readr = TRUE
+        ) %>%
         ## Extra kolom toevoegen om met de Assert_naming functie te kunnen testen
         dplyr::mutate(Veldnaam_export = Veldnaam)
     }
@@ -740,10 +783,10 @@ test_file_on_documentation <-
       ## Als het bestand niet bestaat, wordt dit teruggegeven
       base::return(
         tibble::tibble(
-          Bestand   = Naam_document,
+          Bestand = Naam_document,
           Outputmap = Naam_folder,
-          Geslaagd  = FALSE,
-          Message   = "Fout bij uitvoeren van de test: Outputbestand bestaat niet",
+          Geslaagd = FALSE,
+          Message = "Fout bij uitvoeren van de test: Outputbestand bestaat niet",
           Laatste_update = Sys.time()
         )
       )
@@ -753,27 +796,30 @@ test_file_on_documentation <-
     data <- readrds_csv(output = Rds_path, readr = TRUE)
 
     ## Voer tests uit
-    assertedData <- tryCatch({
-      test_naming(data,
-                  Test_documentatie,
-                  Naam_bestand = Naam_document,
-                  Outputmap = Naam_folder) %>%
-        ## Voeg de datum van de laatste update toe.
-        dplyr::mutate(Laatste_update = file.info(Rds_path_volledig)$mtime)
-    },
-    error = function(e) {
-      base::return(
-        tibble::tibble(
-          Bestand   = Naam_document,
-          Outputmap = Naam_folder,
-          Geslaagd  = FALSE,
-          ## Voeg de foutmelding toe
-          Message   = base::paste("Fout bij uitvoeren van de test:", e[1]),
+    assertedData <- tryCatch(
+      {
+        test_naming(data,
+          Test_documentatie,
+          Naam_bestand = Naam_document,
+          Outputmap = Naam_folder
+        ) %>%
           ## Voeg de datum van de laatste update toe.
-          Laatste_update = file.info(Rds_path_volledig)$mtime
+          dplyr::mutate(Laatste_update = file.info(Rds_path_volledig)$mtime)
+      },
+      error = function(e) {
+        base::return(
+          tibble::tibble(
+            Bestand = Naam_document,
+            Outputmap = Naam_folder,
+            Geslaagd = FALSE,
+            ## Voeg de foutmelding toe
+            Message = base::paste("Fout bij uitvoeren van de test:", e[1]),
+            ## Voeg de datum van de laatste update toe.
+            Laatste_update = file.info(Rds_path_volledig)$mtime
+          )
         )
-      )
-    })
+      }
+    )
 
     assertedData
   }
@@ -803,7 +849,7 @@ validate_introduction <-
     if (base::length(fouten) > 0) {
       if (export_naar_dataframe == TRUE) {
         return(paste0(fouten, collapse = "; "))
-      } else{
+      } else {
         base::cat(cli::style_bold(cli::col_red("Onvolledig: ")))
         ## message de fouten
         base::cat(cli::style_bold(cli::col_red(paste(fouten, "\n"))))
@@ -811,7 +857,7 @@ validate_introduction <-
     } else {
       if (export_naar_dataframe == TRUE) {
         return("Geslaagd")
-      } else{
+      } else {
         base::cat(cli::style_bold(cli::col_green("Geslaagd\n")))
       }
     }
@@ -916,12 +962,12 @@ generate_introduction_validation <-
       lBestandsnaam <-
         as.list(strsplit(Bestandsnaam, "[[:space:]]|_")[[1]])
       suppressWarnings(any(!stringr::str_detect(lBestandsnaam[1:2], pattern = "^[A-Z].*$")) |
-                         stringr::str_detect(Bestandsnaam, "_") |
-                         if (is.null(lBestandsnaam[3][[1]])) {
-                           FALSE
-                         } else {
-                           stringr::str_detect(lBestandsnaam[3], pattern = "^[A-Z].*$")
-                         })
+        stringr::str_detect(Bestandsnaam, "_") |
+        if (is.null(lBestandsnaam[3][[1]])) {
+          FALSE
+        } else {
+          stringr::str_detect(lBestandsnaam[3], pattern = "^[A-Z].*$")
+        })
     }
 
     Incorrecte_naamconventie <- check_naam_conventie_incorrect(x = Script)
@@ -1169,7 +1215,8 @@ generate_introduction_validation <-
 determine_author <- function(x) {
   base::unlist(purrr::compact(
     stringr::str_extract_all(base::readLines(x),
-                             pattern = "([a-zA-Z]{2,3}): Aanmaak bestand")
+      pattern = "([a-zA-Z]{2,3}): Aanmaak bestand"
+    )
   ))
 }
 
@@ -1205,8 +1252,7 @@ check_variable <- function(name) {
   } else {
     class <- class(variable)
   }
-  replacer = switch(
-    class[1],
+  replacer <- switch(class[1],
     "character" = "s",
     "list" = "l",
     "vector" = "v",
@@ -1223,7 +1269,7 @@ check_variable <- function(name) {
   capitals <<- unlist(gregexpr("[A-Z]", name))
   ## Check if variable has correct name
   if (replacer == substr(name, 1, nchar(replacer)) &
-      str_detect(substr(name, nchar(replacer) + 1, nchar(replacer) + 1), "^[:upper:]+$")) {
+    str_detect(substr(name, nchar(replacer) + 1, nchar(replacer) + 1), "^[:upper:]+$")) {
     return(name)
     ## If there is no prefix or it is incorrect. Capitalize and add correct prefix
   } else {

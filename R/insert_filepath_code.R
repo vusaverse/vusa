@@ -33,7 +33,6 @@ insert_filepath_code <- function() {
       filepathcode <- paste0("read_xlsx(paste0(Network_directory, '", newpath, "'))")
       rstudioapi::insertText(filepathcode)
     }
-
   } else if (grepl(Sys.getenv("DOCUMENTATION_DIR"), addin_filepath)) {
     # Extract the file name from the path
     newpath <- gsub(".*XX. Documentatie/", "", addin_filepath)
@@ -42,5 +41,4 @@ insert_filepath_code <- function() {
     filepathcode <- paste0("read_documentation('", newpath, "')")
     rstudioapi::insertText(filepathcode)
   }
-
 }

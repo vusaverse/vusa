@@ -17,40 +17,43 @@
 #' tussen 0.0 en 1.0.
 #' 1.0 = 100% van de keren dat deze waarde voor komt is binnen deze column
 #' 0.0 =  0% van de keren dat deze waarde voor komt is binnen deze column
-#' @examples \dontrun{dfTest <- ratio_df_columns(dfTest, c("column1", "column2"))}
+#' @examples \dontrun{
+#' dfTest <- ratio_df_columns(dfTest, c("column1", "column2"))
+#' }
 #' @importFrom dplyr mutate across
 #' @importFrom rlang :=
 #' @export
 #'
-ratio_df_columns <- function(df, columns = c('00. Downloaden', '01. Inlezen',
-                                               '02. Manipuleren', '03. Analyseset maken',
-                                               '04. Analyseren', '05. Rapporten')){
+ratio_df_columns <- function(df, columns = c(
+                               "00. Downloaden", "01. Inlezen",
+                               "02. Manipuleren", "03. Analyseset maken",
+                               "04. Analyseren", "05. Rapporten"
+                             )) {
+  . <- NULL
+  ## STAP 1: Som de waardes op uit de columns
+  df <- df %>%
+    dplyr::mutate(sum = rowSums(
+      dplyr::across(columns)
+    ))
 
-    . <- NULL
-    ## STAP 1: Som de waardes op uit de columns
+  ## STAP 2: Bereken percentage aandeel binnen de columns
+  # 1.0 = 100% van de keren dat deze waarde voor komt is binnen deze column
+  # 0.0 =  0% van de keren dat deze waarde voor komt is binnen deze column
+  for (column in columns) {
+    nameNewColumn <- paste(column, "_aandeel", sep = "")
     df <- df %>%
-        dplyr::mutate(sum = rowSums(
-            dplyr::across(columns)))
+      # Let op syntax zodat variabele gebruikt kan worden : '!!' en ':='
+      # 'as.name(x)' zodat variabele aangeroepen kan worden, normaal in R
+      # mag een variable namelijk geen spaties hebben of beginnen met een
+      # cijfer (bij ons allebei het geval)
+      dplyr::mutate(!!nameNewColumn := !!as.name(column) / sum)
+  }
 
-    ## STAP 2: Bereken percentage aandeel binnen de columns
-    # 1.0 = 100% van de keren dat deze waarde voor komt is binnen deze column
-    # 0.0 =  0% van de keren dat deze waarde voor komt is binnen deze column
-    for(column in columns){
-        nameNewColumn = paste(column, "_aandeel", sep="")
-        df <- df %>%
-            # Let op syntax zodat variabele gebruikt kan worden : '!!' en ':='
-            # 'as.name(x)' zodat variabele aangeroepen kan worden, normaal in R
-            # mag een variable namelijk geen spaties hebben of beginnen met een
-            # cijfer (bij ons allebei het geval)
-            dplyr::mutate(!!nameNewColumn := !!as.name(column) / sum)
-    }
+  ## STAP 3: Verwijder NA's en rond af
+  df <- df %>%
+    replace(is.na(.), 0) %>%
+    dplyr::mutate(dplyr::across(tidyselect::vars_select_helpers$where(is.numeric), round, 2))
 
-    ## STAP 3: Verwijder NA's en rond af
-    df <- df %>%
-        replace(is.na(.), 0) %>%
-        dplyr::mutate(dplyr::across(tidyselect::vars_select_helpers$where(is.numeric), round, 2))
-
-    ## STAP 4: Return df
-    return(df)
-
+  ## STAP 4: Return df
+  return(df)
 }

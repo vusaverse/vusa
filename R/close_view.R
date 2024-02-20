@@ -8,17 +8,17 @@
 #' @export
 close_view <- function() {
   Tabs <- c()
-  
+
   doc <- rstudioapi::getSourceEditorContext()
-  
+
   while (is.null(doc) || !doc$id %in% Tabs) {
     if (is.null(doc)) {
-      rstudioapi::executeCommand('closeSourceDoc')
+      rstudioapi::executeCommand("closeSourceDoc")
     }
-    rstudioapi::executeCommand('nextTab')
-    
-    Tabs <- c(Tabs, doc$id);
-    
+    rstudioapi::executeCommand("nextTab")
+
+    Tabs <- c(Tabs, doc$id)
+
     doc <- rstudioapi::getSourceEditorContext()
   }
 }

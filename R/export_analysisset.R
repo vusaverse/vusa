@@ -73,13 +73,13 @@
 #'
 #' +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #' @export
-export_analysisset <- function(Faculty_selection = 'All',
-                               Study_selection ='All',
-                               Phase_selection = 'All',
-                               Academic_year = 'All',
+export_analysisset <- function(Faculty_selection = "All",
+                               Study_selection = "All",
+                               Phase_selection = "All",
+                               Academic_year = "All",
                                Category_selection = NULL,
-                               Enrollment_year = 'All',
-                               Enrollment_year_EOI = 'All',
+                               Enrollment_year = "All",
+                               Enrollment_year_EOI = "All",
                                Column_selection = NULL,
                                Name_project,
                                Special_personal_data = FALSE,
@@ -95,7 +95,6 @@ export_analysisset <- function(Faculty_selection = 'All',
                                Network_directory = NULL,
                                Extract_location = "/6. Extracten WP/",
                                Export_name = "Export_Student_Analytics_") {
-
   ## These are all columns and fieldnames from the VUSA analysisset
   INS_Periode_afgerond <- INS_Periode <- Veldnaam <- Categorie <- Omschrijving <-
     Voorkomende_waarden <- Extra_info <- INS_Opleidingsnaam_2002 <-
@@ -107,20 +106,23 @@ export_analysisset <- function(Faculty_selection = 'All',
     if (!Sys.getenv("OUTPUT_DIR") == "") {
       message("system variable present, so this will be used")
       Network_directory <- Sys.getenv("OUTPUT_DIR")
-    }
-    else {
+    } else {
       stop("system variable for Network_directory is missing")
     }
   }
 
   ## These columns always have to be present, these are keys of the VUSA analysisset
-  Required_columns <- c('INS_Studentnummer',
-                        'INS_Opleidingsnaam_2002',
-                        'INS_Inschrijvingsjaar')
+  Required_columns <- c(
+    "INS_Studentnummer",
+    "INS_Opleidingsnaam_2002",
+    "INS_Inschrijvingsjaar"
+  )
 
-  if(!is.null(Column_selection)) {
-    Column_selection <- append(Required_columns,
-                               Column_selection)
+  if (!is.null(Column_selection)) {
+    Column_selection <- append(
+      Required_columns,
+      Column_selection
+    )
   }
 
   # no duplicated columns
@@ -132,8 +134,9 @@ export_analysisset <- function(Faculty_selection = 'All',
   } else if (!is.null(Analysis_set_option) && Analysis_set_option == 7) {
     Analysis_set <- get_analysisset_7(cols = Column_selection)
     Analysis_set <- Analysis_set %>%
-      dplyr::filter(INS_Periode_afgerond == T,
-                    !(INS_Periode == 0)
+      dplyr::filter(
+        INS_Periode_afgerond == T,
+        !(INS_Periode == 0)
       )
   } else {
     Analysis_set <- get_analysisset(columns = Column_selection)
@@ -151,21 +154,25 @@ export_analysisset <- function(Faculty_selection = 'All',
     data_documentation <- Analysis_set %>%
       dplyr::select(rows_not_in_documentation)
     new_documentation <- documentation_generate(data_documentation,
-                                                description = NA,
-                                                source = NA,
-                                                extra_info = "Variable is added for export")
+      description = NA,
+      source = NA,
+      extra_info = "Variable is added for export"
+    )
     Analysis_set_documentation <- dplyr::bind_rows(Analysis_set_documentation, new_documentation)
-
   }
 
-  Analysis_set_documentation_no_bpg <- subset(Analysis_set_documentation,
-                                              !(substr(Veldnaam,1,3) %in% c("ETN",
-                                                                            "FBP",
-                                                                            "VRZ")))
+  Analysis_set_documentation_no_bpg <- subset(
+    Analysis_set_documentation,
+    !(substr(Veldnaam, 1, 3) %in% c(
+      "ETN",
+      "FBP",
+      "VRZ"
+    ))
+  )
 
   ## Make filters based on variables and presence of current Analysisset
   if (length(Faculty_selection) == 1) {
-    if (Faculty_selection == 'All') {
+    if (Faculty_selection == "All") {
       Faculty_selection <- unique(Analysis_set$INS_Faculteit)
     } else {
       Faculty_selection <- Faculty_selection
@@ -176,40 +183,40 @@ export_analysisset <- function(Faculty_selection = 'All',
   message(Faculty_selection)
 
   if (length(Study_selection) == 1) {
-    if (Study_selection == 'All') {
+    if (Study_selection == "All") {
       Study_selection <- unique(Analysis_set$INS_Opleidingsnaam_2002)
     }
   }
   message(Study_selection)
 
-  if ('All' %in% Phase_selection) {
+  if ("All" %in% Phase_selection) {
     Phase_selection <- unique(Analysis_set$INS_Opleidingsfase_BPM)
   }
 
-  if ('All' %in% Academic_year) {
+  if ("All" %in% Academic_year) {
     Academic_year <- unique(Analysis_set$INS_Studiejaar)
   }
 
   if (!is.null(Category_selection)) {
-    if ('All' %in% Category_selection) {
+    if ("All" %in% Category_selection) {
       Category_selection <- unique(Analysis_set_documentation$Categorie)
     }
   }
-  if ('All' %in% Enrollment_year) {
+  if ("All" %in% Enrollment_year) {
     Enrollment_year <- unique(Analysis_set$INS_Inschrijvingsjaar)
   }
-  if ('All' %in% Enrollment_year_EOI) {
+  if ("All" %in% Enrollment_year_EOI) {
     Enrollment_year_EOI <- unique(Analysis_set$INS_Inschrijvingsjaar_EOI)
   }
 
   ## (De)select special personal data
-  if (Special_personal_data == FALSE ) {
+  if (Special_personal_data == FALSE) {
     Analysis_set_documentation <- Analysis_set_documentation_no_bpg
-    message('Analysisset contains no special personal data')
+    message("Analysisset contains no special personal data")
   } else {
-    Analysis_set_documentation_bpg <- subset(Analysis_set_documentation, substr(Veldnaam,1,3) %in% Special_personal_data)
+    Analysis_set_documentation_bpg <- subset(Analysis_set_documentation, substr(Veldnaam, 1, 3) %in% Special_personal_data)
     Analysis_set_documentation <- rbind(Analysis_set_documentation_no_bpg, Analysis_set_documentation_bpg)
-    message(paste('Analysisset contains special personal data: ', paste(Special_personal_data, collapse = ", "), sep = ""))
+    message(paste("Analysisset contains special personal data: ", paste(Special_personal_data, collapse = ", "), sep = ""))
   }
 
   ## Select the necessary column names from the documentation and filter on this in the analysisset
@@ -217,7 +224,7 @@ export_analysisset <- function(Faculty_selection = 'All',
     subset(
       Analysis_set_documentation,
       Categorie %in% Category_selection |
-        Veldnaam %in% Column_selection|
+        Veldnaam %in% Column_selection |
         Veldnaam %in% names(Analysis_set),
       ## NB: This is select as 'argument' in the subset-function, not dplyr::select
       select = c(
@@ -230,19 +237,23 @@ export_analysisset <- function(Faculty_selection = 'All',
     )
 
   ## Sort the documentation
-  Analysis_set_documentation_export <- Analysis_set_documentation_export[order(Analysis_set_documentation_export$Categorie,
-                                                                               Analysis_set_documentation_export$Veldnaam),]
+  Analysis_set_documentation_export <- Analysis_set_documentation_export[order(
+    Analysis_set_documentation_export$Categorie,
+    Analysis_set_documentation_export$Veldnaam
+  ), ]
 
 
 
   ## Filter the analysisset with earlier made filters.
-  Analysis_set <- subset(Analysis_set,
-                         INS_Opleidingsnaam_2002 %in% Study_selection &
-                           INS_Inschrijvingsjaar %in% Enrollment_year &
-                           INS_Inschrijvingsjaar_EOI %in% Enrollment_year_EOI &
-                           INS_Faculteit %in% Faculty_selection &
-                           INS_Opleidingsfase_BPM %in% Phase_selection &
-                           INS_Studiejaar %in% Academic_year)
+  Analysis_set <- subset(
+    Analysis_set,
+    INS_Opleidingsnaam_2002 %in% Study_selection &
+      INS_Inschrijvingsjaar %in% Enrollment_year &
+      INS_Inschrijvingsjaar_EOI %in% Enrollment_year_EOI &
+      INS_Faculteit %in% Faculty_selection &
+      INS_Opleidingsfase_BPM %in% Phase_selection &
+      INS_Studiejaar %in% Academic_year
+  )
   table(Analysis_set$INS_Faculteit)
 
   ## Count the amount of rows in the start; these have to be the same in the end
@@ -285,7 +296,7 @@ export_analysisset <- function(Faculty_selection = 'All',
   }
 
   ## Make the correct folders for saving the exports
-  projectfolder <- paste(Extract_location, Name_project, sep = '')
+  projectfolder <- paste(Extract_location, Name_project, sep = "")
   projectfolder_today <- paste0(projectfolder, current_date)
   dir.create(paste0(Network_directory, Sys.getenv("BRANCH"), projectfolder))
   dir.create(paste0(Network_directory, Sys.getenv("BRANCH"), projectfolder_today))
@@ -296,8 +307,9 @@ export_analysisset <- function(Faculty_selection = 'All',
     ## Save this in a map higher than the export file
     ## If there is a zip made for the export files, these do not need to be in the zip.
     saverds_csv(Hash_mapping,
-                paste0("/Hash_mapping_", Sys.Date()),
-                output = projectfolder)
+      paste0("/Hash_mapping_", Sys.Date()),
+      output = projectfolder
+    )
     rm(Hash_mapping)
   } else if (Hash == TRUE) {
     rm(Hash_mapping)
@@ -306,15 +318,17 @@ export_analysisset <- function(Faculty_selection = 'All',
 
   ## Save the export and documentation
   saverds_csv(Analysis_set,
-              paste(Export_name, Sys.Date(), "_", Filename, sep = ''),
-              # dataloc = projectfolder_today,
-              output = projectfolder_today,
-              save_csv = TRUE)
+    paste(Export_name, Sys.Date(), "_", Filename, sep = ""),
+    # dataloc = projectfolder_today,
+    output = projectfolder_today,
+    save_csv = TRUE
+  )
   saverds_csv(Analysis_set_documentation_export,
-              paste("Documentation_", Export_name, Sys.Date(), "_", Filename, sep = ''),
-              # dataloc = projectfolder_today,
-              output = projectfolder_today,
-              save_csv = TRUE)
+    paste("Documentation_", Export_name, Sys.Date(), "_", Filename, sep = ""),
+    # dataloc = projectfolder_today,
+    output = projectfolder_today,
+    save_csv = TRUE
+  )
 
   ## Make Qualityrapport
   ## Because of the function that is used (Datamaid::makeCodebook)
@@ -323,7 +337,8 @@ export_analysisset <- function(Faculty_selection = 'All',
     create_quality_report(
       Analysis_set,
       ProjectName = Name_project,
-      path = paste0(Sys.getenv("BRANCH"), projectfolder_today))
+      path = paste0(Sys.getenv("BRANCH"), projectfolder_today)
+    )
   }
 
   # Save the results
@@ -333,34 +348,44 @@ export_analysisset <- function(Faculty_selection = 'All',
     dir.create(paste0(Network_directory, Sys.getenv("BRANCH"), Results_map))
     # Sla de export op
     saverds_csv(Results,
-                paste(Export_name, "Results_", Sys.Date(), "_", Filename, sep = ''),
-                output = paste(Results_map, "/", sep = ""), save_csv = Save_as_CSV)
+      paste(Export_name, "Results_", Sys.Date(), "_", Filename, sep = ""),
+      output = paste(Results_map, "/", sep = ""), save_csv = Save_as_CSV
+    )
     # Throw away created variables
     rm(Results, Results_map)
   }
 
   ## Make and save a zip if indicated
   ## NB: A zip from a can take a while.
-  if(Make_zip == TRUE) {
+  if (Make_zip == TRUE) {
     Zip_folder_target <- paste0("/", Sys.Date(), "_", Name_project, ".zip")
-    utils::zip(paste0(Network_directory, Sys.getenv("BRANCH"),
-                      projectfolder, Zip_folder_target),
-               paste0(Network_directory, Sys.getenv("BRANCH"),
-                      projectfolder_today),extras = '-j')
+    utils::zip(
+      paste0(
+        Network_directory, Sys.getenv("BRANCH"),
+        projectfolder, Zip_folder_target
+      ),
+      paste0(
+        Network_directory, Sys.getenv("BRANCH"),
+        projectfolder_today
+      ),
+      extras = "-j"
+    )
   }
 
   ## Count the amount of rows again
   count_rows_analysis_set(Analysis_set, Name_project, Start_amount_rows, type = "Export")
 
   # Throw away created variables
-  rm(Analysis_set_documentation_export,
-     Analysis_set_documentation,
-     Analysis_set,
-     Analysis_set_documentation_no_bpg,
-     projectfolder,
-     current_date)
+  rm(
+    Analysis_set_documentation_export,
+    Analysis_set_documentation,
+    Analysis_set,
+    Analysis_set_documentation_no_bpg,
+    projectfolder,
+    current_date
+  )
 
-  if (Special_personal_data == TRUE ) {
+  if (Special_personal_data == TRUE) {
     rm(Analysis_set_documentation_bpg)
   }
 }

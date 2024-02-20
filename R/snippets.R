@@ -15,7 +15,7 @@
 #' @export
 download_github_file <- function(url, temp_file_path) {
   response <- httr::GET(url)
-  if (response$status_code ==  200) {
+  if (response$status_code == 200) {
     writeBin(httr::content(response, "raw"), temp_file_path)
     return(temp_file_path)
   } else {
@@ -39,9 +39,9 @@ download_github_file <- function(url, temp_file_path) {
 #'
 #' @export
 get_snippets_file <- function(type = c(
-  "r", "markdown", "c_cpp", "css", "html",
-  "java", "javascript", "python", "sql", "stan", "tex"
-)) {
+                                "r", "markdown", "c_cpp", "css", "html",
+                                "java", "javascript", "python", "sql", "stan", "tex"
+                              )) {
   type <- tolower(type)
   type <- match.arg(type)
   file <- fs::path_ext_set(type, "snippets")
@@ -59,7 +59,7 @@ get_snippets_file <- function(type = c(
   } else {
     old_path
   }
-  
+
   return(path)
 }
 
@@ -76,19 +76,19 @@ get_snippets_file <- function(type = c(
 split_file <- function(filename) {
   # read in the file
   lines <- readLines(filename)
-  
+
   # split the lines into chunks
   chunks <- split(lines, cumsum(lines == ""))
-  
+
   # remove any empty chunks
-  chunks <- chunks[sapply(chunks, length) >  1]
-  
+  chunks <- chunks[sapply(chunks, length) > 1]
+
   # split each chunk into lines and preserve indentation
   for (i in seq_along(chunks)) {
     lines <- unlist(strsplit(chunks[[i]], "\n"))
     leading_whitespace <- regexpr("\\S", lines)
-    chunks[[i]] <- paste0(substr(lines,  1, leading_whitespace -  1), substr(lines, leading_whitespace, nchar(lines)), collapse="\n")
+    chunks[[i]] <- paste0(substr(lines, 1, leading_whitespace - 1), substr(lines, leading_whitespace, nchar(lines)), collapse = "\n")
   }
-  
+
   return(chunks)
 }

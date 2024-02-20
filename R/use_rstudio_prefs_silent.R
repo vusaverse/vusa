@@ -7,29 +7,28 @@
 #' @seealso \code{\link[rstudio.prefs]{use_rstudio_prefs}} for the original function that includes user confirmation.
 #' @export
 use_rstudio_prefs_silent <- function(...) {
-  
   # Save lists of existing and updated prefs
   list_updated_prefs <- rlang::dots_list(...)
   if (!rlang::is_named(list_updated_prefs)) {
     rlang::abort("Each argument must be named.")
   }
-  
+
   list_current_prefs <-
     names(list_updated_prefs) %>%
-    purrr::map(~rstudioapi::readRStudioPreference(.x, default = NULL)) %>%
+    purrr::map(~ rstudioapi::readRStudioPreference(.x, default = NULL)) %>%
     stats::setNames(names(list_updated_prefs)) %>%
     purrr::compact()
-  
+
   # Print updates that will be made
   any_update <- pretty_print_updates(list_current_prefs, list_updated_prefs)
   # If no updates, abort function execution
   if (!any_update) {
     return(invisible(NULL))
   }
-  
+
   # Update prefs without user interaction
   list_updated_prefs %>%
-    purrr::iwalk(~rstudioapi::writeRStudioPreference(name = .y, value = .x))
+    purrr::iwalk(~ rstudioapi::writeRStudioPreference(name = .y, value = .x))
   return(invisible(list_updated_prefs))
 }
 
@@ -48,12 +47,12 @@ pretty_print_updates <- function(old, new) {
     tibble::tibble(
       pref =
         names(old) %>%
-        intersect(names(new)) %||%
-        character(0), # if no overlap with old and new, drop in a placeholder,
+          intersect(names(new)) %||%
+          character(0), # if no overlap with old and new, drop in a placeholder,
       old_value =
         old[names(old) %>% intersect(names(new))] %>%
-        unname() %>% lapply(as.character) %>% unlist() %||%
-        character(0) # if no overlap with old and new, drop in a placeholder
+          unname() %>% lapply(as.character) %>% unlist() %||%
+          character(0) # if no overlap with old and new, drop in a placeholder
     ) %>%
     dplyr::full_join(
       # data frame of new prefs
@@ -61,9 +60,9 @@ pretty_print_updates <- function(old, new) {
         pref = names(new),
         new_value =
           new %>%
-          unname() %>%
-          lapply(function(x) ifelse(is.null(x), "*", as.character(x))) %>%
-          unlist()
+            unname() %>%
+            lapply(function(x) ifelse(is.null(x), "*", as.character(x))) %>%
+            unlist()
       ),
       by = "pref"
     ) %>%
@@ -72,7 +71,7 @@ pretty_print_updates <- function(old, new) {
       new_value = ifelse(is.na(.data$new_value), "*", .data$new_value),
       updated = .data$old_value != .data$new_value
     )
-  
+
   # pad each column with trailing spaces ---------------------------------------
   length_total <- df_updates %>% lapply(function(x) nchar(x) %>% max())
   length_total[["pref"]] <- length_total[["pref"]] + 3
@@ -87,7 +86,7 @@ pretty_print_updates <- function(old, new) {
         )
     }
   }
-  
+
   # print updates --------------------------------------------------------------
   if (sum(!df_updates$updated) > 0L) {
     cat(cli::rule("No Changes", line = 2), "\n")
@@ -105,7 +104,7 @@ pretty_print_updates <- function(old, new) {
       cat()
     cat("\n\n")
   }
-  
+
   if (sum(df_updates$updated) > 0L) {
     cat(cli::rule("Updates", line = 2), "\n")
     df_updates %>%
@@ -122,7 +121,7 @@ pretty_print_updates <- function(old, new) {
       cat()
     cat("\n\n")
   }
-  
+
   # return a logical indicating if there were any updates
   return(sum(df_updates$updated) > 0L)
 }

@@ -40,32 +40,27 @@ build_as <- function(Analysis_set, AS_archive, latest, files_list, complete_rebu
           message(paste0(main_file, " has been updated, meaning: run this data again"))
           Analysis_set <- Build_Analysis_set(Analysis_set, main_file, new_columns)
         }
-        ##Update the AS because the input files have been updated
+        ## Update the AS because the input files have been updated
         ## (for loop because multiple input files can be used in a script and therefore also multiple data)
         else if (any(input_date >= date_AS_archive)) {
           message(paste0(main_file, " input file has been updated, meaning: run this data again"))
           Analysis_set <- Build_Analysis_set(Analysis_set, main_file, new_columns)
+        } else {
+          files_list_unchanged[[length(files_list_unchanged) + 1]] <- file
         }
-        else {
-          files_list_unchanged[[length(files_list_unchanged) +1 ]] <- file
-        }
-
       }
       ## input without new columns.
       else {
         if (any(input_date >= date_AS_archive)) {
           message(paste0(file, "input file has been updated, meaning: run this data again"))
           Analysis_set <- Build_Analysis_set(Analysis_set, main_file)
-        }
-        else if (main_file_date >= date_AS_archive) {
+        } else if (main_file_date >= date_AS_archive) {
           message(paste0(main_file, " has been updated, meaning: run this data again"))
           Analysis_set <- Build_Analysis_set(Analysis_set, main_file)
-        }
-        else {
-          files_list_unchanged[[length(files_list_unchanged) +1 ]] <- file
+        } else {
+          files_list_unchanged[[length(files_list_unchanged) + 1]] <- file
         }
       }
-
     }
     ##
     message("the following scripts have no changed files:")
@@ -79,7 +74,6 @@ build_as <- function(Analysis_set, AS_archive, latest, files_list, complete_rebu
       # check again if it is a file where new columns are added
       if (length(file) > 1) {
         Analysis_set <- Build_Analysis_set(Analysis_set, file[1], file[-1])
-
       } else {
         Analysis_set <- Build_Analysis_set(Analysis_set, file)
       }

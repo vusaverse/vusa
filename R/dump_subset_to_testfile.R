@@ -11,18 +11,18 @@
 #' @param suffix A suffix that is placed after the file name
 #' @return A csv file with a subset based on 1 or more student numbers
 #' @export
-dump_subset_to_testfile <- function(df, studentnummer = NULL, output = "XX. Test/", dataloc, suffix = NULL){
-  if(missing(dataloc) == TRUE) {
+dump_subset_to_testfile <- function(df, studentnummer = NULL, output = "XX. Test/", dataloc, suffix = NULL) {
+  if (missing(dataloc) == TRUE) {
     dataloc <- paste("Output/", Sys.getenv("BRANCH"), "/", output, sep = "")
   }
-  if(!is.null(studentnummer)){
-    df <- subset(df, df[,"INS_Studentnummer"] %in% studentnummer)
+  if (!is.null(studentnummer)) {
+    df <- subset(df, df[, "INS_Studentnummer"] %in% studentnummer)
   }
   current_time <- format(Sys.time(), "%Y-%m-%d-%H-%M-%S")
-  if(!is.null(suffix)){
-    filename <- paste("Dump_subset_", current_time, "_", suffix, ".csv", sep = '')
+  if (!is.null(suffix)) {
+    filename <- paste("Dump_subset_", current_time, "_", suffix, ".csv", sep = "")
   } else {
-    filename <- paste("Dump_subset_", current_time, ".csv", sep = '')
+    filename <- paste("Dump_subset_", current_time, ".csv", sep = "")
   }
-  utils::write.csv2(df, paste(Sys.getenv("NETWORK_DIR"), dataloc, filename, sep = ""), col.names=FALSE, sep = ";")
+  utils::write.csv2(df, paste(Sys.getenv("NETWORK_DIR"), dataloc, filename, sep = ""), col.names = FALSE, sep = ";")
 }

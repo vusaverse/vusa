@@ -34,29 +34,35 @@
 #'
 #' @export
 #'
-current_filename <- function()
+current_filename <- function() {
   current_source_filename() %||%
-  current_cli_filename()
+    current_cli_filename()
+}
 
 
 #' @rdname current_filename
 #' @export
 #'
-current_source_filename <- function()
-  purrr::pluck( closest_source_frame(), "env", "filename" )
+current_source_filename <- function() {
+  purrr::pluck(closest_source_frame(), "env", "filename")
+}
 
-get_stack <- function (n = NULL, trim = 0) {
+get_stack <- function(n = NULL, trim = 0) {
   stack <- sys.calls()
   stack <- rev(stack[-length(stack)])
   env <- sys.frames()
   env <- rev(env[-length(env)])
-  if(length(stack) == 0) return(NULL)
-  purrr::transpose(list(fn_name = lapply(stack, rlang::call_name), env = env) )
+  if (length(stack) == 0) {
+    return(NULL)
+  }
+  purrr::transpose(list(fn_name = lapply(stack, rlang::call_name), env = env))
 }
 
 closest_source_frame <- function() {
-  purrr::detect( get_stack(), function(x) {
-    if(is.null(x$fn_name)) return(FALSE)
+  purrr::detect(get_stack(), function(x) {
+    if (is.null(x$fn_name)) {
+      return(FALSE)
+    }
     x$fn_name == "source"
   })
 }
@@ -79,14 +85,13 @@ current_cli_filename <- function() {
   file_index <- grep("^(--file=|-f$)", args)[1]
 
   # No argument found
-  if (is.na(file_index))
+  if (is.na(file_index)) {
     NULL
-
-  # -f filename: return the next argument (minus 1 because we're reversed)
-  else if (args[file_index] == "-f")
+  } # -f filename: return the next argument (minus 1 because we're reversed)
+  else if (args[file_index] == "-f") {
     args[file_index - 1]
-
-  # --file=filename: remove the option name
-  else
+  } # --file=filename: remove the option name
+  else {
     sub("^--file=", "", args[file_index])
+  }
 }

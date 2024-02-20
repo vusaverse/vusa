@@ -12,7 +12,6 @@
 #' @family tests
 #' @export
 check_education_name <- function(df, actual_edu_names = NULL, col_edu_names = NULL) {
-
   ## Carry out checks
   stopifnot(is.data.frame(df))
   stopifnot(col_edu_names %in% names(df))
@@ -22,8 +21,7 @@ check_education_name <- function(df, actual_edu_names = NULL, col_edu_names = NU
     if (!Sys.getenv("EDU_COLUMN") == "") {
       message("system variables present, so these wil be used for col_edu_names")
       col_edu_names <- Sys.getenv("EDU_COLUMN")
-    }
-    else {
+    } else {
       stop("system variables for col_edu_names is missing")
     }
   }
@@ -36,8 +34,7 @@ check_education_name <- function(df, actual_edu_names = NULL, col_edu_names = NU
       # Read in edu_data to create a list of education names
       edu_data <- readrds_csv(output = Sys.getenv("EDU_DATA"))
       actual_edu_names <- unique(edu_data$INS_Opleidingsnaam_Z08)
-    }
-    else {
+    } else {
       stop("system variables for actual_edu_names is missing")
     }
   }
@@ -74,14 +71,14 @@ check_education_name <- function(df, actual_edu_names = NULL, col_edu_names = NU
 #' @param ordered Defaults to FALSE, if TRUE then prefix is "." otherwise "-".
 #'
 #' @export
-md_list <- function(x, header = NULL, ordered = F){
+md_list <- function(x, header = NULL, ordered = F) {
   ## x must be a vector with length greater than 0
   stopifnot(is.vector(x))
   stopifnot(length(x) > 0)
 
   ## message a header if specified
   if (exists("header", inherits = FALSE)) {
-    cat("**",header,"** \n\n", sep = "")
+    cat("**", header, "** \n\n", sep = "")
   }
 
   ## For each item in the vector
@@ -94,5 +91,4 @@ md_list <- function(x, header = NULL, ordered = F){
     }
     cat(pre, x[i], " \n")
   }
-
 }

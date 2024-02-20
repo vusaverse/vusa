@@ -16,7 +16,7 @@
 #' @family vector calculations
 #' @importFrom dplyr %>%
 #' @export
-academic_period <- function(x, type = "period", date_table = NULL){
+academic_period <- function(x, type = "period", date_table = NULL) {
   Measure_date_prev <- Measure_date <- Academic_year <- Period <- NULL
 
   ## Convert POSIXct and POSIXt to date class
@@ -44,8 +44,10 @@ academic_period <- function(x, type = "period", date_table = NULL){
     ## Create cartetic product by joining Dates on TMP
     dplyr::left_join(date_table, by = "TMP") %>%
     ## Filter the rows where x corresponds to the key dates
-    dplyr::filter(x >= Measure_date_prev,
-                  x < Measure_date) %>%
+    dplyr::filter(
+      x >= Measure_date_prev,
+      x < Measure_date
+    ) %>%
     dplyr::select(x, Academic_year, Period)
 
   ## Join the calculated period and registration year to a tibble with vector

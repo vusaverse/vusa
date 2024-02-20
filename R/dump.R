@@ -8,18 +8,18 @@
 #' @param suffix Een suffix dat achter de bestandsnaam geplaatst wordt
 #' @return een xlsx-bestand met een subset obv 1 studentnummer
 #' @export
-dump_subset_to_file <- function(df, studentnummer, dataloc = "Exports/Student_Exports/", suffix = NULL){
+dump_subset_to_file <- function(df, studentnummer, dataloc = "Exports/Student_Exports/", suffix = NULL) {
   INS_Studentnummer <- NULL
-    df <- dplyr:: filter(df, INS_Studentnummer==studentnummer)
-    df <- df[, colSums(is.na(df)) != nrow(df)]
-    df <- t(df)
-    current_time <- format(Sys.time(), "%Y-%m-%d-%H-%M-%S")
-    if(!is.null(suffix)){
-        filename <- paste("dump_subset_", current_time, "_", suffix, ".xlsx", sep = '')
-    } else {
-        filename <- paste("dump_subset_", current_time, ".xlsx", sep = '')
-    }
-    utils::write.csv2(df, paste(Sys.getenv("NETWORK_DIR"), dataloc, filename, sep = ""), col.names=FALSE)
+  df <- dplyr::filter(df, INS_Studentnummer == studentnummer)
+  df <- df[, colSums(is.na(df)) != nrow(df)]
+  df <- t(df)
+  current_time <- format(Sys.time(), "%Y-%m-%d-%H-%M-%S")
+  if (!is.null(suffix)) {
+    filename <- paste("dump_subset_", current_time, "_", suffix, ".xlsx", sep = "")
+  } else {
+    filename <- paste("dump_subset_", current_time, ".xlsx", sep = "")
+  }
+  utils::write.csv2(df, paste(Sys.getenv("NETWORK_DIR"), dataloc, filename, sep = ""), col.names = FALSE)
 }
 
 
@@ -34,15 +34,15 @@ dump_subset_to_file <- function(df, studentnummer, dataloc = "Exports/Student_Ex
 #' @param suffix Een suffix dat achter de bestandsnaam geplaatst wordt
 #' @return Het databestand wordt weggeschreven als csv-bestand
 #' @export
-dump_to_testfile <- function(df, output = "XX. Test/", dataloc, suffix = NULL){
-    if(missing(dataloc) == TRUE) {
-        dataloc <- paste("Output/", Sys.getenv("BRANCH"), "/", output, sep = "")
-    }
-    current_time <- format(Sys.time(), "%Y-%m-%d-%H-%M-%S")
-    if(!is.null(suffix)){
-        filename <- paste("dump_subset_", current_time, "_", suffix, ".csv", sep = '')
-    } else {
-        filename <- paste("dump_subset_", current_time, ".csv", sep = '')
-    }
-    utils::write.csv2(df, paste(Sys.getenv("NETWORK_DIR"), dataloc, filename, sep = ""), col.names=FALSE, sep = ";")
+dump_to_testfile <- function(df, output = "XX. Test/", dataloc, suffix = NULL) {
+  if (missing(dataloc) == TRUE) {
+    dataloc <- paste("Output/", Sys.getenv("BRANCH"), "/", output, sep = "")
+  }
+  current_time <- format(Sys.time(), "%Y-%m-%d-%H-%M-%S")
+  if (!is.null(suffix)) {
+    filename <- paste("dump_subset_", current_time, "_", suffix, ".csv", sep = "")
+  } else {
+    filename <- paste("dump_subset_", current_time, ".csv", sep = "")
+  }
+  utils::write.csv2(df, paste(Sys.getenv("NETWORK_DIR"), dataloc, filename, sep = ""), col.names = FALSE, sep = ";")
 }

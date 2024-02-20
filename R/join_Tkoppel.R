@@ -35,11 +35,9 @@ join_tkoppel <- function(df, faculteit = F) {
   }
 
   if (faculteit == T) {
-
     if (any(names(df) %in% "INS_Faculteit")) {
       stop("The column INS_Faculteit already exists in the data frame")
     }
-
   }
 
   ## Read in the T couple isat table, to add the training name
@@ -58,5 +56,4 @@ join_tkoppel <- function(df, faculteit = F) {
   }
 
   return(df)
-
 }

@@ -68,7 +68,6 @@ sculpt_analysis_set <- function(Analysis_set, file, Extra_sleutels = NULL, slack
 
   ## Verwijder de nieuwe kolommen uit de verrijkte analyseset als die bestaan
   if (length(Verwijder_kolommen) > 0) {
-
     ## filter RES variabelen
     Verwijder_kolommen_zonder_RES <- Verwijder_kolommen[!grepl("^RES", Verwijder_kolommen)]
     ## message deze kolommen naar de console
@@ -76,29 +75,31 @@ sculpt_analysis_set <- function(Analysis_set, file, Extra_sleutels = NULL, slack
 
     ## stuur bericht naar slack kanaal
     if (length(Verwijder_kolommen_zonder_RES) > 0) {
-    slackr::slackr(cat(paste("Columns are already present in the analysis set. These will be overwritten (sans RES_):"),
-                       Verwijder_kolommen_zonder_RES,
-                       sep = "\n"))
+      slackr::slackr(cat(paste("Columns are already present in the analysis set. These will be overwritten (sans RES_):"),
+        Verwijder_kolommen_zonder_RES,
+        sep = "\n"
+      ))
     }
 
 
     ## Verwijder de kolommen uit de complete dataset
     Analysis_set_voor <- Analysis_set_voor %>%
       dplyr::select(-dplyr::one_of(Verwijder_kolommen))
-
   }
 
   ## Voeg de nieuwe kolommen toe aan Analysis_set_compleet
   Analysis_set_compleet <- dplyr::left_join(Analysis_set_voor,
-                                            Analysis_set,
-                                            by = Sleutelkolommen)
+    Analysis_set,
+    by = Sleutelkolommen
+  )
 
   ## Tests uitvoeren op de analyseset
 
   count_rows_analysis_set(Analysis_set_compleet,
-                                   file,
-                                   nrow(Analysis_set_voor),
-                                   slack = slack)
+    file,
+    nrow(Analysis_set_voor),
+    slack = slack
+  )
 
   ## Return de analyseset
   return(Analysis_set_compleet)

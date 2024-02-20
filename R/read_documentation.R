@@ -11,13 +11,11 @@
 #'
 #' @return Imported data object
 #' @export
-read_documentation <- function(filename = "", documentation_location = NULL, readr = F, ...){
-
+read_documentation <- function(filename = "", documentation_location = NULL, readr = F, ...) {
   if (is.null(documentation_location)) {
     if (!Sys.getenv("DOCUMENTATION_DIR") == "") {
-      documentation_location = Sys.getenv("DOCUMENTATION_DIR")
-    }
-    else {
+      documentation_location <- Sys.getenv("DOCUMENTATION_DIR")
+    } else {
       stop("system variables for documentation_location are missing")
     }
   }
@@ -26,19 +24,22 @@ read_documentation <- function(filename = "", documentation_location = NULL, rea
     ## If function arguments are specified in the ..., they must be the arguments
     ## overwrite, without generating an error message.
     ## Determine the function arguments for read_delim
-    function_args <- list(file = paste(Sys.getenv("DOCUMENTATION_DIR"), filename, sep = ""),
-                          delim = ";",
-                          escape_double = FALSE,
-                          locale = readr::locale(decimal_mark = ",",
-                                                 grouping_mark = "."),
-                          trim_ws = TRUE,
-                          col_types = readr::cols(.default = readr::col_guess()))
+    function_args <- list(
+      file = paste(Sys.getenv("DOCUMENTATION_DIR"), filename, sep = ""),
+      delim = ";",
+      escape_double = FALSE,
+      locale = readr::locale(
+        decimal_mark = ",",
+        grouping_mark = "."
+      ),
+      trim_ws = TRUE,
+      col_types = readr::cols(.default = readr::col_guess())
+    )
     ## Overwrite the arguments from the function_args with those from the dots (...)
     function_args <- overwrite_dot_arguments(function_args, ...)
 
     ## Run the function with do.call
     return(do.call(readr::read_delim, function_args))
-
   } else {
     return(utils::read.csv2(paste(Sys.getenv("DOCUMENTATION_DIR"), filename, sep = ""), stringsAsFactors = F, ...))
   }

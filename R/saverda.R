@@ -14,7 +14,7 @@
 #' @export
 saverda <- function(Object_to_save, Name_to_save, output = "1. Ingelezen data/", dataloc, session_info = FALSE) {
   ## determine the dataloc based on the branch
-  if(missing(dataloc) == TRUE) {
+  if (missing(dataloc) == TRUE) {
     dataloc <- paste("Output/", Sys.getenv("BRANCH"), "/", output, sep = "")
   }
 
@@ -22,12 +22,13 @@ saverda <- function(Object_to_save, Name_to_save, output = "1. Ingelezen data/",
   ## be sent to a data.frame
   Object_to_save <- as.data.frame(Object_to_save)
 
-  ##save RDA
+  ## save RDA
   save(Object_to_save,
-       file = paste(Sys.getenv("NETWORK_DIR"),dataloc,Name_to_save,".rda",sep=""), version = 2)
+    file = paste(Sys.getenv("NETWORK_DIR"), dataloc, Name_to_save, ".rda", sep = ""), version = 2
+  )
 
   ## save the Session info
-  if(session_info == TRUE) {
-    save_sessioninfo(paste(Sys.getenv("NETWORK_DIR"),dataloc,Name_to_save, "_", sep=""))
+  if (session_info == TRUE) {
+    save_sessioninfo(paste(Sys.getenv("NETWORK_DIR"), dataloc, Name_to_save, "_", sep = ""))
   }
 }

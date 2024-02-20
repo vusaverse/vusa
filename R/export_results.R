@@ -31,8 +31,7 @@ export_results <- function(Analysis_file, Results_location = NULL, Analysis_set 
     if (!Sys.getenv("RESULTS_DIR") == "") {
       message("system variable present, so this will be used")
       Results_location <- Sys.getenv("RESULTS_DIR")
-    }
-    else {
+    } else {
       stop("system variable for Results_location is missing")
     }
   }
@@ -42,8 +41,7 @@ export_results <- function(Analysis_file, Results_location = NULL, Analysis_set 
     if (!Sys.getenv("AS_1_DIR") == "") {
       message("system variable present, so this will be used")
       Analysis_set <- Sys.getenv("AS_1_DIR")
-    }
-    else {
+    } else {
       stop("system variable for Analysis_set is missing")
     }
   }
@@ -53,9 +51,13 @@ export_results <- function(Analysis_file, Results_location = NULL, Analysis_set 
   Analysis_export <- Analysis_file
 
   ## columns are reuired columns from the VUSA Analysis_set for using this function
-  Analysis_set <- readrds_csv(output = Analysis_set,
-                              columns = c("INS_Opleidingsnaam_2002",
-                                          "INS_Faculteit"))
+  Analysis_set <- readrds_csv(
+    output = Analysis_set,
+    columns = c(
+      "INS_Opleidingsnaam_2002",
+      "INS_Faculteit"
+    )
+  )
 
   # See which Student/education/year combinations there are (again use VUSA columns)
   Results_export <-
@@ -65,7 +67,7 @@ export_results <- function(Analysis_file, Results_location = NULL, Analysis_set 
         INS_Studentnummer,
         INS_Inschrijvingsjaar,
         INS_Opleidingsnaam_2002,
-        sep = '-'
+        sep = "-"
       )
     )) %>% dplyr::distinct()
 
@@ -76,28 +78,32 @@ export_results <- function(Analysis_file, Results_location = NULL, Analysis_set 
       INS_Studentnummer,
       RES_Academisch_jaar_beoordeling,
       INS_Opleidingsnaam_2002,
-      sep = '-'
+      sep = "-"
     )
   ))
 
   # Select only the results of the required student/education/year combinations
   Results_export <- merge(Results_export,
-                          Results,
-                          by = 'key',
-                          all.x = T)
+    Results,
+    by = "key",
+    all.x = T
+  )
 
 
   # Map the factorial name to the results export
-  Faculty_folders <- subset(Analysis_set, select = c(INS_Opleidingsnaam_2002,
-                                                     INS_Faculteit))
+  Faculty_folders <- subset(Analysis_set, select = c(
+    INS_Opleidingsnaam_2002,
+    INS_Faculteit
+  ))
   Faculty_folders <- unique(Faculty_folders)
 
   ## Make the export
   Results_export <-
     merge(Faculty_folders,
-          Results_export,
-          by = 'INS_Opleidingsnaam_2002',
-          all.Y = T)
+      Results_export,
+      by = "INS_Opleidingsnaam_2002",
+      all.Y = T
+    )
 
   return(Results_export)
 }

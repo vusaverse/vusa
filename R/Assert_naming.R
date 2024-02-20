@@ -62,7 +62,7 @@ assert_naming <- function(df, Naming, Naam_bestand, Maak_nieuwe_kolomwaarden = F
   ## gedocumenteerd (bij eerste keer runnen) of gelezen (bij latere runs)
 
   if (is.element("subset", Naming$Veldtype) | is.element("set_equal", Naming$Veldtype) | is.element("list", Naming$Veldtype)) {
-    #if (any("list","set_equal","subset") %in% Naming$Veldtype) {
+    # if (any("list","set_equal","subset") %in% Naming$Veldtype) {
     ## Voer build kolomwaarden  uit (optioneel)
     if (Maak_nieuwe_kolomwaarden == T) {
       build_kolomwaarden(df, Naming, Naam_bestand)
@@ -74,15 +74,16 @@ assert_naming <- function(df, Naming, Naam_bestand, Maak_nieuwe_kolomwaarden = F
 
   ## Roep de functie aan die de assertions/tests doet
   check_assertions(df,
-                   Naming,
-                   Naam_bestand,
-                   Maak_nieuwe_kolomwaarden,
-                   Assert_met_veldnaam,
-                   ## Geef de kolomwaarden mee waarmee list/subset/setequal assertions
-                   ## gedaan worden
-                   Kolomwaarden = Kolomwaarden,
-                   fail,
-                   Bericht)
+    Naming,
+    Naam_bestand,
+    Maak_nieuwe_kolomwaarden,
+    Assert_met_veldnaam,
+    ## Geef de kolomwaarden mee waarmee list/subset/setequal assertions
+    ## gedaan worden
+    Kolomwaarden = Kolomwaarden,
+    fail,
+    Bericht
+  )
 }
 
 #' Test naming
@@ -100,18 +101,18 @@ assert_naming <- function(df, Naming, Naam_bestand, Maak_nieuwe_kolomwaarden = F
 #' @family assertions
 #' @family tests
 #' @export
-test_naming <- function(df, Naming, Naam_bestand, Bericht = NULL,  Outputmap = NULL) {
+test_naming <- function(df, Naming, Naam_bestand, Bericht = NULL, Outputmap = NULL) {
   Veldnaam <- Kolom <- NULL
 
   ## =============================================================================
   ## 1. VOORBEREIDINGEN
   ## Vind patronen in naming bestand, check of ze nog niet bestaan, en sla op
   ## in csv bestand
-  #find_patterns(Naming)
+  # find_patterns(Naming)
 
   Naming <- Naming %>%
     dplyr::mutate(Kolom = Veldnaam) %>%
-    #rename(Kolom = Veldnaam) %>%
+    # rename(Kolom = Veldnaam) %>%
     dplyr::arrange(dplyr::desc(Kolom %in% names(df))) %>%
     dplyr::distinct(Veldnaam, .keep_all = T)
 
@@ -210,8 +211,9 @@ check_assertions <- function(df, Naming, Naam_bestand, Kolomwaarden = NULL, buil
     ## Assert op duplicates in de combinatie van de kolommen die volgens de
     ## documentatie samen uniek zouden zijn
     assert_no_duplicates_in_group(df,
-                                        group_vars = No_duplicates$Kolom,
-                                        assertion_fail = Assertions_Collectie)
+      group_vars = No_duplicates$Kolom,
+      assertion_fail = Assertions_Collectie
+    )
   }
   ## -----------------------------------------------------------------------------
   ## 2. B. Numerieke kolommen
@@ -222,95 +224,108 @@ check_assertions <- function(df, Naming, Naam_bestand, Kolomwaarden = NULL, buil
   ## de assertfunctie, het dataframe, de assertioncollectie voor het assertbericht
   ## de veldtypen die binnen diezelfde soort assertion vallen en de kolommen uit
   ## het namingbestand die nodig zijn voor de assertion.
-  subassertfunctie(Naming,
-                   assert_numeric_named,
-                   df,
-                   Assertions_Collectie,
-                   ## Numerieke assertiosn hebben kolom, veldtype, lower en upper nodig
-                   c("Kolom", "Veldtype", "lower", "upper"),
-                   c("numeric", "integer"))
+  subassertfunctie(
+    Naming,
+    assert_numeric_named,
+    df,
+    Assertions_Collectie,
+    ## Numerieke assertiosn hebben kolom, veldtype, lower en upper nodig
+    c("Kolom", "Veldtype", "lower", "upper"),
+    c("numeric", "integer")
+  )
 
   ## -----------------------------------------------------------------------------
   ## 2. C. Character-kolommen
   ## Kolommen van type character worden gefilterd, en de nodige assertion-gegevens
   ## (any.missing, pattern) worden geselecteerd, om hierop te asserten
-  subassertfunctie(Naming,
-                   assert_character_named,
-                   df,
-                   Assertions_Collectie,
-                   ## Kolom en patroon meegeven voor de assertion
-                   c("Kolom", "pattern"),
-                   c("list", "character", "subset"))
+  subassertfunctie(
+    Naming,
+    assert_character_named,
+    df,
+    Assertions_Collectie,
+    ## Kolom en patroon meegeven voor de assertion
+    c("Kolom", "pattern"),
+    c("list", "character", "subset")
+  )
 
   ## -----------------------------------------------------------------------------
   ## 2. D. Subset- en set_equal-kolommen
   ## Kolommen van type subset worden gefilterd om hierop te asserten met de Kolomwaarden
   subassertfunctie(Naming,
-                   assert_character_subset,
-                   df,
-                   Assertions_Collectie,
-                   ## Deze assertion heeft alleen de veldnamen nodig
-                   c("Kolom"),
-                   c("list", "subset"),
-                   ## Kolomwaarden worden meegegeven
-                   kolomwaarden = Kolomwaarden)
+    assert_character_subset,
+    df,
+    Assertions_Collectie,
+    ## Deze assertion heeft alleen de veldnamen nodig
+    c("Kolom"),
+    c("list", "subset"),
+    ## Kolomwaarden worden meegegeven
+    kolomwaarden = Kolomwaarden
+  )
 
   ## Kolommen van type set_equal worden gefilterd om hierop te asserten met de Kolomwaarden
   subassertfunctie(Naming,
-                   assert_character_set_equal,
-                   df,
-                   Assertions_Collectie,
-                   ## Deze assertion heeft alleen de veldnamen nodig
-                   c("Kolom"),
-                   c("set_equal"),
-                   ## Kolomwaarden worden meegegeven
-                   kolomwaarden = Kolomwaarden)
+    assert_character_set_equal,
+    df,
+    Assertions_Collectie,
+    ## Deze assertion heeft alleen de veldnamen nodig
+    c("Kolom"),
+    c("set_equal"),
+    ## Kolomwaarden worden meegegeven
+    kolomwaarden = Kolomwaarden
+  )
 
   ## -----------------------------------------------------------------------------
   ## 2. E. POSIXCT-kolommen
   ## Kolommen van type posixct worden gefilterd, en de nodige assertion-gegevens
   ## (any.missing) worden geselecteerd, om hierop te asserten
-  subassertfunctie(Naming,
-                   assert_posixct_named,
-                   df,
-                   Assertions_Collectie,
-                   ## Deze assertion heeft alleen de veldnamen nodig
-                   c("Kolom"),
-                   c("posixct", "POSIXct"))
+  subassertfunctie(
+    Naming,
+    assert_posixct_named,
+    df,
+    Assertions_Collectie,
+    ## Deze assertion heeft alleen de veldnamen nodig
+    c("Kolom"),
+    c("posixct", "POSIXct")
+  )
 
   ## 2. E.2 DATE-kolommen
   ## Kolommen van type posixct worden gefilterd, en de nodige assertion-gegevens
   ## (any.missing) worden geselecteerd, om hierop te asserten
-  subassertfunctie(Naming,
-                   assert_date_named,
-                   df,
-                   Assertions_Collectie,
-                   ## Deze assertion heeft alleen de veldnamen nodig
-                   c("Kolom"),
-                   c("Date"))
+  subassertfunctie(
+    Naming,
+    assert_date_named,
+    df,
+    Assertions_Collectie,
+    ## Deze assertion heeft alleen de veldnamen nodig
+    c("Kolom"),
+    c("Date")
+  )
 
   ## -----------------------------------------------------------------------------
   ## 2. F. Logical-kolommen
   ## Kolommen van type logical worden gefilterd, en de nodige assertion-gegevens
   ## (any.missing) worden geselecteerd, om hierop te asserten
-  subassertfunctie(Naming,
-                   assert_logical_named,
-                   df,
-                   Assertions_Collectie,
-                   ## Deze assertion heeft alleen de veldnamen nodig
-                   c("Kolom"),
-                   c("Logical"))
+  subassertfunctie(
+    Naming,
+    assert_logical_named,
+    df,
+    Assertions_Collectie,
+    ## Deze assertion heeft alleen de veldnamen nodig
+    c("Kolom"),
+    c("Logical")
+  )
 
   ## -----------------------------------------------------------------------------
   ## 2. G. Percentage NAs
   ## Voor elke kolom dat NAs bevat wordt berekend of het aantal NAs te veel is.
-  subassertfunctie(Naming,
-                   controleer_na_waarden,
-                   df,
-                   Assertions_Collectie,
-                   c('Kolom'),
-                   ## Alle velden moeten worden gecontroleerd op NAs
-                   c("numeric", "integer", "character", "Date", "posixct", "POSIXct", "list", "subset", "set_equal", "Logical")
+  subassertfunctie(
+    Naming,
+    controleer_na_waarden,
+    df,
+    Assertions_Collectie,
+    c("Kolom"),
+    ## Alle velden moeten worden gecontroleerd op NAs
+    c("numeric", "integer", "character", "Date", "posixct", "POSIXct", "list", "subset", "set_equal", "Logical")
   )
 
   ## =============================================================================
@@ -346,9 +361,11 @@ check_assertions <- function(df, Naming, Naam_bestand, Kolomwaarden = NULL, buil
 assert_aanwezige_kolommen <- function(Naming, df, Collectie) {
   Kolommen_niet_in_df <- setdiff(Naming$Kolom, names(df))
   if (!purrr::is_empty(Kolommen_niet_in_df)) {
-    Collectie$push(paste0('Variable \n\t',
-                          paste(Kolommen_niet_in_df, collapse = "\n\t"),
-                          '\n Op deze kolommen wordt niet geassert; ze zitten niet in de data, maar wel in de documentatie.'))
+    Collectie$push(paste0(
+      "Variable \n\t",
+      paste(Kolommen_niet_in_df, collapse = "\n\t"),
+      "\n Op deze kolommen wordt niet geassert; ze zitten niet in de data, maar wel in de documentatie."
+    ))
     Kolommen_niet_in_doc <- setdiff(names(df), Naming$Kolom)
     # message(paste0('Variable \n\t',
     #              paste(Kolommen_niet_in_doc, collapse = "\n\t"),
@@ -385,8 +402,10 @@ subassertfunctie <- function(naming, assert_functie, df, collectie, selecteer_ko
   ## upper kolommen die leeg zijn infinity waarden krijgen.
   if (as.character(substitute(assert_functie)) %in% c("assert_numeric_named")) {
     Assert_lijst <- Assert_lijst %>%
-      dplyr::mutate(lower = dplyr::coalesce(as.double(lower), -Inf),
-                    upper = dplyr::coalesce(as.double(upper), Inf))
+      dplyr::mutate(
+        lower = dplyr::coalesce(as.double(lower), -Inf),
+        upper = dplyr::coalesce(as.double(upper), Inf)
+      )
   }
   ## Als de assertion een subset of set_equal assertion is moeten ook de kolomwaarden
   ## mee worden genomen in de pwalk
@@ -463,9 +482,8 @@ controleer_na_waarden <- function(Kolomwaarde, df, Naming, add, fail = "stop") {
 
   ## Als het percentage NAs in df groter is dan de grenswaarde moet er een assertion message komen
   if (round(Gevonden_NA_percentage, digits = 2) > round(Grenswaarde_NAs, digits = 2)) {
-    #add$push(paste0("Toegestaan % NAs is ", round(Grenswaarde_NAs, digits = 2), " en gevonden % NAs is ", round(Gevonden_NA_percentage, digits = 2), ", dus te veel NAs in Kolom ", Kolomwaarde, sep = ": "))
-    add$push(paste0("Variable '", Kolomwaarde, "': " ,"Toegestaan % NAs is ", round(Grenswaarde_NAs, digits = 2), " en gevonden % NAs is ", round(Gevonden_NA_percentage, digits = 2), ", dus te veel NAs in de Kolom."))
-
+    # add$push(paste0("Toegestaan % NAs is ", round(Grenswaarde_NAs, digits = 2), " en gevonden % NAs is ", round(Gevonden_NA_percentage, digits = 2), ", dus te veel NAs in Kolom ", Kolomwaarde, sep = ": "))
+    add$push(paste0("Variable '", Kolomwaarde, "': ", "Toegestaan % NAs is ", round(Grenswaarde_NAs, digits = 2), " en gevonden % NAs is ", round(Gevonden_NA_percentage, digits = 2), ", dus te veel NAs in de Kolom."))
   }
 }
 
@@ -531,11 +549,16 @@ build_kolomwaarden <- function(df, Naming, Naam_bestand) {
 read_kolomwaarden <- function(Naam_bestand) {
   path <- paste0(Sys.getenv("DOCUMENTATION_DIR"), "Kolomwaarden/Assert_", Naam_bestand, ".csv")
   Kolomwaarden <- readr::read_delim(path,
-                                    col_types = vroom::cols(Kolomnaam = vroom::col_character(),
-                                                     Waarde = vroom::col_character()),
-                                    delim = ";",
-                                    locale = vroom::locale(decimal_mark = ",",
-                                                    grouping_mark = "."))
+    col_types = vroom::cols(
+      Kolomnaam = vroom::col_character(),
+      Waarde = vroom::col_character()
+    ),
+    delim = ";",
+    locale = vroom::locale(
+      decimal_mark = ",",
+      grouping_mark = "."
+    )
+  )
   return(Kolomwaarden)
 }
 
@@ -552,9 +575,13 @@ read_kolomwaarden_testen <- function(Testdoc) {
   ## Split kolomwaarden op de komma
   Split_kolomwaarden <- strsplit(Documentatie_kolomwaarden$Kolomwaarden, split = "', '")
   ## Creeër nieuwe rij voor iedere kolomwaarde
-  df_kolomwaarden <- tibble::tibble(Kolomnaam = rep(Documentatie_kolomwaarden$Veldnaam,
-                                                    sapply(Split_kolomwaarden, length)),
-                                    Waarde = unlist(Split_kolomwaarden)) %>%
+  df_kolomwaarden <- tibble::tibble(
+    Kolomnaam = rep(
+      Documentatie_kolomwaarden$Veldnaam,
+      sapply(Split_kolomwaarden, length)
+    ),
+    Waarde = unlist(Split_kolomwaarden)
+  ) %>%
     ## Verwijder onnodige tekens en spaties
     dplyr::mutate(Waarde = gsub(pattern = "'", replacement = "", x = Waarde))
 
@@ -572,7 +599,6 @@ find_patterns <- function(Naming) {
   ## Check of pattern-kolom bestaat
   patterns <- c()
   if ("pattern" %in% colnames(Naming)) {
-
     ## Loop door kolom, zoek naar niet NA velden en onthoud alleen de patronen die
     ## er niet al in zitten
     for (row in Naming$pattern) {
@@ -598,7 +624,7 @@ write_pattern_table <- function(pattern) {
   path <- paste0(Sys.getenv("DOCUMENTATION_DIR"), "Testpatterns/Patterns.csv")
   Pattern_bestand <- utils::read.csv2(file = path)
   ## creeër map om bestanden in op te slaan
-  #dir.create(dirname(path), showWarnings = FALSE, recursive = TRUE)
+  # dir.create(dirname(path), showWarnings = FALSE, recursive = TRUE)
   for (Single_pattern in pattern) {
     if (!is.null(Single_pattern) & !is.na(Single_pattern) & !(Single_pattern %in% Pattern_bestand$Pattern)) {
       utils::write.table(Single_pattern, file = path, row.names = F, col.names = F, append = T)

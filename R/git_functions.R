@@ -4,14 +4,16 @@
 #' @param n Integer number to look back in the git log
 #' @export
 get_last_n_commit_date <- function(filepath, n = 1) {
-  return(shell(paste0('git log -', n, ' --format=%cd --date=format:"', "%Y-%m-%d",
-                      '"  -- "', filepath, '"'), intern = T))
+  return(shell(paste0(
+    "git log -", n, ' --format=%cd --date=format:"', "%Y-%m-%d",
+    '"  -- "', filepath, '"'
+  ), intern = T))
 }
 
-#'Current git branch
+#' Current git branch
 #'
-#'Determine the current git branch
-#'@export
+#' Determine the current git branch
+#' @export
 current_git_branch <- function() {
   ## Get a list of all available branches
   Branches <- system("git branch", intern = TRUE)

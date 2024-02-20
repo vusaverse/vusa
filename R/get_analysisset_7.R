@@ -8,23 +8,20 @@
 #' columns are: "INS_Studentnummer","INS_Opleidingsnaam_2002","INS_Inschrijvingsjaar"
 #' @param AS_7 Path for the location of Analysis set 7
 #' @export
-get_analysisset_7 <- function(cols = NULL, cols_match = c("INS_Studentnummer",
-              "INS_Opleidingsnaam_2002","INS_Inschrijvingsjaar"), AS_7 = NULL) {
-
+get_analysisset_7 <- function(cols = NULL, cols_match = c(
+                                "INS_Studentnummer",
+                                "INS_Opleidingsnaam_2002", "INS_Inschrijvingsjaar"
+                              ), AS_7 = NULL) {
   if (is.null(AS_7)) {
-
     if (!Sys.getenv("AS_7_DIR") == "") {
-
       AS_7 <- paste0(Sys.getenv("OUTPUT_DIR"), Sys.getenv("BRANCH"), "/", Sys.getenv("AS_7_DIR"))
-    }
-    else {
+    } else {
       stop("system variables for AS_7 are missing")
     }
   }
 
   ## If columns for AS1 are specified, they will be loaded
   if (length(cols > 0)) {
-
     cols <- c(
       ## First the columns to join
       cols_match,

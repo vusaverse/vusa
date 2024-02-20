@@ -13,7 +13,7 @@
 clear_global_proj <- function() {
   # Retrieve the default keep list from the environment variable
   env_default_keep_list <- Sys.getenv("DEFAULT_KEEP_LIST")
-  
+
   # Check if the environment variable is set and convert it to a list of object names
   if (!env_default_keep_list == "") {
     default_keep_list <- strsplit(env_default_keep_list, " ")[[1]]
@@ -22,13 +22,13 @@ clear_global_proj <- function() {
     # For example, you could throw an error or use a fallback list
     stop("The 'DEFAULT_KEEP_LIST' environment variable is not set.")
   }
-  
+
   # Get the names of all objects in the global environment
   all_objects <- ls(envir = .GlobalEnv)
-  
+
   # Determine which objects to remove by finding the difference between all objects and the default keep list
   objects_to_remove <- setdiff(all_objects, default_keep_list)
-  
+
   # Remove the objects from the global environment
   # rm(list = objects_to_remove, envir = .GlobalEnv)
   rm(list = objects_to_remove, envir = parent.frame())
@@ -46,31 +46,35 @@ clear_global_proj <- function() {
 #' @param line_end until which line
 #' @param silent whether to mute console output
 #' @export
-clear_script_objects <- function (..., filepath = NULL, list = character(), pos = -1, envir = as.environment(pos), line_start = 0, line_end = -1L, silent = TRUE){
-  if (missing(filepath)){
+clear_script_objects <- function(..., filepath = NULL, list = character(), pos = -1, envir = as.environment(pos), line_start = 0, line_end = -1L, silent = TRUE) {
+  if (missing(filepath)) {
     filepath <- this.path::sys.path()
   }
-  
-  dots <- match.call(expand.dots=FALSE)$...
-  if(length(dots) &&
-     !all(vapply(dots, function(x) is.symbol(x) || is.character(x), NA, USE.NAMES=FALSE)))
+
+  dots <- match.call(expand.dots = FALSE)$...
+  if (length(dots) &&
+    !all(vapply(dots, function(x) is.symbol(x) || is.character(x), NA, USE.NAMES = FALSE))) {
     stop("... must contain names or character strings")
+  }
   names <- vapply(dots, as.character, "")
   if (length(names) == 0L) names <- character()
   list <- .Primitive("c")(list, names)
-  
+
   Teststring_assignment <- "^[a-zA-Z_0-9]*(?=(\\s<-))"
   Regels <-
-    stringr::str_extract(readr::read_lines(filepath, skip = line_start, n_max = line_end),
-                         Teststring_assignment)
+    stringr::str_extract(
+      readr::read_lines(filepath, skip = line_start, n_max = line_end),
+      Teststring_assignment
+    )
   Regels <- base::unique(Regels[!base::is.na(Regels)])
-  
+
   Regels2 <- setdiff(Regels, list)
   rm(list = Regels2, pos = ".GlobalEnv")
   if (!silent) {
     base::cat(cli::style_bold(cli::col_red("De volgende variabelen worden verwijderd: \n")))
     base::cat(cli::style_bold(cli::col_red(paste(Regels2,
-                                                 collapse = ", \n"))))
+      collapse = ", \n"
+    ))))
     base::cat(paste("\n"))
   }
 }
@@ -86,12 +90,16 @@ clear_script_objects <- function (..., filepath = NULL, list = character(), pos 
 source_index <- function(..., script) {
   source(script)
   dots <- match.call(expand.dots = FALSE)$...
-  if (length(dots) && !all(vapply(dots, function(x) is.symbol(x) ||
-                                  is.character(x), NA, USE.NAMES = FALSE)))
+  if (length(dots) && !all(vapply(dots, function(x) {
+    is.symbol(x) ||
+      is.character(x)
+  }, NA, USE.NAMES = FALSE))) {
     stop("... must contain names or character strings")
+  }
   names <- vapply(dots, as.character, "")
-  if (length(names) == 0L)
+  if (length(names) == 0L) {
     names <- character()
+  }
   list <- .Primitive("c")(list, names)
   Teststring_assignment <- "^[a-zA-Z_0-9]*(?=(\\s<-))"
   Regels <- stringr::str_extract(readr::read_lines(script), Teststring_assignment)

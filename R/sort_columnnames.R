@@ -6,8 +6,8 @@
 #'
 #' @return New data frame with column names sorted.
 #' @export
-sort_columnnames <- function(data){
-  data <- data[,order(colnames(data))]
+sort_columnnames <- function(data) {
+  data <- data[, order(colnames(data))]
   return(data)
 }
 
@@ -34,32 +34,40 @@ sort_columnnames_analysis_set <- function(data) {
     dplyr::rename(kolomnaam = value) %>%
     ## Add the category
     ## 1. Keys to join on
-    dplyr::mutate(prioriteit = dplyr::case_when(kolomnaam %in%
-                                                  c("INS_Studentnummer",
-                                                    "INS_Opleidingsnaam_2002",
-                                                    "INS_Inschrijvingsjaar",
-                                                    "INS_Inschrijvingsjaar_EOI",
-                                                    "INS_Studiejaar",
-                                                    "INS_Opleidingsfase_BPM") ~ "Keys",
-                                                ## 2. Inschrijvingsvelden
-                                                substr(kolomnaam, 1, 3) == "INS" ~ "Inschrijving",
-                                                ## 3. Voor aanvang van de studie
-                                                substr(kolomnaam, 1, 3) %in% c("VOP",
-                                                                               "MAC",
-                                                                               "MVR",
-                                                                               "ORI",
-                                                                               "INT") ~ "Voor aanvang",
-                                                ## 5. Alumni
-                                                substr(kolomnaam, 1, 3) == "ALU" ~ "Alumnus",
-                                                ## 4. de rest is tijdens de studie
-                                                TRUE ~ "Tijdens studie"
-    ),
-    ## Maak kolom prioriteit een factor en sorteer deze
-    prioriteit = factor(prioriteit, levels = c("Keys",
-                                               "Inschrijving",
-                                               "Voor aanvang",
-                                               "Tijdens studie",
-                                               "Alumnus")                                            )
+    dplyr::mutate(
+      prioriteit = dplyr::case_when(
+        kolomnaam %in%
+          c(
+            "INS_Studentnummer",
+            "INS_Opleidingsnaam_2002",
+            "INS_Inschrijvingsjaar",
+            "INS_Inschrijvingsjaar_EOI",
+            "INS_Studiejaar",
+            "INS_Opleidingsfase_BPM"
+          ) ~ "Keys",
+        ## 2. Inschrijvingsvelden
+        substr(kolomnaam, 1, 3) == "INS" ~ "Inschrijving",
+        ## 3. Voor aanvang van de studie
+        substr(kolomnaam, 1, 3) %in% c(
+          "VOP",
+          "MAC",
+          "MVR",
+          "ORI",
+          "INT"
+        ) ~ "Voor aanvang",
+        ## 5. Alumni
+        substr(kolomnaam, 1, 3) == "ALU" ~ "Alumnus",
+        ## 4. de rest is tijdens de studie
+        TRUE ~ "Tijdens studie"
+      ),
+      ## Maak kolom prioriteit een factor en sorteer deze
+      prioriteit = factor(prioriteit, levels = c(
+        "Keys",
+        "Inschrijving",
+        "Voor aanvang",
+        "Tijdens studie",
+        "Alumnus"
+      ))
     ) %>%
     ## Sort the list
     dplyr::arrange(prioriteit, kolomnaam)

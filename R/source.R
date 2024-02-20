@@ -7,5 +7,5 @@
 #' @param ... optional parameters to parse to base::source()
 #' @export
 src_clean <- function(file, ...) {
-    source(file, local = T, ...)
+  source(file, local = T, ...)
 }

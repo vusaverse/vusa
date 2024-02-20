@@ -10,21 +10,23 @@
 #' @return table with the results.
 #' @export
 check_columns_for_double_rows <- function(data,
-                                          group_vars = c("INS_Studentnummer",
-                                                         "INS_Opleidingsnaam_2002",
-                                                         "INS_Inschrijvingsjaar")) {
-    variable <- value <- Double_count <- NULL
+                                          group_vars = c(
+                                            "INS_Studentnummer",
+                                            "INS_Opleidingsnaam_2002",
+                                            "INS_Inschrijvingsjaar"
+                                          )) {
+  variable <- value <- Double_count <- NULL
 
-    result <- data %>%
-        dplyr::ungroup() %>%
-        dplyr::group_by_at(dplyr::vars(dplyr::one_of(group_vars))) %>%
-        dplyr::summarise_all(dplyr::n_distinct) %>%
-        dplyr::ungroup() %>%
-        tidyr::gather(variable, value, -dplyr::one_of(group_vars)) %>%
-        dplyr::group_by(variable) %>%
-        dplyr::summarise(Double_count = count_more_than_1(value)) %>%
-        dplyr::filter(Double_count > 0) %>%
-        dplyr::arrange(dplyr::desc(Double_count))
+  result <- data %>%
+    dplyr::ungroup() %>%
+    dplyr::group_by_at(dplyr::vars(dplyr::one_of(group_vars))) %>%
+    dplyr::summarise_all(dplyr::n_distinct) %>%
+    dplyr::ungroup() %>%
+    tidyr::gather(variable, value, -dplyr::one_of(group_vars)) %>%
+    dplyr::group_by(variable) %>%
+    dplyr::summarise(Double_count = count_more_than_1(value)) %>%
+    dplyr::filter(Double_count > 0) %>%
+    dplyr::arrange(dplyr::desc(Double_count))
 
-    return(result)
+  return(result)
 }

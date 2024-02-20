@@ -9,34 +9,36 @@
 #' @return Een dataframe dat de verschillen tussen de kolomnamen en classes van de twee
 #' inleesmethode weergeeft
 #' @export
-test_csv <- function(dataloc = ""){
-    df1 <- readr::read_csv2(paste(Sys.getenv("NETWORK_DIR"), dataloc, sep = ""))  %>%
-        dplyr::mutate_if(is.character, factor) ## readr
+test_csv <- function(dataloc = "") {
+  df1 <- readr::read_csv2(paste(Sys.getenv("NETWORK_DIR"), dataloc, sep = "")) %>%
+    dplyr::mutate_if(is.character, factor) ## readr
 
-    df2 <- utils::read.csv2(paste(Sys.getenv("NETWORK_DIR"), dataloc, sep = "")) ## read.csv2
+  df2 <- utils::read.csv2(paste(Sys.getenv("NETWORK_DIR"), dataloc, sep = "")) ## read.csv2
 
-    # maak een df van read_csv2
-    class_df1               <- data.frame(unlist(lapply(df1, class)))
-    class_df1               <- tibble::rownames_to_column(class_df1)
-    colnames(class_df1)     <- c("var", "class_readr")
-    class_df1$var_readr <- class_df1$var
+  # maak een df van read_csv2
+  class_df1 <- data.frame(unlist(lapply(df1, class)))
+  class_df1 <- tibble::rownames_to_column(class_df1)
+  colnames(class_df1) <- c("var", "class_readr")
+  class_df1$var_readr <- class_df1$var
 
-    # Maak een df van read.csv2
-    class_df2               <- data.frame(unlist(lapply(df2, class)))
-    class_df2               <- tibble::rownames_to_column(class_df2)
-    colnames(class_df2)     <- c("var", "class_read.csv2")
-    class_df2$var_read.csv2 <- class_df2$var
+  # Maak een df van read.csv2
+  class_df2 <- data.frame(unlist(lapply(df2, class)))
+  class_df2 <- tibble::rownames_to_column(class_df2)
+  colnames(class_df2) <- c("var", "class_read.csv2")
+  class_df2$var_read.csv2 <- class_df2$var
 
-    # Merge de lijsten
-    Comparison            <- merge(class_df1, class_df2, all = TRUE)
+  # Merge de lijsten
+  Comparison <- merge(class_df1, class_df2, all = TRUE)
 
-    # Maak een df met de gelijke rijen
-    Equal                  <- dplyr::filter(Comparison,
-                                             (as.character(Comparison$var_readr) == as.character(Comparison$var_read.csv2)) &
-                                                 (as.character(Comparison$class_readr) == as.character(Comparison$class_read.csv2)))
-    # Maak een df met alle rijen die niet gelijk zijn
-    Differences             <- Comparison[!Comparison$var %in% Equal$var,]
+  # Maak een df met de gelijke rijen
+  Equal <- dplyr::filter(
+    Comparison,
+    (as.character(Comparison$var_readr) == as.character(Comparison$var_read.csv2)) &
+      (as.character(Comparison$class_readr) == as.character(Comparison$class_read.csv2))
+  )
+  # Maak een df met alle rijen die niet gelijk zijn
+  Differences <- Comparison[!Comparison$var %in% Equal$var, ]
 
-    # Geef dit df als output
-    Differences
+  # Geef dit df als output
+  Differences
 }

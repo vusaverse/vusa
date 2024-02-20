@@ -23,36 +23,38 @@ mapping_translate <- function(Data, current, new, mapping_table_input = NULL, ma
   ## is not so, an error message is given
   if (!is.null(mapping_table_input)) {
     if (!(any(names(mapping_table_input) == "from") &&
-          any(names(mapping_table_input) == "to"))) {
+      any(names(mapping_table_input) == "to"))) {
       stop("mapping_table must contain the columns 'from' and 'to'.")
     }
   }
 
-  #If a mapping table is included, there is no need to read a csv file anymore.
-  if(!is.null(mapping_table_input)) {
+  # If a mapping table is included, there is no need to read a csv file anymore.
+  if (!is.null(mapping_table_input)) {
     translate <- mapping_table_input
-  } else if(!is.null(mapping_table_name)){
+  } else if (!is.null(mapping_table_name)) {
     translate <- utils::read.csv2(paste0(Sys.getenv("MAP_TABLE_DIR"), mapping_table_name), stringsAsFactors = F)
   } else {
     translate <- utils::read.csv2(paste0(Sys.getenv("MAP_TABLE_DIR"),
-                                         "Mapping_",current,"_",new,".csv", sep= "" ), stringsAsFactors = F )
+      "Mapping_", current, "_", new, ".csv",
+      sep = ""
+    ), stringsAsFactors = F)
   }
 
 
   ## Translate to factors with sorted levels as in the csv file
-  translate$to <- factor(translate$to, levels=unique(translate$to))
-  Data$TO <- translate$to[match(Data$CURRENT,translate$from)]
+  translate$to <- factor(translate$to, levels = unique(translate$to))
+  Data$TO <- translate$to[match(Data$CURRENT, translate$from)]
 
   if (!KeepOriginal) {
-    Data<- Data[ , !names(Data) %in% c(current)]
+    Data <- Data[, !names(Data) %in% c(current)]
   }
   ## Change factors to characters
-  if(is.factor(Data$TO)){
+  if (is.factor(Data$TO)) {
     Data$TO <- as.character(Data$TO)
   }
 
   ## If a column already exists with the name of the new variable name
-  if(new %in% colnames(Data)){
+  if (new %in% colnames(Data)) {
     stop("the specified new column name already exists in the specified dataframe")
   }
   colnames(Data)[which(names(Data) == "TO")] <- new

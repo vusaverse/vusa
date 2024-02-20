@@ -14,14 +14,12 @@
 #' @export
 create_quality_report <- function(df, ProjectName, Network_directory = NULL,
                                   export_map = "/6. Exports/", path = NULL) {
-
   if (is.null(Network_directory)) {
     message("No given Network_directory, so looking for system variables")
     if (!Sys.getenv("OUTPUT_DIR") == "") {
       message("system variable present, so this will be used")
       Network_directory <- Sys.getenv("OUTPUT_DIR")
-    }
-    else {
+    } else {
       stop("system variable for Network_directory is missing")
     }
   }
@@ -39,13 +37,16 @@ create_quality_report <- function(df, ProjectName, Network_directory = NULL,
     # If dates are given, they must be adjusted due to compatibility package
     dplyr::mutate_if(lubridate::is.Date, as.character) %>%
     # Select desired columns
-    dplyr::select(if(!is.null(vars)){!!vars})
+    dplyr::select(if (!is.null(vars)) {
+      !!vars
+    })
 
   ## Add labels and descriptions to selected_data
   selected_data <- purrr::map2_dfc(selected_data,
-                                   names(selected_data),
-                                   add_attribute,
-                                   Documentation = Documentation)
+    names(selected_data),
+    add_attribute,
+    Documentation = Documentation
+  )
 
   ## Create path with date if missing
   if (is.null(path)) {
@@ -53,23 +54,23 @@ create_quality_report <- function(df, ProjectName, Network_directory = NULL,
   }
 
   ## Create quality report directory
-  dir.create(paste(Network_directory, path, "Quality Report/", sep = ''))
+  dir.create(paste(Network_directory, path, "Quality Report/", sep = ""))
 
   ## Create the dataMaid quality report
   dataMaid::makeCodebook(selected_data,
-                         # Title of the report
-                         reportTitle = paste0("Quality report ", ProjectName),
-                         # The name of the file
-                         file = paste0(Network_directory, path, "Quality Report/", ProjectName, ".Rmd"),
-                         # what kind of output
-                         output="html",
-                         # replace old file
-                         replace = TRUE,
-                         # output to be generated and saved
-                         render = TRUE,
-                         # maximum unique values message
-                         maxProbVals = 10)
-
+    # Title of the report
+    reportTitle = paste0("Quality report ", ProjectName),
+    # The name of the file
+    file = paste0(Network_directory, path, "Quality Report/", ProjectName, ".Rmd"),
+    # what kind of output
+    output = "html",
+    # replace old file
+    replace = TRUE,
+    # output to be generated and saved
+    render = TRUE,
+    # maximum unique values message
+    maxProbVals = 10
+  )
 }
 
 #' Adjust dataframe for dataMaid
@@ -80,7 +81,7 @@ create_quality_report <- function(df, ProjectName, Network_directory = NULL,
 #' @param Documentation Documentation of the analysis set
 #'
 #' @return Analysis set with labels
-add_attribute <- function(x, varname, Documentation){
+add_attribute <- function(x, varname, Documentation) {
   ## temporarily also remove accents globally until a replacement function comes
   Veldnaam <- NULL
   description <- dplyr::filter(Documentation, Veldnaam == varname)

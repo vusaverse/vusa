@@ -8,9 +8,9 @@
 #' @export
 has_globale_identifiers <- function(df) {
   global_identifiers <- NULL
-    Identifiers_in_df <- dplyr::intersect(global_identifiers, names(df))
+  Identifiers_in_df <- dplyr::intersect(global_identifiers, names(df))
 
-    if (!purrr::is_empty(Identifiers_in_df)) {
-        return(Identifiers_in_df)
-    }
+  if (!purrr::is_empty(Identifiers_in_df)) {
+    return(Identifiers_in_df)
+  }
 }

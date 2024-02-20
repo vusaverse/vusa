@@ -5,14 +5,10 @@
 #' @return Analysis set 1, 1R = random set, 7 or 7 Extra features from the branch set
 #' @export
 get_analysisset <- function(columns = NULL, AS_path = NULL) {
-
   if (is.null(AS_path)) {
-
     if (!any(Sys.getenv(c("OUTPUT_DIR", "AS_1_DIR")) == "")) {
-
       AS <- paste0(Sys.getenv("OUTPUT_DIR"), Sys.getenv("BRANCH"), "/", Sys.getenv("AS_1_DIR"))
-    }
-    else {
+    } else {
       stop("system variables for as_path are missing")
     }
   }

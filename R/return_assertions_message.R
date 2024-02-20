@@ -21,9 +21,10 @@ assert_character_named <-
       pattern <- NULL
     }
     checkmate::assert_character(df[[Kolom]],
-                                .var.name = trimws(paste(prefix_kolom, Kolom)),
-                                pattern = pattern,
-                                ...)
+      .var.name = trimws(paste(prefix_kolom, Kolom)),
+      pattern = pattern,
+      ...
+    )
   }
 
 
@@ -47,13 +48,13 @@ assert_character_named <-
 assert_numeric_named <- function(Kolom, df, prefix_kolom = NULL, Veldtype = "numeric", ...) {
   if (Veldtype == "integer") {
     checkmate::assert_integer(df[[Kolom]],
-                              .var.name = trimws(paste(prefix_kolom, Kolom)),
-                              ...
+      .var.name = trimws(paste(prefix_kolom, Kolom)),
+      ...
     )
   } else {
     checkmate::assert_numeric(df[[Kolom]],
-                              .var.name = trimws(paste(prefix_kolom, Kolom)),
-                              ...
+      .var.name = trimws(paste(prefix_kolom, Kolom)),
+      ...
     )
   }
 }
@@ -83,15 +84,18 @@ assert_character_subset <- function(Kolom, df, Kolomwaarden, prefix_kolom = NULL
     dplyr::filter(Kolomnaam == Kolom)
 
   choices <- Kolomwaarden$Waarde
-  var_name = trimws(paste(prefix_kolom, Kolom))
+  var_name <- trimws(paste(prefix_kolom, Kolom))
 
   ## Gebruik structuur uit assert_subset functie om de subset assertion toe te
   ## kunnen passen en hier tekst bij te kunnen voegen
-  res = checkmate::checkSubset(stats::na.omit(unique(df[[Kolom]])),
-                    choices)
+  res <- checkmate::checkSubset(
+    stats::na.omit(unique(df[[Kolom]])),
+    choices
+  )
   if (!identical(res, TRUE)) {
-    if (is.null(add))
+    if (is.null(add)) {
       mstop("Assertion on '%s' failed: %s.", var_name, res)
+    }
     checkmate::assertClass(add, "AssertCollection", .var.name = "add")
     Assert_info <- sprintf("Variable '%s': %s.", var_name, res)
   }
@@ -134,11 +138,14 @@ assert_character_set_equal <- function(Kolom, df, Kolomwaarden, prefix_kolom = N
   ## Gebruik structuur van de assert_set_equal functie om de set_equal assertion
   ## uit te voeren en om een extra tekst hieraan toe te voegen, over de waarden
   ## waarop de assertion faalt.
-  res = checkmate::checkSetEqual(stats::na.omit(unique(df[[Kolom]])),
-                      choices)
+  res <- checkmate::checkSetEqual(
+    stats::na.omit(unique(df[[Kolom]])),
+    choices
+  )
   if (!identical(res, TRUE)) {
-    if (is.null(add))
+    if (is.null(add)) {
       mstop("Assertion on '%s' failed: %s.", var_name, res)
+    }
     checkmate::assertClass(add, "AssertCollection", .var.name = "add")
     Assert_info <- sprintf("Variable '%s': %s.", var_name, res)
   }
@@ -169,8 +176,9 @@ assert_character_set_equal <- function(Kolom, df, Kolomwaarden, prefix_kolom = N
 #' @export
 assert_posixct_named <- function(Kolom, df, prefix_kolom = NULL, ...) {
   checkmate::assert_posixct(df[[Kolom]],
-                            .var.name = trimws(paste(prefix_kolom, Kolom)),
-                            ...)
+    .var.name = trimws(paste(prefix_kolom, Kolom)),
+    ...
+  )
 }
 
 
@@ -190,8 +198,9 @@ assert_posixct_named <- function(Kolom, df, prefix_kolom = NULL, ...) {
 #' @export
 assert_date_named <- function(Kolom, df, prefix_kolom = NULL, ...) {
   checkmate::assert_date(df[[Kolom]],
-                         .var.name = trimws(paste(prefix_kolom, Kolom)),
-                         ...)
+    .var.name = trimws(paste(prefix_kolom, Kolom)),
+    ...
+  )
 }
 
 
@@ -211,9 +220,9 @@ assert_date_named <- function(Kolom, df, prefix_kolom = NULL, ...) {
 #' @export
 assert_logical_named <- function(Kolom, df, prefix_kolom = NULL, ...) {
   checkmate::assert_logical(df[[Kolom]],
-                            .var.name =  trimws(paste(prefix_kolom, Kolom)),
-                            ...)
-
+    .var.name = trimws(paste(prefix_kolom, Kolom)),
+    ...
+  )
 }
 
 
@@ -253,19 +262,24 @@ assertion_message <- function(message, assertion_fail = "stop") {
 #' @family tests
 #' @export
 assert_no_duplicates_in_group <- function(df,
-                                          group_vars = c("INS_Studentnummer",
-                                                         "INS_Opleidingsnaam_2002",
-                                                         "INS_Inschrijvingsjaar"),
+                                          group_vars = c(
+                                            "INS_Studentnummer",
+                                            "INS_Opleidingsnaam_2002",
+                                            "INS_Inschrijvingsjaar"
+                                          ),
                                           assertion_fail = "stop") {
   Aantal_rijen <- NULL
 
   # Test of de variabelen waarop we testen voorkomen in df, en geef anders een melding
   if (!all(group_vars %in% names(df))) {
-    assertion_message(paste("Onvoldoende kolommen om dubbele rijen te kunnen bepalen",
-                            "De volgende kolommen ontbreken:",
-                            paste(setdiff(group_vars, names(df)), collapse = "\n"),
-                            sep = "\n"),
-                      assertion_fail = assertion_fail)
+    assertion_message(
+      paste("Onvoldoende kolommen om dubbele rijen te kunnen bepalen",
+        "De volgende kolommen ontbreken:",
+        paste(setdiff(group_vars, names(df)), collapse = "\n"),
+        sep = "\n"
+      ),
+      assertion_fail = assertion_fail
+    )
   }
 
   ## Check of de meegegeven kolommen wel in het dataframe zitten, voordat hierop
@@ -292,10 +306,12 @@ assert_no_duplicates_in_group <- function(df,
     variables <- paste(group_vars, collapse = ", ")
     ## Als aantal dubbelingen meer dan 0 wordt dit weergegeven in het assertbericht.
     if (Aantal_dubbelingen > 0) {
-      result <- paste("In de combinatie van de kolommen", variables, "zijn er",
-                      Aantal_dubbelingen,
-                      "rijen die vaker voorkomen. Het totaal aantal dubbele rijen is",
-                      Totaal_dubbel)
+      result <- paste(
+        "In de combinatie van de kolommen", variables, "zijn er",
+        Aantal_dubbelingen,
+        "rijen die vaker voorkomen. Het totaal aantal dubbele rijen is",
+        Totaal_dubbel
+      )
       assertion_message(result, assertion_fail)
     }
   }
@@ -345,13 +361,20 @@ return_assertions_message <- function(Collection, Name_collection, fail = "stop"
 
     ## De titel van het bericht
     Assertion_titel <- paste(Name_collection,
-                             ": ",
-                             aantal_berichten,
-                             " Assertion",
-                             ## Maak het woord "asserion" meervoud als er meer dan 1 bericht is
-                             (function(x) if (x == 1) {""} else {"s"})(aantal_berichten),
-                             " NIET geslaagd",
-                             sep = "")
+      ": ",
+      aantal_berichten,
+      " Assertion",
+      ## Maak het woord "asserion" meervoud als er meer dan 1 bericht is
+      (function(x) {
+        if (x == 1) {
+          ""
+        } else {
+          "s"
+        }
+      })(aantal_berichten),
+      " NIET geslaagd",
+      sep = ""
+    )
 
     ## Zoek de assertions die alleen een warning mogen geven, geen error.
     ## Dit is gewenst bij:
@@ -375,11 +398,15 @@ return_assertions_message <- function(Collection, Name_collection, fail = "stop"
       ## Opsomming(nummering)
       cli::style_bold(paste0(1:aantal_berichten, ".")),
       ## Alle berichten onder elkaar
-      Collection$getMessages(), collapse = "\n")
+      Collection$getMessages(),
+      collapse = "\n"
+    )
 
     ## Voeg de titel en de assertions samen, en bepaal de opmaak
     Return_message <- paste(cli::style_bold(cli::col_red(Assertion_titel)),
-                            cli::col_cyan(Assertion_berichten), sep = "\n")
+      cli::col_cyan(Assertion_berichten),
+      sep = "\n"
+    )
   }
 
   message(Return_message)
@@ -399,7 +426,8 @@ return_assertions_message <- function(Collection, Name_collection, fail = "stop"
     }
   } else if (fail == "warning") {
     return(
-      warning(Return_message))
+      warning(Return_message)
+    )
   }
 }
 
@@ -434,26 +462,28 @@ return_assertions_message_testen <- function(Collection, Name_collection, silent
     ## Als Testen_documentatie TRUE is worden de resultaten in een df teruggegeven,
     ## ipv in een bericht
     ## Haal berichten op
-    Messages = Collection$getMessages()
+    Messages <- Collection$getMessages()
     Messages_te_bekijken <- Messages[stringr::str_detect(Messages, "Variable")]
     ## Assertion niet geslaagd want niet leeg
-    Geslaagd = FALSE
+    Geslaagd <- FALSE
     ## Vind de reden van de melding (dus waar test op vastloopt) voor elke regel
     Reden_melding <- purrr::map_chr(Messages_te_bekijken, vind_assertion_soort)
     ## Vind de variabele waar het misgaat
     Variabele <- stringr::str_extract(Messages_te_bekijken, pattern = "(?<=Variable ')[a-zA-Z0-9_=, ]*(?=')")
     Bestand <- Name_collection
     Message <- purrr::map_chr(Messages_te_bekijken, stringr::str_extract, pattern = "(?<=: ).*")
-    Outputmap = Outputmap
+    Outputmap <- Outputmap
   }
 
   ## Return dataframe met informatie
-  result <- dplyr::tibble(Bestand = Bestand,
-                   Outputmap = Outputmap,
-                   Variabele = Variabele,
-                   Geslaagd = Geslaagd,
-                   Assertion_soort = Reden_melding,
-                   Message = Message)
+  result <- dplyr::tibble(
+    Bestand = Bestand,
+    Outputmap = Outputmap,
+    Variabele = Variabele,
+    Geslaagd = Geslaagd,
+    Assertion_soort = Reden_melding,
+    Message = Message
+  )
   return(result)
 }
 
@@ -463,7 +493,6 @@ return_assertions_message_testen <- function(Collection, Name_collection, silent
 #' @param Regel Regel/character waarin gezocht wordt naar soort assertion
 #' @return Characters die in 1 woord omschrijven om welke assertion het gaat
 vind_assertion_soort <- function(Regel) {
-
   if (grepl("Must be of type 'numeric'", Regel)) {
     return("Numeric")
   }
@@ -498,7 +527,7 @@ vind_assertion_soort <- function(Regel) {
     return("Missende_waarden")
   }
   if (grepl("Op deze kolommen wordt niet geassert", Regel)) {
-    return('Kolom_niet_in_data')
+    return("Kolom_niet_in_data")
   }
   ## Dit gaat over: 'Aantal_dubbelingen == 0': Must be TRUE.
   ## De melding is nu 'Variabelenaam': Must be TRUE, maar hier wordt gecheckt
@@ -523,11 +552,12 @@ vind_assertion_soort <- function(Regel) {
 #' INS_Studentnummer, INS_Opleidingsnaam_2002, INS_Studiejaar, INS_Inschrijvingsjaar.
 #' @export
 #'
-assert_dataframe_export <- function(df, kolommen_uniek = c("INS_Studentnummer",
-                                                           "INS_Opleidingsnaam_2002",
-                                                           "INS_Studiejaar",
-                                                           "INS_Inschrijvingsjaar")
-) {
+assert_dataframe_export <- function(df, kolommen_uniek = c(
+                                      "INS_Studentnummer",
+                                      "INS_Opleidingsnaam_2002",
+                                      "INS_Studiejaar",
+                                      "INS_Inschrijvingsjaar"
+                                    )) {
   Collectie <- checkmate::makeAssertCollection()
 
   ## Assert op meer dan 0 rijen
@@ -536,7 +566,7 @@ assert_dataframe_export <- function(df, kolommen_uniek = c("INS_Studentnummer",
   ## Als dataframe geen rijen heeft slagen de verdere assertions ook niet
   if (Collectie$isEmpty()) {
     ## Assert op geen dubbele rijen
-    #assertion_geen_dubbele_rijen(df, Collectie, kolommen_uniek)
+    # assertion_geen_dubbele_rijen(df, Collectie, kolommen_uniek)
     assert_no_duplicates_in_group(group_vars = kolommen_uniek, df, Collectie)
     ## Assert op geen kolommen met enkel 0
     assertion_geen_kolommen_met_enkel_0(df, Collectie)
@@ -554,10 +584,12 @@ assert_dataframe_export <- function(df, kolommen_uniek = c("INS_Studentnummer",
 #' @param df Dataframe
 #' @param Collectie lijst
 #' @return Collectie
-#' @examples \dontrun{assertion_meer_dan_0_rijen(df, Collectie)}
+#' @examples \dontrun{
+#' assertion_meer_dan_0_rijen(df, Collectie)
+#' }
 #' @export
 assertion_meer_dan_0_rijen <- function(df, Collectie) {
-  #assert_true(nrow(df) > 0)
+  # assert_true(nrow(df) > 0)
   if (!nrow(df) > 0) {
     Collectie$push("De dataset bevat 0 rijen")
   }
@@ -571,20 +603,24 @@ assertion_meer_dan_0_rijen <- function(df, Collectie) {
 #' @param Collectie lijst
 #' @param kolommen_uniek Default: c("INS_Studentnummer", "INS_Opleidingsnaam_2002", "INS_Studiejaar", "INS_Inschrijvingsjaar")
 #' @return Collectie
-#' @examples \dontrun{assertion_geen_dubbele_rijen(df, Collectie)}
+#' @examples \dontrun{
+#' assertion_geen_dubbele_rijen(df, Collectie)
+#' }
 #' @export
-assertion_geen_dubbele_rijen <- function(df, Collectie, kolommen_uniek = c("INS_Studentnummer",
-                                                                           "INS_Opleidingsnaam_2002",
-                                                                           "INS_Studiejaar",
-                                                                           "INS_Inschrijvingsjaar")
-) {
+assertion_geen_dubbele_rijen <- function(df, Collectie, kolommen_uniek = c(
+                                           "INS_Studentnummer",
+                                           "INS_Opleidingsnaam_2002",
+                                           "INS_Studiejaar",
+                                           "INS_Inschrijvingsjaar"
+                                         )) {
   # Test of de variabelen waarop we testen voorkomen in df;
   # Zo nee, geef een melding
   if (!checkmate::testNames(kolommen_uniek, subset.of = names(df))) {
     Collectie$push(paste("Onvoldoende kolommen om dubbele rijen te kunnen bepalen",
-                         "De volgende kolommen ontbreken:",
-                         paste(setdiff(kolommen_uniek, names(df)), collapse = "\n"),
-                         sep = "\n"))
+      "De volgende kolommen ontbreken:",
+      paste(setdiff(kolommen_uniek, names(df)), collapse = "\n"),
+      sep = "\n"
+    ))
     return(Collectie)
   }
   ## Zo ja, ga door met controle duplicates met de unieke kolommen
@@ -599,26 +635,31 @@ assertion_geen_dubbele_rijen <- function(df, Collectie, kolommen_uniek = c("INS_
 #' @param df Dataframe
 #' @param Collectie Lijst
 #' @return Collectie
-#' @examples \dontrun{assertion_geen_kolommen_met_enkel_0(dfInspect, Collectie)}
+#' @examples \dontrun{
+#' assertion_geen_kolommen_met_enkel_0(dfInspect, Collectie)
+#' }
 #' @export
 assertion_geen_kolommen_met_enkel_0 <- function(df, Collectie) {
   p_zeros <- variable <- NULL
 
   ## Creëer dataframe met percentage 0 per kolom
-  df_zeros = data.frame(p_zeros = round(100*sapply(df,
-                                                   function(x) sum(x == 0,na.rm = T))/nrow(df),2))
-  df_zeros$variable = rownames(df_zeros)
-  rownames(df_zeros) = NULL
+  df_zeros <- data.frame(p_zeros = round(100 * sapply(
+    df,
+    function(x) sum(x == 0, na.rm = T)
+  ) / nrow(df), 2))
+  df_zeros$variable <- rownames(df_zeros)
+  rownames(df_zeros) <- NULL
 
   if (any(df_zeros$p_zeros == 100)) {
-
     Variabelen <- df_zeros %>%
       dplyr::filter(p_zeros == 100) %>%
       dplyr::select(variable) %>%
       unlist() %>%
       toString()
-    Collectie$push(paste("De volgende kolommen bevatten 100% 0:",
-                         Variabelen))
+    Collectie$push(paste(
+      "De volgende kolommen bevatten 100% 0:",
+      Variabelen
+    ))
   }
   return(Collectie)
 }
@@ -628,15 +669,17 @@ assertion_geen_kolommen_met_enkel_0 <- function(df, Collectie) {
 #' @param df Dataframe
 #' @param Collectie Lijst
 #' @return Collectie
-#' @examples \dontrun{assertion_geen_kolommen_met_enkel_na(df, Collectie)}
+#' @examples \dontrun{
+#' assertion_geen_kolommen_met_enkel_na(df, Collectie)
+#' }
 #' @export
 assertion_geen_kolommen_met_enkel_na <- function(df, Collectie) {
   p_na <- variable <- NULL
 
   ## Creëer dataframe met percentage NA per kolom
-  df_na = data.frame(p_na = round(100*sapply(df, function(x) sum(is.na(x)))/nrow(df),2))
-  df_na$variable = rownames(df_na)
-  rownames(df_na) = NULL
+  df_na <- data.frame(p_na = round(100 * sapply(df, function(x) sum(is.na(x))) / nrow(df), 2))
+  df_na$variable <- rownames(df_na)
+  rownames(df_na) <- NULL
 
   if (any(df_na$p_na == 100)) {
     variabelen <- df_na %>%
@@ -644,11 +687,10 @@ assertion_geen_kolommen_met_enkel_na <- function(df, Collectie) {
       dplyr::select(variable) %>%
       unlist() %>%
       toString()
-    Collectie$push(paste("De volgende kolommen bevatten 100% NA's:",
-                         variabelen))
+    Collectie$push(paste(
+      "De volgende kolommen bevatten 100% NA's:",
+      variabelen
+    ))
   }
   return(Collectie)
 }
-
-
-

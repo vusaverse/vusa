@@ -7,7 +7,7 @@
 #'
 #' @return return_var (=hashed vector)
 #' @export
-hash_var <- function(Vector_to_hash, seed = NULL){
+hash_var <- function(Vector_to_hash, seed = NULL) {
   ## Check if digest is installed
   check_installed_package("digest")
 
@@ -17,8 +17,7 @@ hash_var <- function(Vector_to_hash, seed = NULL){
     if (!Sys.getenv("LOCAL_SEED") == "") {
       message("Neccesary system variable is present , this will be used for seed ")
       seed <- getOption(Sys.getenv("LOCAL_SEED"))
-    }
-    else {
+    } else {
       stop("system variable for LOCAL_SEED")
     }
   }
@@ -31,8 +30,9 @@ hash_var <- function(Vector_to_hash, seed = NULL){
   ## TODO: combine this with salts
   dfHash <- tibble::tibble(to_hash = unique(Vector_to_hash))
   dfHash$var_seed <- purrr::map_chr(dfHash$to_hash, digest::digest,
-                                    algo = "sha256", seed = 0)
-  dfInput <- tibble::tibble(to_hash=Vector_to_hash) %>%
+    algo = "sha256", seed = 0
+  )
+  dfInput <- tibble::tibble(to_hash = Vector_to_hash) %>%
     dplyr::left_join(dfHash)
   var_seed <- dfInput$var_seed
   unique_var_seed <- unique(var_seed)
@@ -50,8 +50,8 @@ hash_var <- function(Vector_to_hash, seed = NULL){
   unique_var_salt <- paste0(salt_vector, unique_var_seed)
 
   ## Create a lookup table from these two vectors
-  lookup <- data.frame(unique_var_seed,unique_var_salt)
-  names(lookup) <- c("unique_var_seed","unique_var_salt")
+  lookup <- data.frame(unique_var_seed, unique_var_salt)
+  names(lookup) <- c("unique_var_seed", "unique_var_salt")
 
   ## Create a dataframe base on the input and join (dplyr)
   input <- data.frame(var_seed)
@@ -70,14 +70,18 @@ hash_var <- function(Vector_to_hash, seed = NULL){
 #' @param length the number of characters in a string
 #' @param characters A vector containing the characters to include
 random_string_vector <- function(n = 500, length, characters = c(letters[1:6], 0:9)) {
-
   ## Generate a random vector with strings of 20 characters
-  return(do.call(paste0,
-          replicate(length,
-                    ## Random letters and numbers are drawn
-                    sample(characters,
-                           n,
-                           TRUE),
-                    FALSE)))
-
+  return(do.call(
+    paste0,
+    replicate(
+      length,
+      ## Random letters and numbers are drawn
+      sample(
+        characters,
+        n,
+        TRUE
+      ),
+      FALSE
+    )
+  ))
 }

@@ -18,14 +18,17 @@ df_compare <- function(df1, df2) {
 
   ## apply join and add the suffixes _df1 and _df2
   df_merged <- dplyr::full_join(df1_inspect,
-                                df2_inspect,
-                                by = "variable",
-                                suffix = c("_df1", "_df2")) %>%
+    df2_inspect,
+    by = "variable",
+    suffix = c("_df1", "_df2")
+  ) %>%
     ## Check for equal types
     dplyr::mutate(Type_equal = type_df1 == type_df2) %>%
     ## Sort variable names
-    dplyr::select(variable,
-                  Type_equal,
-                  sort(dplyr::current_vars()))
+    dplyr::select(
+      variable,
+      Type_equal,
+      sort(dplyr::current_vars())
+    )
   return(df_merged)
 }
