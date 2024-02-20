@@ -25,11 +25,11 @@
 #'
 validate_script_proj <- function(filepath = NULL, export_to_dataframe = FALSE) {
   start.time <- Sys.time()
-  
+
   if (is.null(filepath)) {
     filepath <- this.path::sys.path()
   }
-  
+
   if (export_to_dataframe == FALSE) {
     validate_scipt_addin(filepath, export_to_dataframe)
   } else {
@@ -38,42 +38,46 @@ validate_script_proj <- function(filepath = NULL, export_to_dataframe = FALSE) {
       export_to_dataframe
     )
     error_message <- warnings_errors_messages$error
-    
-    
+
+
     error <- !warnings_errors_messages$no_error
-    
+
     warning_message <- as.character(list(warnings_errors_messages$warning))
     warning <- !warnings_errors_messages$no_warning
     memory_usage <- warnings_errors_messages$memory_usage
-    
+
     error_or_warning <- warnings_errors_messages$result
-    
+
     last_commit_date <- get_last_n_commit_date(filepath)
     
+    if (!length(last_commit_date)) {
+      last_commit_date <- NA_character_
+    }
+
     git_info <- get_last_n_commit_info(filepath)
     last_commit_author <- git_info$author
     last_commit_hash <- git_info$hash
     last_commit_message <- git_info$message
-    
+
     script_number_of_lines <- length(readLines(filepath))
     script_size <- file.size(filepath)
-    
+
     style <- validate_style(filepath, export_to_dataframe)
-    
+
     style_issues <- !is.na(style)
-    
+
     end.time <- Sys.time()
-    
+
     execution_time <- end.time - start.time
-    
+
     lib <- any(grep("library", readLines(filepath)))
     req <- any(grep("require", readLines(filepath)))
     ins <- any(grep("install.packages", readLines(filepath)))
-    
+
     ## These should be used in a wrapper function, as they are project specific
     assert_naming <- any(grep("assert_naming", readLines(filepath)))
     clear_script_objects <- any(grep("clear_script_objects", readLines(filepath)))
-    
+
     return(tibble::tibble(
       filepath,
       assert_naming,
@@ -129,23 +133,23 @@ validate_script_proj <- function(filepath = NULL, export_to_dataframe = FALSE) {
 #'
 validate_script_addin <- function(filepath, export_to_dataframe = FALSE) {
   validate_no_warning_errors(filepath, export_to_dataframe)
-  
+
   validate_assertions_present(filepath, export_to_dataframe)
-  
+
   validate_write_files(filepath)
-  
+
   validate_introduction(filepath, export_to_dataframe)
-  
+
   validate_clear_script_objects(filepath, export_to_dataframe)
-  
+
   if (check_installed_package("lintr", check = TRUE)) {
     validate_style(filepath, export_to_dataframe)
   } else {
     base::cat(cli::style_bold(cli::col_cyan("Install lintr using \"library(\"lintr\")\" to test for style")))
   }
-  
+
   compare_input_output(filepath, export_to_dataframe)
-  
+
   base::cat("\n")
   clear_script_objects(bestandspad = filepath, envir = globalenv())
 }
@@ -173,14 +177,14 @@ validate_script_addin <- function(filepath, export_to_dataframe = FALSE) {
 #' get_last_n_commit_info(filepath = "/path/to/file.R")
 #'
 #' # Retrieve the last  5 commit information for a file
-#' get_last_n_commit_info(filepath = "/path/to/file.R", n =  5)
+#' get_last_n_commit_info(filepath = "/path/to/file.R", n = 5)
 #' }
 #'
 #' @export
 get_last_n_commit_info <- function(filepath, n = 1) {
   # Execute the git log command and capture the output
   git_output <- shell(paste0("git log -", n, ' --format=%H%n%an%n%s -- "', filepath, '"'), intern = TRUE)
-  
+
   # Initialize an empty data frame to store the commit information
   commit_info_df <- data.frame(
     hash = character(),
@@ -188,7 +192,7 @@ get_last_n_commit_info <- function(filepath, n = 1) {
     message = character(),
     stringsAsFactors = FALSE
   )
-  
+
   # Loop through the git log output and extract the commit information
   for (i in 1:length(git_output)) {
     if (i %% 3 == 1) {
@@ -201,7 +205,7 @@ get_last_n_commit_info <- function(filepath, n = 1) {
       ))
     }
   }
-  
+
   # Return a flat list of commit information
   return(as.list(commit_info_df))
 }
@@ -238,13 +242,13 @@ make_lint_object <- function(expr, source_file) {
   if (identical(name, "") | is.na(name)) {
     return(NULL)
   }
-  
+
   if (!exists(name, envir = globalenv(), inherits = FALSE)) {
     return(NULL)
   }
-  
+
   new_name <- check_variable(name)
-  
+
   if (new_name == name) {
     return(NULL)
   }
@@ -276,7 +280,7 @@ variable_name_lint <- function() {
     } else {
       return()
     }
-    
+
     ## Get all the variable assignments "<-/="
     xpath <-
       paste0(
@@ -331,13 +335,13 @@ validate_style <-
           line_length_linter = lintr::line_length_linter(100)
         )
       ))
-    
+
     dfVariable_names <- dplyr::as_tibble(lintr::lint(
       filepath,
       variable_name_lint()
     ))
     output <- rbind(output, dfVariable_names)
-    
+
     output_improved <-
       output %>%
       arrange(line_number) %>%
@@ -349,9 +353,9 @@ validate_style <-
     ## Add exclusions to the "line_length_linter". These ensure
     ## that strings (text within double quotes) do not trigger a warning
     ## if they exceed  50 characters. The same applies to variables (text between spaces).
-    if (base::nrow(output) >  0) {
+    if (base::nrow(output) > 0) {
       tmp <- output %>% filter(linter == "line_length_linter")
-      if (nrow(tmp) >  0) {
+      if (nrow(tmp) > 0) {
         tmp %>%
           mutate(
             length_of_string =
@@ -359,21 +363,21 @@ validate_style <-
                 stringi::stri_extract_all_regex(line, '(?<=").*?(?=")')
               )
           ) %>%
-          mutate_if(is.integer, ~ replace(., is.na(.),  0)) %>%
+          mutate_if(is.integer, ~ replace(., is.na(.), 0)) %>%
           mutate(max_length_of_object_name = max(nchar(unlist(
             strsplit(trimws(line), "\\s+")
           )))) %>%
-          filter(length_of_string >=  50 |
-                   max_length_of_object_name >=  50)
+          filter(length_of_string >= 50 |
+            max_length_of_object_name >= 50)
       }
       output <- output %>%
         filter(!line_number %in% tmp$line_number) %>%
         arrange(line_number)
     }
-    
+
     ## Check if there are style errors and report the test result
     ## as a marker
-    if (base::nrow(output) >  0) {
+    if (base::nrow(output) > 0) {
       if (export_to_dataframe == FALSE) {
         base::cat(cli::style_bold(cli::col_red("Style errors detected. See Markers\n")))
       }
@@ -428,56 +432,58 @@ validate_no_warning_errors <- function(filepath, export_to_dataframe = FALSE) {
   no_error <- TRUE
   no_warning <- TRUE
   no_message <- TRUE
-  
+
   ## Determine where Clear_script is run and remove it from the file so it is not executed
   lines <- scan(filepath, what = character(), sep = "\n", quiet = TRUE)
   clear_line <- grep("clear_script_object", lines)[1]
   if (!is.na(clear_line)) {
-    lines <- lines[1:clear_line -  1]
+    lines <- lines[1:clear_line - 1]
   }
-  
+
   ## Function to capture error messages generated by tryCatch into a list
   catchToList <- function(expr) {
     val <- NA
     myWarnings <- NA
     wHandler <- function(w) {
       myWarnings <<- c(myWarnings, paste(format(Sys.time()), w$message))
-      no_warning <<- FALSE  # Set no_warning to FALSE if a warning is captured
+      no_warning <<- FALSE # Set no_warning to FALSE if a warning is captured
       invokeRestart("muffleWarning")
     }
     myError <- NA
-    
+
     eHandler <- function(e) {
       myError <<- paste("Error:", format(Sys.time()), capture.output(e), collapse = "\n")
-      no_error <<- FALSE  # Set no_error to FALSE if an error is captured
+      no_error <<- FALSE # Set no_error to FALSE if an error is captured
       NA
     }
-    
+
     # Capture memory usage before execution
     mem_before <- pryr::mem_used()
-    
+
     val <-
       tryCatch(
         withCallingHandlers(expr, warning = wHandler),
         error = eHandler
       )
-    
+
     # Capture memory usage after execution
     mem_after <- pryr::mem_used()
-    
+
     # Calculate memory usage during execution
     mem_usage <- mem_after - mem_before
-    
-    list(warning = myWarnings, error = myError, memory_usage = mem_usage,
-         no_error = no_error, no_warning = no_warning, no_message = no_message)
+
+    list(
+      warning = myWarnings, error = myError, memory_usage = mem_usage,
+      no_error = no_error, no_warning = no_warning, no_message = no_message
+    )
   }
-  
+
   ## Execute the script using tryCatch to capture any errors, warnings, and messages
   ## The boolean values are updated to remember that there were undesired results in case of an error/warning or message
   if (export_to_dataframe == FALSE) {
     errors <-
       catchToList(eval(parse(text = lines), envir = globalenv()))
-    
+
     ## Print the result of the test to the console
     base::cat("Warnings/ errors/ messages: ")
     for (message in na.omit(errors$warning)) {
