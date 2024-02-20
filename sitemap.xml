@@ -322,6 +322,9 @@
     <loc>https://vusaverse.github.io/vusa/reference/pipe.html</loc>
   </url>
   <url>
+    <loc>https://vusaverse.github.io/vusa/reference/pretty_print_updates.html</loc>
+  </url>
+  <url>
     <loc>https://vusaverse.github.io/vusa/reference/print_last_used.html</loc>
   </url>
   <url>
@@ -470,6 +473,9 @@
   </url>
   <url>
     <loc>https://vusaverse.github.io/vusa/reference/up_to_date.html</loc>
+  </url>
+  <url>
+    <loc>https://vusaverse.github.io/vusa/reference/use_rstudio_prefs_silent.html</loc>
   </url>
   <url>
     <loc>https://vusaverse.github.io/vusa/reference/validate_assertions_present.html</loc>
