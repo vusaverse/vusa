@@ -37,6 +37,14 @@ reference:
   - validate_script_proj
   - validate_style
   - variable_name_lint
+  
+- title: RStudio Project preference methods.
+  desc: |
+    Methods that alter project preference in RStudio.
+  contents:  
+  - pretty_print_updates
+  - use_rstudio_prefs_silent
+
 
 - title: Assertion methods.
   desc: |
