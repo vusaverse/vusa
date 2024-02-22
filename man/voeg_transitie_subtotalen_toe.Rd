@@ -18,5 +18,7 @@ De transitiematrix na 'df \%>\% left_join(df_lang)' plus nog andere aanpassingen
 Functie om de transitie aantallen toe te voegen aan de dataset (alleen nodig bij ongeneste data)
 }
 \examples{
-\dontrun{voeg_transitie_subtotalen_toe(df_lang, df)}
+\dontrun{
+voeg_transitie_subtotalen_toe(df_lang, df)
+}
 }

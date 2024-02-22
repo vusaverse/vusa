@@ -21,5 +21,7 @@ Transitiematrix voor prognose jaren
 Functie om de transitiematrix toe passen voor alle prognosejaren
 }
 \examples{
-\dontrun{maak_transitiematrix_voor_prognosejaren(df)}
+\dontrun{
+maak_transitiematrix_voor_prognosejaren(df)
+}
 }

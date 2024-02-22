@@ -16,5 +16,7 @@ Transitiematrix uitstroom met subtotalen
 Functie om de transitieaantallen voor gegroepeerde (zoals Studiejaar, Uitstroom etc.) en geneste data te berekenen
 }
 \examples{
-\dontrun{maak_transitiematrix_uitstroom_met_subtotalen(df)}
+\dontrun{
+maak_transitiematrix_uitstroom_met_subtotalen(df)
+}
 }

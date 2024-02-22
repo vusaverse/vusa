@@ -32,7 +32,7 @@ the \code{shell()} function.
 get_last_n_commit_info(filepath = "/path/to/file.R")
 
 # Retrieve the last  5 commit information for a file
-get_last_n_commit_info(filepath = "/path/to/file.R", n =  5)
+get_last_n_commit_info(filepath = "/path/to/file.R", n = 5)
 }
 
 }

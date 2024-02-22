@@ -18,5 +18,7 @@ Collectie
 Check of er geen kolommen met enkel NA values zijn
 }
 \examples{
-\dontrun{assertion_geen_kolommen_met_enkel_na(df, Collectie)}
+\dontrun{
+assertion_geen_kolommen_met_enkel_na(df, Collectie)
+}
 }

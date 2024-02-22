@@ -16,5 +16,7 @@ dfTransitiematrix_uitstroom
 Functie om een Transitiematrix voor uitstroom te maken
 }
 \examples{
-\dontrun{maak_transitiematrix_uitstroom(df)}
+\dontrun{
+maak_transitiematrix_uitstroom(df)
+}
 }

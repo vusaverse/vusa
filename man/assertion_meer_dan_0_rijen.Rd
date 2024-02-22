@@ -18,5 +18,7 @@ Collectie
 Check of er meer dan 0 rijen in de dataframe zitten.
 }
 \examples{
-\dontrun{assertion_meer_dan_0_rijen(df, Collectie)}
+\dontrun{
+assertion_meer_dan_0_rijen(df, Collectie)
+}
 }

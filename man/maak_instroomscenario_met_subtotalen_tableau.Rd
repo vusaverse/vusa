@@ -20,5 +20,7 @@ Matrix instroomscenario met subtotalen klaar voor Tableau
 Functie om de matrix om te zetten naar het instroomscenarioformaat voor Tableau
 }
 \examples{
-\dontrun{maak_instroomscenario_met_subtotalen_tableau(df, scenario, subscenario = NA)}
+\dontrun{
+maak_instroomscenario_met_subtotalen_tableau(df, scenario, subscenario = NA)
+}
 }

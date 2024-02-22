@@ -51,5 +51,7 @@ voor elke functie) duurt het even voordat alle scripts zijn doorlopen.
 nog een keer in die submap specifiek laten runnen
 }
 \examples{
-\dontrun{df_functies_in_package <- package_important_in_project()}
+\dontrun{
+df_functies_in_package <- package_important_in_project()
+}
 }

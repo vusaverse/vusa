@@ -38,5 +38,7 @@ waarde uit de column gedeeld door de opsomming (column/sum)
 }
 }
 \examples{
-\dontrun{dfTest <- ratio_df_columns(dfTest, c("column1", "column2"))}
+\dontrun{
+dfTest <- ratio_df_columns(dfTest, c("column1", "column2"))
+}
 }

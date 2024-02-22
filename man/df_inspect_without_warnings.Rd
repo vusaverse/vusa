@@ -16,5 +16,7 @@ suppressWarnings(df_inspect(df, print_results = F))
 Wrapper for df_inspect to suppress warnings.
 }
 \examples{
-\dontrun{df_inspect_without_warnings(df)}
+\dontrun{
+df_inspect_without_warnings(df)
+}
 }

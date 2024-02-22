@@ -16,6 +16,6 @@ A logical value indicating if the element is not present in the vector.
 This operator negates the \code{\%in\%} operator in R. It checks if an element is not present in a vector.
 }
 \examples{
-1 \%notin\% seq(5)  # FALSE
-6 \%notin\% seq(5)  # TRUE
+1 \%notin\% seq(5) # FALSE
+6 \%notin\% seq(5) # TRUE
 }

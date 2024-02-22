@@ -25,5 +25,7 @@ Collectie
 Check of er geen dubbele rijen zijn
 }
 \examples{
-\dontrun{assertion_geen_dubbele_rijen(df, Collectie)}
+\dontrun{
+assertion_geen_dubbele_rijen(df, Collectie)
+}
 }

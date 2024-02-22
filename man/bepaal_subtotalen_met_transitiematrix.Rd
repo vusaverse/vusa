@@ -18,5 +18,7 @@ Transitiematrix in lang formaat
 Functie om subtotalen te berekenen met een transitiematrix
 }
 \examples{
-\dontrun{bepaal_subtotalen_met_transitiematrix(df, aantal)}
+\dontrun{
+bepaal_subtotalen_met_transitiematrix(df, aantal)
+}
 }

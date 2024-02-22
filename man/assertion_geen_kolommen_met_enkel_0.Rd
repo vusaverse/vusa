@@ -18,5 +18,7 @@ Collectie
 Check of er geen kolommen met enkel 0 waarden zijn
 }
 \examples{
-\dontrun{assertion_geen_kolommen_met_enkel_0(dfInspect, Collectie)}
+\dontrun{
+assertion_geen_kolommen_met_enkel_0(dfInspect, Collectie)
+}
 }
