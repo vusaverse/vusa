@@ -22,7 +22,7 @@ write_file <- function(Object_to_save, Name_to_save, destination = NULL,
     directory <- rstudioapi::getActiveDocumentContext()$path
   } else {
     docname <- basename(scriptName::current_filename())
-    directory <- this.path::this.dir()
+    directory <- this.path::sys.dir()
   }
 
   if (is.null(destination)) {
