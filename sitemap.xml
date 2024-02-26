@@ -97,6 +97,9 @@
     <loc>https://vusaverse.github.io/vusa/reference/check_columns_for_double_rows.html</loc>
   </url>
   <url>
+    <loc>https://vusaverse.github.io/vusa/reference/check_common_cols.html</loc>
+  </url>
+  <url>
     <loc>https://vusaverse.github.io/vusa/reference/check_documentation_analysisset.html</loc>
   </url>
   <url>
@@ -160,6 +163,9 @@
     <loc>https://vusaverse.github.io/vusa/reference/df_compare.html</loc>
   </url>
   <url>
+    <loc>https://vusaverse.github.io/vusa/reference/df_inspect.html</loc>
+  </url>
+  <url>
     <loc>https://vusaverse.github.io/vusa/reference/df_inspect_without_warnings.html</loc>
   </url>
   <url>
@@ -220,9 +226,6 @@
     <loc>https://vusaverse.github.io/vusa/reference/extract_output_file.html</loc>
   </url>
   <url>
-    <loc>https://vusaverse.github.io/vusa/reference/filter_settings_on_type.html</loc>
-  </url>
-  <url>
     <loc>https://vusaverse.github.io/vusa/reference/find_pattern_csv.html</loc>
   </url>
   <url>
@@ -230,6 +233,9 @@
   </url>
   <url>
     <loc>https://vusaverse.github.io/vusa/reference/find_patterns.html</loc>
+  </url>
+  <url>
+    <loc>https://vusaverse.github.io/vusa/reference/fixencoding.html</loc>
   </url>
   <url>
     <loc>https://vusaverse.github.io/vusa/reference/generate_introduction_validation.html</loc>
@@ -275,9 +281,6 @@
   </url>
   <url>
     <loc>https://vusaverse.github.io/vusa/reference/join_tkoppel_isat.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/load_and_save_config_proj.html</loc>
   </url>
   <url>
     <loc>https://vusaverse.github.io/vusa/reference/maak_inschrijvingen_grid.html</loc>
@@ -338,9 +341,6 @@
   </url>
   <url>
     <loc>https://vusaverse.github.io/vusa/reference/read_documentation.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/read_file_proj.html</loc>
   </url>
   <url>
     <loc>https://vusaverse.github.io/vusa/reference/read_kolomwaarden.html</loc>
@@ -527,9 +527,6 @@
   </url>
   <url>
     <loc>https://vusaverse.github.io/vusa/reference/write_file.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/write_file_proj.html</loc>
   </url>
   <url>
     <loc>https://vusaverse.github.io/vusa/reference/write_pattern_table.html</loc>
