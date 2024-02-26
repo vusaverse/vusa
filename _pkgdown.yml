@@ -148,6 +148,7 @@ reference:
   - determine_input_files
   - determine_output_files
   - df_compare
+  - df_inspect
   - df_inspect_without_warnings
   - drop_na_column_names
   - extract_filepaths_readrds_csv
@@ -155,6 +156,7 @@ reference:
   - find_pattern_csv
   - find_pattern_r
   - find_patterns
+  - fixencoding
   - generate_introduction_validation
   - generate_output_files_database
   - has_globale_identifiers
