@@ -119,6 +119,7 @@ reference:
   - savefst_csv
   - saverda
   - saverds_csv
+  - save_sessioninfo
   - write_file
   - write_pattern_table
   - write_tableau
