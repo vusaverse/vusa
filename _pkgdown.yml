@@ -182,6 +182,7 @@ reference:
   - ratio_df_columns
   - regex_content_parameter
   - rename_columns
+  - retrieve_data_metadata
   - return_assertions_message
   - return_assertions_message_testen
   - sa_defineer_test_documentatie
