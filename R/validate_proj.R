@@ -31,7 +31,7 @@ validate_script_proj <- function(filepath = NULL, export_to_dataframe = FALSE) {
   }
 
   if (export_to_dataframe == FALSE) {
-    validate_scipt_addin(filepath, export_to_dataframe)
+    validate_script_addin(filepath, export_to_dataframe)
   } else {
     warnings_errors_messages <- validate_no_warning_errors(
       filepath,
