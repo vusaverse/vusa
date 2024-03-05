@@ -70,16 +70,24 @@ archive_current_script <- function() {
   if (current_script == "") {
     message("No script is currently open in the source pane.")
   } else {
+    # Get the current working directory
+    cwd <- getwd()
+    
+    # Make the path relative to the current working directory
+    # Use sub() to replace the current working directory path from the full path of the script
+    current_script_relative <- sub(cwd, "", current_script)
+    
     # Confirmation step before archiving
     confirmation <- utils::menu(choices = c("Yes", "No"), 
-                                title = paste0("Are you sure you want to archive the script: ", current_script, "?"))
+                                title = paste0("Are you sure you want to archive the script: ", current_script_relative, "?"))
     
     if (confirmation == 1) {
-      # Archive the script
-      archive_script(File_path = current_script)
+      # Archive the script using the relative path
+      archive_script(File_path = current_script_relative)
     } else {
       message("The script was not archived.")
     }
   }
 }
+
 
