@@ -13,3 +13,8 @@ Description: Closes All View Panes And Unsaved Files
 Binding: close_view
 Interactive: false
 
+Name: archive_current_script
+Description: Archives Current script
+Binding: archive_current_script
+Interactive: false
+

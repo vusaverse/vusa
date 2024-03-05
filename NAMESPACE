@@ -3,6 +3,7 @@
 export("%>%")
 export("%notin%")
 export(academic_period)
+export(archive_current_script)
 export(archive_script)
 export(assert_aanwezige_kolommen)
 export(assert_character_named)

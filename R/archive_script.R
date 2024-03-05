@@ -55,3 +55,31 @@ archive_script <- function(File_path, Archive_path = NULL) {
     }
   }
 }
+
+
+
+#' Archive Current Script
+#'
+#' Function to archive the current script open in the source pane in RStudio.
+#' @export
+archive_current_script <- function() {
+  # Get the path of the current script open in the source pane
+  current_script <- rstudioapi::getSourceEditorContext()$path
+  
+  # Check if there is a script open in the source pane
+  if (current_script == "") {
+    message("No script is currently open in the source pane.")
+  } else {
+    # Confirmation step before archiving
+    confirmation <- utils::menu(choices = c("Yes", "No"), 
+                                title = paste0("Are you sure you want to archive the script: ", current_script, "?"))
+    
+    if (confirmation == 1) {
+      # Archive the script
+      archive_script(File_path = current_script)
+    } else {
+      message("The script was not archived.")
+    }
+  }
+}
+
