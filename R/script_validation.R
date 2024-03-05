@@ -266,7 +266,7 @@ extract_filepaths_readrds_csv <- function(bestandspad) {
 validate_clear_script_objects <-
   function(filepath, export_naar_dataframe = FALSE) {
     if (export_naar_dataframe == FALSE) {
-      base::cat("Opruimen variabelen: ")
+      base::cat("Clearing objects: ")
     }
     lines <- scan(filepath,
       what = character(),
@@ -278,22 +278,22 @@ validate_clear_script_objects <-
       ## Als er variabelen niet worden opgeruimd message deze dan
       if (export_naar_dataframe == TRUE) {
         return(
-          "clear_script_objects() ontbreekt. Stijl van variabelname kan niet worden gecheckt."
+          "The clear_script_objects() function is missing. The style of variable names cannot be checked."
         )
       } else {
         base::cat(cli::style_bold(
-          cli::col_red("De functie clear_script_objects() ontbreekt \n")
+          cli::col_red("The clear_script_objects() function is missing \n")
         ))
         base::cat(cli::style_bold(
-          cli::col_red("Stijl van variabel namen kan niet gechekt worden \n")
+          cli::col_red("The style of variable names cannot be checked \n")
         ))
         base::cat(paste("\n"))
       }
     } else {
       if (export_naar_dataframe == TRUE) {
-        return("Geslaagd")
+        return("Passed")
       } else {
-        base::cat(cli::style_bold(cli::col_green("Geslaagd\n")))
+        base::cat(cli::style_bold(cli::col_green("Passed\n")))
       }
     }
   }

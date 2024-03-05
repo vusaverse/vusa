@@ -134,11 +134,11 @@ validate_script_proj <- function(filepath = NULL, export_to_dataframe = FALSE) {
 validate_script_addin <- function(filepath, export_to_dataframe = FALSE) {
   validate_no_warning_errors(filepath, export_to_dataframe)
 
-  validate_assertions_present(filepath, export_to_dataframe)
+  # validate_assertions_present(filepath, export_to_dataframe)
 
-  validate_write_files(filepath)
+  # validate_write_files(filepath)
 
-  validate_introduction(filepath, export_to_dataframe)
+  # validate_introduction(filepath, export_to_dataframe)
 
   validate_clear_script_objects(filepath, export_to_dataframe)
 
@@ -148,7 +148,7 @@ validate_script_addin <- function(filepath, export_to_dataframe = FALSE) {
     base::cat(cli::style_bold(cli::col_cyan("Install lintr using \"library(\"lintr\")\" to test for style")))
   }
 
-  compare_input_output(filepath, export_to_dataframe)
+  # compare_input_output(filepath, export_to_dataframe)
 
   base::cat("\n")
   clear_script_objects(bestandspad = filepath, envir = globalenv())
