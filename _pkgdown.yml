@@ -8,6 +8,7 @@ reference:
     Methods that are (or can be) used as addins.
   contents:
   - archive_script
+  - archive_current_script
   - auto_document
   - clear_global_proj
   - clear_script_objects
