@@ -142,7 +142,7 @@ validate_script_addin <- function(filepath, export_to_dataframe = FALSE) {
 
   validate_clear_script_objects(filepath, export_to_dataframe)
 
-  if (check_installed_package("lintr", check = TRUE)) {
+  if (vvmover::check_installed_package("lintr", check = TRUE)) {
     validate_style(filepath, export_to_dataframe)
   } else {
     base::cat(cli::style_bold(cli::col_cyan("Install lintr using \"library(\"lintr\")\" to test for style")))
