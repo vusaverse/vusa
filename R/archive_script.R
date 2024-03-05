@@ -71,7 +71,7 @@ archive_current_script <- function() {
     message("No script is currently open in the source pane.")
   } else {
     # Get the current working directory
-    cwd <- getwd()
+    cwd <- paste0(getwd(), "/")
     
     # Make the path relative to the current working directory
     # Use sub() to replace the current working directory path from the full path of the script
