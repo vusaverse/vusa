@@ -74,6 +74,7 @@ reference:
   - check_education_name
   - check_name
   - check_variable
+  - determine_delimiter
   
 - title: Metadata methods.
   desc: |
