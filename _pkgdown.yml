@@ -8,6 +8,7 @@ reference:
     Methods that are (almost) ready to move to vvauditor.
   contents:
   - determine_delimiter
+  - validate_filenames
 
 # - title: vvconverter methods.
 #   desc: |
