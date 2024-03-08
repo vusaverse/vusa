@@ -3,6 +3,37 @@ template:
   bootstrap: 5
   
 reference:
+- title: vvauditor methods.
+  desc: |
+    Methods that are (almost) ready to move to vvauditor.
+  contents:
+  - determine_delimiter
+
+# - title: vvconverter methods.
+#   desc: |
+#     Methods that are (almost) ready to move to vvconverter.
+#   contents:
+#   - 
+#   
+# - title: vvfiller methods.
+#   desc: |
+#     Methods that are (almost) ready to move to vvfiller.
+#   contents:
+#   - 
+#   
+# - title: vvmover methods.
+#   desc: |
+#     Methods that are (almost) ready to move to vvmover.
+#   contents:
+#   - 
+  
+- title: vvsculptor methods.
+  desc: |
+    Methods that are (almost) ready to move to vvsculptor.
+  contents:
+  - check_common_cols
+
+
 - title: Addin methods.
   desc: |
     Methods that are (or can be) used as addins.
@@ -74,7 +105,6 @@ reference:
   - check_education_name
   - check_name
   - check_variable
-  - determine_delimiter
   
 - title: Metadata methods.
   desc: |
@@ -137,7 +167,6 @@ reference:
   - build_analysis_set
   - build_as
   - build_kolomwaarden
-  - check_common_cols
   - compare_input_output
   - controleer_na_waarden
   - correct_file_name
