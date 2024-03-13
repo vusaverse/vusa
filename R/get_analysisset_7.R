@@ -13,8 +13,8 @@ get_analysisset_7 <- function(cols = NULL, cols_match = c(
                                 "INS_Opleidingsnaam_2002", "INS_Inschrijvingsjaar"
                               ), AS_7 = NULL) {
   if (is.null(AS_7)) {
-    if (!Sys.getenv("AS_7_DIR") == "") {
-      AS_7 <- paste0(Sys.getenv("OUTPUT_DIR"), Sys.getenv("BRANCH"), "/", Sys.getenv("AS_7_DIR"))
+    if (!Sys.getenv("AS_7_PATH") == "") {
+      AS_7 <- paste0(Sys.getenv("OUTPUT_DIR"), Sys.getenv("BRANCH"), "/", Sys.getenv("AS_7_PATH"))
     } else {
       stop("system variables for AS_7 are missing")
     }

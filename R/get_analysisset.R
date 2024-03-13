@@ -6,8 +6,8 @@
 #' @export
 get_analysisset <- function(columns = NULL, AS_path = NULL) {
   if (is.null(AS_path)) {
-    if (!any(Sys.getenv(c("OUTPUT_DIR", "AS_1_DIR")) == "")) {
-      AS <- paste0(Sys.getenv("OUTPUT_DIR"), Sys.getenv("BRANCH"), "/", Sys.getenv("AS_1_DIR"))
+    if (!any(Sys.getenv(c("OUTPUT_DIR", "AS_1_PATH")) == "")) {
+      AS <- paste0(Sys.getenv("OUTPUT_DIR"), Sys.getenv("BRANCH"), "/", Sys.getenv("AS_1_PATH"))
     } else {
       stop("system variables for as_path are missing")
     }

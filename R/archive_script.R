@@ -21,9 +21,9 @@ archive_script <- function(File_path, Archive_path = NULL) {
     } else {
       if (is.null(Archive_path)) {
         message("No input for Archive_path, so looking for system variables")
-        if (!Sys.getenv("ARCHIVE_DIR") == "") {
+        if (!Sys.getenv("ARCHIVE_REPO") == "") {
           message("system variables present, so this will be used for Archive_path")
-          Archive_path <- Sys.getenv("ARCHIVE_DIR")
+          Archive_path <- Sys.getenv("ARCHIVE_REPO")
         } else {
           stop("system variables for Archive_path is missing")
         }
