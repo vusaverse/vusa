@@ -11,10 +11,9 @@ schedule_job <- function(file) {
     stop(paste("The file does not exist:", file))
   } else {
     # If the file exists, write the file path and branch to the txt file
-    write(
-      x = paste(file, "branch: ", current_git_branch()),
-      file = paste0(Sys.getenv("NETWORK_DIR"), "Server_wachtrij/Wachtrij.txt"),
-      append = TRUE
-    )
+    # Use cat with file argument to write directly to the file
+    cat(paste(file, "branch: ", current_git_branch()),
+        file = Sys.getenv("SCHEDULE_PATH"),
+        append = TRUE, sep = "\n")
   }
 }
