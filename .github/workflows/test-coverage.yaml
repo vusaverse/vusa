@@ -13,8 +13,6 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-      COVERALLS_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
-      CI_NAME: jenkins # see https://github.com/r-lib/covr/issues/457
 
     steps:
       - uses: actions/checkout@v4
@@ -30,7 +28,7 @@ jobs:
 
       - name: Test coverage
         run: |
-          covr::coveralls(
+          covr::codecov(
             quiet = FALSE,
             clean = FALSE,
             install_path = file.path(normalizePath(Sys.getenv("RUNNER_TEMP"), winslash = "/"), "package")
