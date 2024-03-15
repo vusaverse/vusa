@@ -2,7 +2,8 @@
   <!-- badges: start -->
   [![CodeFactor](https://www.codefactor.io/repository/github/vusaverse/vusa/badge)](https://www.codefactor.io/repository/github/vusaverse/vusa)
   [![R-CMD-check](https://github.com/vusaverse/vusa/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/vusaverse/vusa/actions/workflows/R-CMD-check.yaml)
-  [![Coveralls test coverage](https://coveralls.io/repos/github/vusaverse/vusa/badge.svg)](https://coveralls.io/r/vusaverse/vusa?branch=main)
+  [![Codecov test coverage](https://codecov.io/gh/vusaverse/vusa/branch/main/graph/badge.svg)](https://app.codecov.io/gh/vusaverse/vusa?branch=main)
+
   <!-- badges: end -->
 
 This is a collection of R functions designed to provide a variety of utilities. However, please note that due to the nature of the functions included in this package, it will not be available on CRAN. The functions contain hardcoded lines, system variables, and functions that may violate CRAN policies. Furthermore, the usage of `.Internals` is also prohibited by CRAN, which further restricts the availability of this package on CRAN.
