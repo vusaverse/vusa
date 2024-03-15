@@ -30,7 +30,7 @@ Please note that there may be some untranslated words from Dutch and that runnin
 
 ## Reference Page
 
-We are currently working on ordering the reference page on the [reference](https://vusaverse.github.io/vusa/reference/index.html) page to make it easier for users to find relevant functions. 
+We are currently working on organizing the reference page on the [reference](https://vusaverse.github.io/vusa/reference/index.html) page to make it easier for users to find relevant functions. 
 
 ## Contributing
 
