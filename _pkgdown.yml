@@ -33,6 +33,7 @@ reference:
     Methods that are (almost) ready to move to vvsculptor.
   contents:
   - check_common_cols
+  - identify_join_suffixes
 
 
 - title: Addin methods.
