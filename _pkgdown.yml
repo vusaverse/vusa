@@ -190,6 +190,7 @@ reference:
   - find_pattern_csv
   - find_pattern_r
   - find_patterns
+  - find_sys_variables
   - fixencoding
   - generate_introduction_validation
   - generate_output_files_database
