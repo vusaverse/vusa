@@ -107,6 +107,7 @@ reference:
   - check_education_name
   - check_name
   - check_variable
+  - check_unused_objects
   
 - title: Metadata methods.
   desc: |

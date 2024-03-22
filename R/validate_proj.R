@@ -73,6 +73,8 @@ validate_script_proj <- function(filepath = NULL, export_to_dataframe = FALSE) {
     lib <- any(grep("library", readLines(filepath)))
     req <- any(grep("require", readLines(filepath)))
     ins <- any(grep("install.packages", readLines(filepath)))
+    
+    unused_objects <- check_unused_objects(filepath)
 
     ## These should be used in a wrapper function, as they are project specific
     assert_naming <- any(grep("assert_naming", readLines(filepath)))
@@ -92,6 +94,7 @@ validate_script_proj <- function(filepath = NULL, export_to_dataframe = FALSE) {
       warning_message,
       memory_usage,
       execution_time,
+      unused_objects,
       style_issues,
       style,
       last_commit_author,
