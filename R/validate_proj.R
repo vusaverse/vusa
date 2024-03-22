@@ -75,6 +75,10 @@ validate_script_proj <- function(filepath = NULL, export_to_dataframe = FALSE) {
     ins <- any(grep("install.packages", readLines(filepath)))
     
     unused_objects <- check_unused_objects(filepath)
+    
+    if (length(unused_objects > 1)) {
+      unused_objects <- paste0(unused_objects, collapse = " \n ")
+    }
 
     ## These should be used in a wrapper function, as they are project specific
     assert_naming <- any(grep("assert_naming", readLines(filepath)))
