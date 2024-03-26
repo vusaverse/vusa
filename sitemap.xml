@@ -109,7 +109,13 @@
     <loc>https://vusaverse.github.io/vusa/reference/check_education_name.html</loc>
   </url>
   <url>
+    <loc>https://vusaverse.github.io/vusa/reference/check_entire_naming_convention.html</loc>
+  </url>
+  <url>
     <loc>https://vusaverse.github.io/vusa/reference/check_name.html</loc>
+  </url>
+  <url>
+    <loc>https://vusaverse.github.io/vusa/reference/check_naming_convention_from_yaml.html</loc>
   </url>
   <url>
     <loc>https://vusaverse.github.io/vusa/reference/check_unused_objects.html</loc>
