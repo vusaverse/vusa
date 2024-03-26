@@ -7,6 +7,8 @@ reference:
   desc: |
     Methods that are (almost) ready to move to vvauditor.
   contents:
+  - check_entire_naming_convention
+  - check_naming_convention_from_yaml
   - determine_delimiter
   - validate_filenames
 

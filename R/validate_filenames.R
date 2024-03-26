@@ -47,3 +47,58 @@ validate_filenames <- function(filenames, separator) {
   # If no inconsistencies are found, return TRUE
   return(TRUE)
 }
+
+
+#' Check naming conventions from a YAML file
+#'
+#' This function reads a YAML file containing naming conventions and checks if a given file name adheres to these conventions.
+#'
+#' @param x A character string representing the file name to check.
+#' @param yaml_file A character string representing the path to the YAML file containing the naming conventions.
+#'
+#' @return A list of logical values indicating whether each naming convention is met by the file name.
+#'
+#' @export
+check_naming_convention_from_yaml <- function(x, yaml_file) {
+  conventions <- yaml::read_yaml(yaml_file)$conventions
+  
+  file_name <- basename(x)
+  parts <- unlist(strsplit(file_name, "[[:space:]]|_"))
+  
+  results <- list()
+  
+  for (convention in conventions) {
+    check_parts <- min(convention$parts, length(parts))
+    part_to_check <- paste(parts[1:check_parts], collapse = "")
+    
+    result <- stringr::str_detect(part_to_check, convention$pattern)
+    
+    results[[convention$name]] <- all(result)
+  }
+  
+  return(results)
+}
+
+#' Check Entire Naming Convention
+#'
+#' This function validates the filename's separator usage and checks the filename against the naming conventions specified in a YAML file. It returns TRUE if all conventions are met, FALSE otherwise.
+#'
+#' @param filename A character string representing the file name to check.
+#' @param yaml_file A character string representing the path to the YAML file containing the naming conventions.
+#' @param separator A character string specifying the separator used in the filename.
+#'
+#' @return A logical value indicating whether the filename adheres to all the naming conventions specified in the YAML file.
+#' @export
+check_entire_naming_convention <- function(filename, yaml_file, separator) {
+  # First, validate the filename's separator usage
+  if (!validate_filenames(c(filename), separator)) {
+    return(FALSE)
+  }
+  
+  # Then, check the filename against the naming conventions
+  convention_results <- check_naming_convention_from_yaml(filename, yaml_file)
+  
+  # Return TRUE if all conventions are met, FALSE otherwise
+  return(all(unlist(convention_results)))
+}
+
