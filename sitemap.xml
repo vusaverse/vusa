@@ -82,6 +82,9 @@
     <loc>https://vusaverse.github.io/vusa/reference/bepaal_subtotalen_met_transitiematrix.html</loc>
   </url>
   <url>
+    <loc>https://vusaverse.github.io/vusa/reference/bereken_na_waarden.html</loc>
+  </url>
+  <url>
     <loc>https://vusaverse.github.io/vusa/reference/build_analysis_set.html</loc>
   </url>
   <url>
@@ -149,6 +152,12 @@
   </url>
   <url>
     <loc>https://vusaverse.github.io/vusa/reference/count_rows_analysis_set.html</loc>
+  </url>
+  <url>
+    <loc>https://vusaverse.github.io/vusa/reference/create_documentatie.html</loc>
+  </url>
+  <url>
+    <loc>https://vusaverse.github.io/vusa/reference/create_documentatie_tests.html</loc>
   </url>
   <url>
     <loc>https://vusaverse.github.io/vusa/reference/create_quality_report.html</loc>
@@ -253,6 +262,9 @@
     <loc>https://vusaverse.github.io/vusa/reference/find_sys_variables.html</loc>
   </url>
   <url>
+    <loc>https://vusaverse.github.io/vusa/reference/first_class.html</loc>
+  </url>
+  <url>
     <loc>https://vusaverse.github.io/vusa/reference/fixencoding.html</loc>
   </url>
   <url>
@@ -271,10 +283,16 @@
     <loc>https://vusaverse.github.io/vusa/reference/get_archived_result_files.html</loc>
   </url>
   <url>
+    <loc>https://vusaverse.github.io/vusa/reference/get_dist.html</loc>
+  </url>
+  <url>
     <loc>https://vusaverse.github.io/vusa/reference/get_last_n_commit_date.html</loc>
   </url>
   <url>
     <loc>https://vusaverse.github.io/vusa/reference/get_last_n_commit_info.html</loc>
+  </url>
+  <url>
+    <loc>https://vusaverse.github.io/vusa/reference/get_ratio.html</loc>
   </url>
   <url>
     <loc>https://vusaverse.github.io/vusa/reference/get_snippets_file.html</loc>
@@ -296,6 +314,9 @@
   </url>
   <url>
     <loc>https://vusaverse.github.io/vusa/reference/insert_filepath_code.html</loc>
+  </url>
+  <url>
+    <loc>https://vusaverse.github.io/vusa/reference/is_unieke_identifier.html</loc>
   </url>
   <url>
     <loc>https://vusaverse.github.io/vusa/reference/join_tkoppel.html</loc>
@@ -334,7 +355,22 @@
     <loc>https://vusaverse.github.io/vusa/reference/mapping_translate.html</loc>
   </url>
   <url>
+    <loc>https://vusaverse.github.io/vusa/reference/match_kolom_met_patroon.html</loc>
+  </url>
+  <url>
+    <loc>https://vusaverse.github.io/vusa/reference/max_num.html</loc>
+  </url>
+  <url>
+    <loc>https://vusaverse.github.io/vusa/reference/maxnum.html</loc>
+  </url>
+  <url>
     <loc>https://vusaverse.github.io/vusa/reference/md_list.html</loc>
+  </url>
+  <url>
+    <loc>https://vusaverse.github.io/vusa/reference/min_num.html</loc>
+  </url>
+  <url>
+    <loc>https://vusaverse.github.io/vusa/reference/minnum.html</loc>
   </url>
   <url>
     <loc>https://vusaverse.github.io/vusa/reference/overwrite_dot_arguments.html</loc>
@@ -386,6 +422,9 @@
   </url>
   <url>
     <loc>https://vusaverse.github.io/vusa/reference/return_assertions_message_testen.html</loc>
+  </url>
+  <url>
+    <loc>https://vusaverse.github.io/vusa/reference/round_values.html</loc>
   </url>
   <url>
     <loc>https://vusaverse.github.io/vusa/reference/sa_defineer_test_documentatie.html</loc>
@@ -541,7 +580,13 @@
     <loc>https://vusaverse.github.io/vusa/reference/variable_name_lint.html</loc>
   </url>
   <url>
+    <loc>https://vusaverse.github.io/vusa/reference/veld_is_subset.html</loc>
+  </url>
+  <url>
     <loc>https://vusaverse.github.io/vusa/reference/vind_assertion_soort.html</loc>
+  </url>
+  <url>
+    <loc>https://vusaverse.github.io/vusa/reference/vind_kolomwaarden.html</loc>
   </url>
   <url>
     <loc>https://vusaverse.github.io/vusa/reference/vind_subset_kolommen.html</loc>
@@ -554,6 +599,9 @@
   </url>
   <url>
     <loc>https://vusaverse.github.io/vusa/reference/wrapper_translate_colnames_documentation.html</loc>
+  </url>
+  <url>
+    <loc>https://vusaverse.github.io/vusa/reference/write_documentatie_tests.html</loc>
   </url>
   <url>
     <loc>https://vusaverse.github.io/vusa/reference/write_file.html</loc>
