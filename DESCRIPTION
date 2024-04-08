@@ -21,6 +21,7 @@ Imports:
     fs,
     fst,
     httr,
+    janitor,
     lintr,
     lubridate,
     magrittr,

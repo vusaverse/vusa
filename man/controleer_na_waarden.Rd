@@ -33,10 +33,16 @@ Other assertions:
 \code{\link{assert_posixct_named}()},
 \code{\link{build_kolomwaarden}()},
 \code{\link{check_assertions}()},
+\code{\link{create_documentatie_tests}()},
 \code{\link{find_patterns}()},
+\code{\link{get_dist}()},
+\code{\link{get_ratio}()},
+\code{\link{match_kolom_met_patroon}()},
 \code{\link{read_kolomwaarden}()},
 \code{\link{test_naming}()},
+\code{\link{veld_is_subset}()},
 \code{\link{vind_subset_kolommen}()},
+\code{\link{write_documentatie_tests}()},
 \code{\link{write_pattern_table}()}
 
 Other tests: 
@@ -51,8 +57,14 @@ Other tests:
 \code{\link{assert_posixct_named}()},
 \code{\link{check_assertions}()},
 \code{\link{check_education_name}()},
+\code{\link{create_documentatie_tests}()},
 \code{\link{find_patterns}()},
+\code{\link{get_dist}()},
+\code{\link{get_ratio}()},
+\code{\link{match_kolom_met_patroon}()},
 \code{\link{test_naming}()},
+\code{\link{veld_is_subset}()},
+\code{\link{write_documentatie_tests}()},
 \code{\link{write_pattern_table}()}
 }
 \concept{assertions}

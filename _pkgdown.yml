@@ -81,6 +81,26 @@ reference:
   - pretty_print_updates
   - use_rstudio_prefs_silent
 
+- title: Legacy code.
+  desc: |
+    Legacy functions.
+  contents:  
+  - bereken_na_waarden
+  - create_documentatie
+  - create_documentatie_tests
+  - first_class
+  - get_dist
+  - get_ratio
+  - is_unieke_identifier
+  - match_kolom_met_patroon
+  - maxnum
+  - max_num
+  - minnum
+  - min_num
+  - round_values
+  - veld_is_subset
+  - vind_kolomwaarden
+  - write_documentatie_tests
 
 - title: Assertion methods.
   desc: |
