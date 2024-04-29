@@ -293,7 +293,7 @@ assert_no_duplicates_in_group <- function(df,
       ## Groepeer op de opgegeven variabelen
       dplyr::group_by_at(dplyr::vars(dplyr::one_of(group_vars))) %>%
       ## bepaal het aantal unieke waarden voor iedere variabele per groep
-      dplyr::summarise(Aantal_rijen = n()) %>%
+      dplyr::summarise(Aantal_rijen = dplyr::n()) %>%
       ## Bereken per variable het aantal waarden dat "te veel" is.
       dplyr::mutate(Aantal_dubbel_per_veld = Aantal_rijen - 1)
 
