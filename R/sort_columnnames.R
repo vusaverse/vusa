@@ -1,15 +1,3 @@
-#' Sort column names
-#'
-#' Function to sort column names alphabetically.
-#'
-#' @param data Data frame
-#'
-#' @return New data frame with column names sorted.
-#' @export
-sort_columnnames <- function(data) {
-  data <- data[, order(colnames(data))]
-  return(data)
-}
 
 
 
