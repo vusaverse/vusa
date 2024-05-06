@@ -79,6 +79,40 @@ read_import_definitions <- function(filename = "", metadata_location = NULL, ...
   }
 }
 
+#' read_data_dictionary
+#'
+#' A function that reads a data dictionary file.
+#'
+#' @param filename The filename of the data dictionary file.
+#' @param metadata_location Location of the data dictionary files,
+#' if NULL system variables will be used.
+#' @param ... Additional parameters to be passed to the file reading function.
+#'
+#' @return A data frame containing the data dictionary.
+#' @export
+read_data_dictionary <- function(filename = "", metadata_location = NULL, ...) {
+  if (is.null(metadata_location)) {
+    if (!Sys.getenv("METADATA_DICTIONARY_DIR") == "") {
+      metadata_location <- Sys.getenv("METADATA_DICTIONARY_DIR")
+    } else {
+      stop("System variable for metadata_location is missing.")
+    }
+  }
+  
+  file_path <- file.path(metadata_location, filename)
+  
+  # Determine the file reading function based on the file extension
+  file_extension <- tools::file_ext(filename)
+  if (file_extension == "csv") {
+    return(utils::read.csv(file_path, stringsAsFactors = FALSE, ...))
+  } else if (file_extension == "txt" || file_extension == "dat") {
+    # Assume tab-separated file
+    return(utils::read.delim(file_path, stringsAsFactors = FALSE, ...))
+  } else {
+    stop("Unsupported file format. Only CSV, TXT, and DAT files are supported.")
+  }
+}
+
 
 #' Overwrite the arguments with the specified dots (...)
 #'
