@@ -151,6 +151,7 @@ reference:
   - get_analysisset_7
   - get_archived_result_files
   - read_documentation
+  - read_import_definitions
   
 - title: Snippets methods.
   desc: |
