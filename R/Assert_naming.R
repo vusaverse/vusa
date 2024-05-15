@@ -501,7 +501,7 @@ vind_subset_kolommen <- function(Naming) {
   df_new <- Naming %>%
     ## Factoren moeten worden omgezet naar character
     dplyr::mutate_if(is.factor, as.character) %>%
-    dplyr::filter(In_gebruik == T, Veldtype %in% c("subset", "list", "set_equal"))
+    dplyr::filter(In_gebruik == TRUE, Veldtype %in% c("subset", "list", "set_equal"))
   return(df_new$Veldnaam_export)
 }
 
@@ -521,19 +521,24 @@ build_kolomwaarden <- function(df, Naming, Naam_bestand) {
   Waarde <- NULL
   ## Vind de kolommen die het subset-type hebben
   Waarden_te_gebruiken <- vind_subset_kolommen(Naming = Naming)
-
-  df_uniek <- df %>%
-    ## Selecteer de kolommen uit de df
-    dplyr::select(dplyr::one_of(Waarden_te_gebruiken)) %>%
-    ## Omklappen van de kolommen
-    tidyr::gather(key = "Kolomnaam", value = "Waarde") %>%
-    ## Neem alleen de unieke waarden mee, geen NA
-    dplyr::distinct() %>%
-    dplyr::filter(!is.na(Waarde))
-
-  ## Sla de assertwaarden op in een tabel in een csv file
-  path <- paste0(Sys.getenv("DOCUMENTATION_DIR"), "Kolomwaarden/Assert_", Naam_bestand, ".csv")
-  utils::write.csv2(df_uniek, file = path, row.names = F, fileEncoding = "UTF-8")
+  
+  if(length(Waarden_te_gebruiken) > 0) {
+    df_uniek <- df %>%
+      ## Selecteer de kolommen uit de df
+      dplyr::select(dplyr::one_of(Waarden_te_gebruiken)) %>%
+      ## Omklappen van de kolommen
+      tidyr::gather(key = "Kolomnaam", value = "Waarde") %>%
+      ## Neem alleen de unieke waarden mee, geen NA
+      dplyr::distinct() %>%
+      dplyr::filter(!is.na(Waarde))
+    
+    ## Sla de assertwaarden op in een tabel in een csv file
+    path <- paste0(Sys.getenv("DOCUMENTATION_DIR"), "Kolomwaarden/Assert_", Naam_bestand, ".csv")
+    utils::write.csv2(df_uniek, file = path, row.names = FALSE, fileEncoding = "UTF-8")
+  } else {
+    # Consider logging a warning here or using another method to notify the user
+    message("Warning: No subset columns found, or none are in use. See the documentation file.")
+  }
 }
 
 #' Read kolomwaarden
