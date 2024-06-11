@@ -17,5 +17,5 @@
   if (!is.vector(table)) {
     stop("'table' must be a vector.")
   }
-  return(!x %in% table)
+  !x %in% table
 }
