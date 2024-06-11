@@ -4,18 +4,21 @@
 \alias{\%notin\%}
 \title{Negate \code{\%in\%} operator}
 \usage{
-... \%notin\% NA
+x \%notin\% table
 }
 \arguments{
-\item{...}{Other arguments passed to the function.}
+\item{x}{The value(s) to be checked.}
+
+\item{table}{The vector to be checked against.}
 }
 \value{
-A logical value indicating if the element is not present in the vector.
+A logical vector indicating if elements of x are not in table.
 }
 \description{
-This operator negates the \code{\%in\%} operator in R. It checks if an element is not present in a vector.
+This function is a convenience wrapper to negate the \code{\%in\%} operator in R.
 }
 \examples{
-1 \%notin\% seq(5) # FALSE
-6 \%notin\% seq(5) # TRUE
+x <- c(1, 2, 3)
+table <- c(2, 3, 4)
+x \%notin\% table # Returns TRUE, as 1 is not in table
 }

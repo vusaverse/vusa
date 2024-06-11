@@ -1238,11 +1238,14 @@ rapport_result_test_introduction <- function(obj, melding) {
   }
 }
 
+capitals <- NULL
+
 #' Check variable names
 #'
 #' Function to check whether the variable name is according the "stijlgids"
 #'
 #' @param name Variable name to check
+#' 
 #'
 check_variable <- function(name) {
   ## Turn variable name into variable value
@@ -1266,7 +1269,7 @@ check_variable <- function(name) {
     ""
   )
   ## Get the position of all capital letters
-  capitals <<- unlist(gregexpr("[A-Z]", name))
+  capitals < unlist(gregexpr("[A-Z]", name))
   ## Check if variable has correct name
   if (replacer == substr(name, 1, nchar(replacer)) &
     str_detect(substr(name, nchar(replacer) + 1, nchar(replacer) + 1), "^[:upper:]+$")) {

@@ -22,18 +22,20 @@ Imports:
     fst,
     httr,
     janitor,
+    magrittr,
+    purrr,
+    readr,
+    rlang,
+    rstudioapi
+Suggests: 
+    testthat (>= 3.0.0),
     lintr,
     lubridate,
-    magrittr,
     plyr,
     pryr,
-    purrr,
     RCurl,
-    readr,
     rex,
-    rlang,
     rstudio.prefs,
-    rstudioapi,
     scriptName,
     slackr,
     stats,
@@ -47,6 +49,4 @@ Imports:
     vvmover,
     xml2,
     yaml
-Suggests: 
-    testthat (>= 3.0.0)
 Config/testthat/edition: 3
