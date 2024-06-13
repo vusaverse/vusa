@@ -371,7 +371,7 @@ assert_aanwezige_kolommen <- function(Naming, df, Collectie) {
     #              paste(Kolommen_niet_in_doc, collapse = "\n\t"),
     #              '\n Op deze kolommen wordt niet geassert; ze zitten niet in de documentatie, maar wel in de data.\n'))
 
-    return(Kolommen_niet_in_df)
+    Kolommen_niet_in_df
   }
 }
 
@@ -502,7 +502,7 @@ vind_subset_kolommen <- function(Naming) {
     ## Factoren moeten worden omgezet naar character
     dplyr::mutate_if(is.factor, as.character) %>%
     dplyr::filter(In_gebruik == TRUE, Veldtype %in% c("subset", "list", "set_equal"))
-  return(df_new$Veldnaam_export)
+  df_new$Veldnaam_export
 }
 
 #' Build kolomwaarden
@@ -564,7 +564,7 @@ read_kolomwaarden <- function(Naam_bestand) {
       grouping_mark = "."
     )
   )
-  return(Kolomwaarden)
+  Kolomwaarden
 }
 
 #' Read kolomwaarden testen
@@ -590,7 +590,7 @@ read_kolomwaarden_testen <- function(Testdoc) {
     ## Verwijder onnodige tekens en spaties
     dplyr::mutate(Waarde = gsub(pattern = "'", replacement = "", x = Waarde))
 
-  return(df_kolomwaarden)
+  df_kolomwaarden
 }
 
 

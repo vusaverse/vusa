@@ -533,13 +533,13 @@ vind_assertion_soort <- function(Regel) {
   ## De melding is nu 'Variabelenaam': Must be TRUE, maar hier wordt gecheckt
   ## of het aantal dubbelingen voor deze variabele 0 is.
   if (grepl("dubbelingen", Regel)) {
-    return("Uniek")
+    "Uniek"
   }
   # if (grepl("Assertion fail op waarden:", Regel)) {
   #
   # }
   else {
-    return(NA)
+    NA
   }
 }
 
@@ -593,7 +593,7 @@ assertion_meer_dan_0_rijen <- function(df, Collectie) {
   if (!nrow(df) > 0) {
     Collectie$push("De dataset bevat 0 rijen")
   }
-  return(Collectie)
+  Collectie
 }
 
 
@@ -661,7 +661,7 @@ assertion_geen_kolommen_met_enkel_0 <- function(df, Collectie) {
       Variabelen
     ))
   }
-  return(Collectie)
+  Collectie
 }
 
 #' @title assertion_geen_kolommen_met_enkel_na
@@ -692,5 +692,5 @@ assertion_geen_kolommen_met_enkel_na <- function(df, Collectie) {
       variabelen
     ))
   }
-  return(Collectie)
+  Collectie
 }

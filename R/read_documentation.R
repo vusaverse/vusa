@@ -127,5 +127,5 @@ read_data_dictionary <- function(filename = "", metadata_location = NULL, ...) {
 #' @return a named list of function arguments
 overwrite_dot_arguments <- function(function_args, ...) {
   dots <- list(...)
-  return(c(function_args[setdiff(names(function_args), names(dots))], dots))
+  c(function_args[setdiff(names(function_args), names(dots))], dots)
 }
