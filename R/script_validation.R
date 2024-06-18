@@ -250,7 +250,7 @@ extract_filepaths_readrds_csv <- function(bestandspad) {
         )
       )
   }
-  dependencies
+  return(dependencies)
 }
 
 #' Valideer clear_script_objects
@@ -412,7 +412,7 @@ determine_data_files <- function(filepath, testString) {
         extract_output_file(Regel, testString)
       )
   }
-  Results_list
+  return(Results_list)
 }
 
 #' Bepaal inputbestanden
@@ -544,7 +544,7 @@ extract_output_file <- function(regel, testString) {
       )
     }
   }
-  path
+  return(path)
 }
 
 #' Vergelijk input output
@@ -807,6 +807,7 @@ test_file_on_documentation <-
           dplyr::mutate(Laatste_update = file.info(Rds_path_volledig)$mtime)
       },
       error = function(e) {
+        base::return(
           tibble::tibble(
             Bestand = Naam_document,
             Outputmap = Naam_folder,
@@ -816,6 +817,7 @@ test_file_on_documentation <-
             ## Voeg de datum van de laatste update toe.
             Laatste_update = file.info(Rds_path_volledig)$mtime
           )
+        )
       }
     )
 
@@ -1271,11 +1273,11 @@ check_variable <- function(name) {
   ## Check if variable has correct name
   if (replacer == substr(name, 1, nchar(replacer)) &
     str_detect(substr(name, nchar(replacer) + 1, nchar(replacer) + 1), "^[:upper:]+$")) {
-    name
+    return(name)
     ## If there is no prefix or it is incorrect. Capitalize and add correct prefix
   } else {
     name <-
       paste0(toupper(substr(name, 1, 1)), substr(name, 2, nchar(name)))
-    paste0(replacer, name)
+    return(paste0(replacer, name))
   }
 }
