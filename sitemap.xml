@@ -1,621 +1,209 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://vusaverse.github.io/vusa/404.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/index.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/academic_period.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/add_attribute.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/archive_current_script.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/archive_script.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/assert_aanwezige_kolommen.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/assert_character_named.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/assert_character_set_equal.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/assert_character_subset.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/assert_dataframe_export.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/assert_date_named.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/assert_logical_named.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/assert_naming.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/assert_no_duplicates_in_group.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/assert_numeric_named.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/assert_posixct_named.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/assertion_geen_dubbele_rijen.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/assertion_geen_kolommen_met_enkel_0.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/assertion_geen_kolommen_met_enkel_na.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/assertion_meer_dan_0_rijen.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/assertion_message.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/auto_document.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/bepaal_subtotalen_met_transitiematrix.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/bereken_na_waarden.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/build_analysis_set.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/build_as.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/build_kolomwaarden.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/check_assertions.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/check_classes.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/check_columns_for_double_rows.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/check_common_cols.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/check_documentation_analysisset.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/check_education_name.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/check_entire_naming_convention.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/check_name.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/check_naming_convention_from_yaml.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/check_unused_objects.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/check_variable.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/clear_global_proj.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/clear_script_objects.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/close_view.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/compare_input_output.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/controleer_na_waarden.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/correct_file_name.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/correct_var_name.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/count_more_than_1.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/count_rows_analysis_set.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/create_documentatie.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/create_documentatie_tests.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/create_quality_report.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/current_filename.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/current_git_branch.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/determine_author.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/determine_data_files.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/determine_delimiter.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/determine_input_files.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/determine_output_files.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/df_compare.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/df_inspect.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/df_inspect_without_warnings.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/documentation_add.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/documentation_add_csv.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/documentation_change.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/documentation_dump_csv.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/documentation_generate.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/documentation_get.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/documentation_remove.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/documentation_save.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/documentation_search.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/documentation_search_output.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/download_github_file.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/drop_na_column_names.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/dump_subset_to_file.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/dump_subset_to_testfile.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/dump_to_testfile.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/export_analysisset.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/export_results.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/extract_filepaths_readrds_csv.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/extract_output_file.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/find_pattern_csv.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/find_pattern_r.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/find_patterns.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/find_sys_variables.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/first_class.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/fixencoding.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/generate_introduction_validation.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/generate_output_files_database.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/get_analysisset.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/get_analysisset_7.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/get_archived_result_files.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/get_dist.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/get_last_n_commit_date.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/get_last_n_commit_info.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/get_ratio.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/get_snippets_file.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/grapes-notin-grapes.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/has_globale_identifiers.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/hash_var.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/identify_join_suffixes.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/insert_filepath_code.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/is_unieke_identifier.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/join_tkoppel.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/join_tkoppel_isat.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/maak_inschrijvingen_grid.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/maak_instroomscenario_met_subtotalen_tableau.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/maak_transitiematrix_grid.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/maak_transitiematrix_uitstroom.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/maak_transitiematrix_uitstroom_met_subtotalen.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/maak_transitiematrix_voor_prognosejaren.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/make_lint_object.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/mapping_category.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/mapping_fix.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/mapping_translate.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/match_kolom_met_patroon.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/max_num.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/maxnum.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/md_list.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/min_num.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/minnum.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/overwrite_dot_arguments.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/package_important_in_project.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/pipe.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/pretty_print_updates.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/print_last_used.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/random_string_vector.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/rapport_result_test_introduction.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/ratio_df_columns.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/read_data_dictionary.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/read_documentation.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/read_import_definitions.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/read_kolomwaarden.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/read_kolomwaarden_testen.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/readrds_csv.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/regex_content_parameter.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/rename_columns.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/retrieve_data_metadata.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/return_assertions_message.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/return_assertions_message_testen.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/round_values.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/sa_defineer_test_documentatie.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/sa_defineer_test_documentatie_get.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/sa_set_seed.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/sa_voorbereidingen.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/save_fst.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/save_multiple_tableau.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/save_sessioninfo.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/savecsv.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/savefst_csv.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/saverda.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/saverds_csv.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/schedule_job.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/sculpt_analysis_set.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/sculpt_as.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/sftp_delete.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/sftp_download.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/sftp_list_dir.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/sftp_login_credentials_get.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/sftp_login_credentials_set.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/sftp_upload.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/sftp_vu_delete.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/sftp_vu_download.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/sftp_vu_download_and_delete.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/sftp_vu_list_dir.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/sftp_vu_upload.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/sort_columnnames.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/sort_columnnames_analysis_set.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/source_index.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/split_file.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/src_clean.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/strip_names.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/subassertfunctie.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/tableau_colnames.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/test_csv.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/test_file_on_documentation.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/test_naming.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/translate_colnames_documentation.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/up_to_date.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/use_rstudio_prefs_silent.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/validate_assertions_present.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/validate_clear_script_objects.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/validate_filenames.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/validate_introduction.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/validate_no_warning_errors.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/validate_rm_objects.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/validate_script.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/validate_script_addin.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/validate_script_proj.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/validate_style.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/validate_write_files.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/variable_name_lint.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/veld_is_subset.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/vind_assertion_soort.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/vind_kolomwaarden.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/vind_subset_kolommen.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/voeg_transitie_subtotalen_toe.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/vvconverter_data.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/wrapper_translate_colnames_documentation.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/write_documentatie_tests.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/write_file.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/write_pattern_table.html</loc>
-  </url>
-  <url>
-    <loc>https://vusaverse.github.io/vusa/reference/write_tableau.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://vusaverse.github.io/vusa/404.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/LICENSE-text.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/LICENSE.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/authors.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/index.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/academic_period.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/add_attribute.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/archive_current_script.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/archive_script.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/assert_aanwezige_kolommen.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/assert_character_named.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/assert_character_set_equal.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/assert_character_subset.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/assert_dataframe_export.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/assert_date_named.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/assert_logical_named.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/assert_naming.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/assert_no_duplicates_in_group.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/assert_numeric_named.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/assert_posixct_named.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/assertion_geen_dubbele_rijen.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/assertion_geen_kolommen_met_enkel_0.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/assertion_geen_kolommen_met_enkel_na.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/assertion_meer_dan_0_rijen.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/assertion_message.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/auto_document.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/bepaal_subtotalen_met_transitiematrix.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/bereken_na_waarden.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/build_analysis_set.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/build_as.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/build_kolomwaarden.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/check_assertions.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/check_classes.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/check_columns_for_double_rows.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/check_common_cols.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/check_documentation_analysisset.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/check_education_name.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/check_entire_naming_convention.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/check_name.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/check_naming_convention_from_yaml.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/check_unused_objects.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/check_variable.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/clear_global_proj.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/clear_script_objects.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/close_view.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/compare_input_output.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/controleer_na_waarden.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/correct_file_name.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/correct_var_name.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/count_more_than_1.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/count_rows_analysis_set.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/create_documentatie.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/create_documentatie_tests.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/create_quality_report.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/current_filename.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/current_git_branch.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/determine_author.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/determine_data_files.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/determine_delimiter.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/determine_input_files.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/determine_output_files.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/df_compare.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/df_inspect.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/df_inspect_without_warnings.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/documentation_add.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/documentation_add_csv.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/documentation_change.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/documentation_dump_csv.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/documentation_generate.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/documentation_get.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/documentation_remove.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/documentation_save.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/documentation_search.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/documentation_search_output.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/download_github_file.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/drop_na_column_names.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/dump_subset_to_file.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/dump_subset_to_testfile.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/dump_to_testfile.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/export_analysisset.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/export_results.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/extract_filepaths_readrds_csv.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/extract_output_file.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/find_pattern_csv.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/find_pattern_r.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/find_patterns.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/find_sys_variables.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/first_class.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/fixencoding.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/generate_introduction_validation.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/generate_output_files_database.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/get_analysisset.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/get_analysisset_7.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/get_archived_result_files.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/get_dist.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/get_last_n_commit_date.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/get_last_n_commit_info.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/get_ratio.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/get_snippets_file.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/grapes-notin-grapes.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/has_globale_identifiers.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/hash_var.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/identify_join_suffixes.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/index.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/insert_filepath_code.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/is_unieke_identifier.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/join_tkoppel.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/join_tkoppel_isat.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/maak_inschrijvingen_grid.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/maak_instroomscenario_met_subtotalen_tableau.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/maak_transitiematrix_grid.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/maak_transitiematrix_uitstroom.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/maak_transitiematrix_uitstroom_met_subtotalen.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/maak_transitiematrix_voor_prognosejaren.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/make_lint_object.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/mapping_category.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/mapping_fix.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/mapping_translate.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/match_kolom_met_patroon.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/max_num.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/maxnum.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/md_list.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/min_num.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/minnum.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/overwrite_dot_arguments.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/package_important_in_project.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/pipe.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/pretty_print_updates.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/print_last_used.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/random_string_vector.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/rapport_result_test_introduction.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/ratio_df_columns.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/read_data_dictionary.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/read_documentation.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/read_import_definitions.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/read_kolomwaarden.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/read_kolomwaarden_testen.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/readrds_csv.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/regex_content_parameter.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/rename_columns.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/retrieve_data_metadata.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/return_assertions_message.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/return_assertions_message_testen.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/round_values.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/sa_defineer_test_documentatie.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/sa_defineer_test_documentatie_get.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/sa_set_seed.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/sa_voorbereidingen.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/save_fst.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/save_multiple_tableau.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/save_sessioninfo.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/savecsv.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/savefst_csv.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/saverda.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/saverds_csv.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/schedule_job.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/sculpt_analysis_set.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/sculpt_as.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/sftp_delete.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/sftp_download.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/sftp_list_dir.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/sftp_login_credentials_get.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/sftp_login_credentials_set.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/sftp_upload.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/sftp_vu_delete.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/sftp_vu_download.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/sftp_vu_download_and_delete.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/sftp_vu_list_dir.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/sftp_vu_upload.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/sort_columnnames.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/sort_columnnames_analysis_set.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/source_index.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/split_file.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/src_clean.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/strip_names.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/subassertfunctie.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/tableau_colnames.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/test_csv.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/test_file_on_documentation.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/test_naming.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/translate_colnames_documentation.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/up_to_date.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/use_rstudio_prefs_silent.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/validate_assertions_present.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/validate_clear_script_objects.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/validate_filenames.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/validate_introduction.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/validate_no_warning_errors.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/validate_rm_objects.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/validate_script.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/validate_script_addin.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/validate_script_proj.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/validate_style.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/validate_write_files.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/variable_name_lint.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/veld_is_subset.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/vind_assertion_soort.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/vind_kolomwaarden.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/vind_subset_kolommen.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/voeg_transitie_subtotalen_toe.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/vvconverter_data.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/wrapper_translate_colnames_documentation.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/write_documentatie_tests.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/write_file.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/write_pattern_table.html</loc></url>
+<url><loc>https://vusaverse.github.io/vusa/reference/write_tableau.html</loc></url>
 </urlset>
+
