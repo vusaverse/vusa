@@ -8,8 +8,6 @@
 #' @return return_var (=hashed vector)
 #' @export
 hash_var <- function(Vector_to_hash, seed = NULL) {
-  ## Check if digest is installed
-  check_installed_package("digest")
 
   ## Check if system variable exists, when argument for seed is NULL.
   if (is.null(seed)) {
