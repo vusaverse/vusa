@@ -60,7 +60,7 @@ clear_script_objects <- function(..., filepath = NULL, list = character(), pos =
   if (length(names) == 0L) names <- character()
   list <- .Primitive("c")(list, names)
 
-  Teststring_assignment <- "^[a-zA-Z_0-9]*(?=(\\s<-))"
+  Teststring_assignment <- "[a-zA-Z_0-9]*(?=(\\s*<-))"
   Regels <-
     stringr::str_extract(
       readr::read_lines(filepath, skip = line_start, n_max = line_end),
