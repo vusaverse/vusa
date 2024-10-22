@@ -87,6 +87,7 @@ reference:
   contents:  
   - bereken_na_waarden
   - create_documentatie
+  - create_dataframe_documentation
   - create_documentatie_tests
   - first_class
   - get_dist
