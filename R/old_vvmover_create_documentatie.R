@@ -324,7 +324,19 @@ minnum <- function(x) {
   if (is.numeric(x)) {
     non_missing_values <- x[!is.na(x)]
     if (length(non_missing_values) > 0) {
-      return(round(round_values(min(non_missing_values)), digits = 0))
+      # Find the minimum value
+      min_value <- min(non_missing_values)
+      
+      # Apply standard rounding logic
+      if (min_value >= 0 && min_value < 1) {
+        # Round to 0 if < 0.5, otherwise round to 1
+        rounded_value <- ifelse(min_value < 0.5, 0, 1)
+      } else {
+        # Standard rounding for other numbers
+        rounded_value <- round(min_value)
+      }
+      
+      return(rounded_value)
     } else {
       return(NA_real_)
     }
@@ -332,6 +344,8 @@ minnum <- function(x) {
     return(NA_real_)
   }
 }
+
+
 
 #' Maximum numeric
 #'
