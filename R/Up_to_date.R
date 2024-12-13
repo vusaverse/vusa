@@ -55,8 +55,8 @@ up_to_date <- function(bestandspad, correctie_tijdstip, frequentie, contact, inl
           } else {
             Leverdatum <- Leverdata
           }
-
-
+          
+          
           # omzetten van data met format "_20161115" naar "2016-11-15
           Leverdatum[grepl("^_", Leverdatum)] <-
             substr(Leverdatum[grepl("^_", Leverdatum)], 2, 10) %>%
@@ -70,7 +70,7 @@ up_to_date <- function(bestandspad, correctie_tijdstip, frequentie, contact, inl
           Leverdata <- file.info(bestandspad)$mtime %>%
             stats::na.omit() %>%
             as.Date()
-
+          
           if (length(Leverdata) > 1) {
             bestandspad <- suppressWarnings(file[which.max(Leverdata)])
             Leverdatum <- max(Leverdata)
@@ -79,12 +79,11 @@ up_to_date <- function(bestandspad, correctie_tijdstip, frequentie, contact, inl
           }
         }
       }
-
+      
       # Lees documentatie in
-      Documentatie_uptodate <- readrds_csv(
-        "Tableau/177 VU-Datasets up to date/Data/Documentatie uptodate check.rds"
+      Documentatie_uptodate <- readrds_csv(dataloc = "Documentatie/Documentatie uptodate check.rds"
       )
-
+      
       # Verzamel metadata
       Levering <- tibble::tribble(
         ~Naam,
@@ -137,8 +136,8 @@ up_to_date <- function(bestandspad, correctie_tijdstip, frequentie, contact, inl
           if (Levering$Inleesscript %in% Documentatie_uptodate$Inleesscript) {
             # en als de leverdatum van de huidige levering de meest recente levering is
             if (Levering$Leverdatum >= (Documentatie_uptodate %>%
-              dplyr::filter(Inleesscript == inleesscript) %>%
-              dplyr::pull(Leverdatum))[1]) {
+                                        dplyr::filter(Inleesscript == inleesscript) %>%
+                                        dplyr::pull(Leverdatum))[1]) {
               slackr::slackr_msg(paste0(
                 Levering$Naam, " Bestand is niet up to date (Contact: ", Levering$Contact, ")"
               ))
@@ -151,12 +150,12 @@ up_to_date <- function(bestandspad, correctie_tijdstip, frequentie, contact, inl
         dplyr::group_by(Naam, Inleesscript, Frequentie) %>%
         dplyr::slice(dplyr::n()) %>%
         dplyr::ungroup()
-
+      
       # Overwrite de documentatie
       saverds_csv(Documentatie_uptodate,
-        "Documentatie uptodate check",
-        dataloc = "Tableau/177 VU-Datasets up to date/Data/",
-        save_csv = TRUE
+                  "Documentatie uptodate check",
+                  dataloc = "Documentatie/",
+                  save_csv = TRUE
       )
     },
     ## Indien er een error  is, wordt er een error message geprint
