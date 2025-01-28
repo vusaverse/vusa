@@ -64,9 +64,9 @@ read_import_definitions <- function(filename = "", metadata_location = NULL, ...
       stop("System variable for metadata_location is missing.")
     }
   }
-  
+
   file_path <- file.path(metadata_location, filename)
-  
+
   # Determine the file reading function based on the file extension
   file_extension <- tools::file_ext(filename)
   if (file_extension == "csv") {
@@ -98,9 +98,9 @@ read_data_dictionary <- function(filename = "", metadata_location = NULL, ...) {
       stop("System variable for metadata_location is missing.")
     }
   }
-  
+
   file_path <- file.path(metadata_location, filename)
-  
+
   # Determine the file reading function based on the file extension
   file_extension <- tools::file_ext(filename)
   if (file_extension == "csv") {

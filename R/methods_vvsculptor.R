@@ -10,7 +10,7 @@ check_common_cols <- function(...) {
   list_of_dfs <- list(...)
   dfColList <- lapply(list_of_dfs, names)
   commonCols <- Reduce(intersect, dfColList)
-  
+
   return(commonCols)
 }
 

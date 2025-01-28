@@ -39,4 +39,3 @@ test_that("Validating filenames with inconsistent separators", {
   filenames <- c("file name-1.txt", "file name 2.csv", "file name 3.doc")
   expect_false(validate_filenames(filenames, "space"))
 })
-

@@ -65,22 +65,24 @@ archive_script <- function(File_path, Archive_path = NULL) {
 archive_current_script <- function() {
   # Get the path of the current script open in the source pane
   current_script <- rstudioapi::getSourceEditorContext()$path
-  
+
   # Check if there is a script open in the source pane
   if (current_script == "") {
     message("No script is currently open in the source pane.")
   } else {
     # Get the current working directory
     cwd <- paste0(getwd(), "/")
-    
+
     # Make the path relative to the current working directory
     # Use sub() to replace the current working directory path from the full path of the script
     current_script_relative <- sub(cwd, "", current_script)
-    
+
     # Confirmation step before archiving
-    confirmation <- utils::menu(choices = c("Yes", "No"), 
-                                title = paste0("Are you sure you want to archive the script: ", current_script_relative, "?"))
-    
+    confirmation <- utils::menu(
+      choices = c("Yes", "No"),
+      title = paste0("Are you sure you want to archive the script: ", current_script_relative, "?")
+    )
+
     if (confirmation == 1) {
       # Archive the script using the relative path
       archive_script(File_path = current_script_relative)
@@ -89,5 +91,3 @@ archive_current_script <- function() {
     }
   }
 }
-
-

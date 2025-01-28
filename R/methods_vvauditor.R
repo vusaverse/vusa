@@ -2,7 +2,7 @@
 #'
 #' This function checks if all filenames in a given vector use a specified
 #' separator consistently and return FALSE if there's any inconsistency.
-#' 
+#'
 #' @param filenames A character vector of filenames to validate.
 #' @param separator A character string specifying the separator to check for.
 #'                 Valid options are "hyphen", "underscore", or "space".
@@ -12,10 +12,10 @@
 #' # Test case for inconsistent separator usage
 #' filenames <- c("file name-1.txt", "file name 2.csv", "file name 3.doc")
 #' validate_filenames(filenames, "space") # Should return FALSE
-#' 
+#'
 #' filenames <- c("file-name-1.txt", "file_name-2.csv", "file_name-3.doc")
 #' validate_filenames(filenames, "underscore") # Should return TRUE
-#' 
+#'
 #' filenames <- c("file-name-1.txt", "file_name-2.csv", "file name-3.doc")
 #' validate_filenames(filenames, "underscore") # Should return FALSE
 #' @export
@@ -23,27 +23,27 @@ validate_filenames <- function(filenames, separator) {
   # Define valid separators and their corresponding regex patterns
   valid_separators <- c("hyphen", "underscore", "space")
   separator_patterns <- c(".*-.*", ".*_.*", ".*\\s+.*")
-  
+
   # Check if the specified separator is valid
   if (!(separator %in% valid_separators)) {
     stop("Invalid separator specified. Please use 'hyphen', 'underscore', or 'space'.")
   }
-  
+
   # Get the index of the selected separator
   separator_index <- match(separator, valid_separators)
-  
+
   # Check for inconsistent separator usage in filenames
   # Use purrr::map_lgl to check if any filename contains any other separator
   inconsistent <- purrr::map_lgl(
     setdiff(valid_separators, separator),
     ~ any(stringr::str_detect(filenames, stringr::regex(separator_patterns[match(., valid_separators)])))
   )
-  
+
   # If any inconsistency is found, return FALSE
   if (any(inconsistent)) {
     return(FALSE)
   }
-  
+
   # If no inconsistencies are found, return TRUE
   return(TRUE)
 }
@@ -61,21 +61,21 @@ validate_filenames <- function(filenames, separator) {
 #' @export
 check_naming_convention_from_yaml <- function(x, yaml_file) {
   conventions <- yaml::read_yaml(yaml_file)$conventions
-  
+
   file_name <- basename(x)
   parts <- unlist(strsplit(file_name, "[[:space:]]|_"))
-  
+
   results <- list()
-  
+
   for (convention in conventions) {
     check_parts <- min(convention$parts, length(parts))
     part_to_check <- paste(parts[1:check_parts], collapse = "")
-    
+
     result <- stringr::str_detect(part_to_check, convention$pattern)
-    
+
     results[[convention$name]] <- all(result)
   }
-  
+
   return(results)
 }
 
@@ -94,10 +94,10 @@ check_entire_naming_convention <- function(filename, yaml_file, separator) {
   if (!validate_filenames(c(filename), separator)) {
     return(FALSE)
   }
-  
+
   # Then, check the filename against the naming conventions
   convention_results <- check_naming_convention_from_yaml(filename, yaml_file)
-  
+
   # Return TRUE if all conventions are met, FALSE otherwise
   return(all(unlist(convention_results)))
 }
@@ -217,9 +217,9 @@ current_cli_filename <- function() {
   # _exist_, only the last is executed), so we search in reverse since it's
   # easier to grab the first item.
   args <- rev(commandArgs(F))
-  
+
   file_index <- grep("^(--file=|-f$)", args)[1]
-  
+
   # No argument found
   if (is.na(file_index)) {
     NULL
@@ -246,33 +246,33 @@ current_cli_filename <- function() {
 find_sys_variables <- function(package_name) {
   # Load the package
   library(package_name, character.only = TRUE)
-  
+
   # Get the environment of the package
   package_env <- asNamespace(package_name)
-  
+
   # Get a list of all functions in the package
   package_functions <- ls(envir = package_env)
-  
+
   # Initialize an empty list to store system variables
   sys_variables <- list()
-  
+
   # Iterate through each function in the package
-  for(func in package_functions) {
+  for (func in package_functions) {
     # Get the function object using get
     func_obj <- get(func, envir = package_env)
-    
+
     # Extract the function body as a character vector
     func_body <- capture.output(print(func_obj))
-    
+
     # Search for Sys.getenv() calls in the function body and extract variable names
     matches <- gregexpr("Sys.getenv\\(\"([^\"]+)\"\\)", func_body, perl = TRUE)
-    
+
     if (any(sapply(matches, length) > 0)) {
       # Extract variable names from matches
       var_names <- regmatches(func_body, matches)
       var_names <- gsub("Sys.getenv\\(\"", "", var_names)
       var_names <- gsub("\"\\)", "", var_names)
-      
+
       # Add the function name and variable names to the results
       for (i in 1:length(var_names)) {
         if (var_names[[i]] != "character(0)") {
@@ -281,10 +281,10 @@ find_sys_variables <- function(package_name) {
       }
     }
   }
-  
+
   # Combine the list of data frames into a single data frame
   result_df <- do.call(rbind, sys_variables)
-  
+
   return(result_df)
 }
 
@@ -301,18 +301,18 @@ find_sys_variables <- function(package_name) {
 check_unused_objects <- function(filepath) {
   script_lines <- readr::read_lines(filepath)
   script_text <- paste(script_lines, collapse = "\n")
-  
+
   assigned_objects <- stringr::str_extract_all(script_text, "\\b[a-zA-Z_][a-zA-Z0-9_.]*\\b(?=(\\s*<-))") %>% unlist()
-  
+
   used_objects <- character()
   for (obj in assigned_objects) {
     if (!grepl(paste0("\\b", obj, "\\b"), script_text) || sum(grepl(paste0("\\b", obj, "\\b"), script_lines)) > 1) {
       used_objects <- c(used_objects, obj)
     }
   }
-  
+
   unused_objects <- setdiff(assigned_objects, used_objects)
-  
+
   # Check if unused_objects is empty and return NA if true
   if (length(unused_objects) == 0) {
     return(NA)

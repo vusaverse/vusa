@@ -49,7 +49,7 @@ validate_script_proj <- function(filepath = NULL, export_to_dataframe = FALSE) {
     error_or_warning <- warnings_errors_messages$result
 
     last_commit_date <- get_last_n_commit_date(filepath)
-    
+
     if (!length(last_commit_date)) {
       last_commit_date <- NA_character_
     }
@@ -73,9 +73,9 @@ validate_script_proj <- function(filepath = NULL, export_to_dataframe = FALSE) {
     lib <- any(grep("library", readLines(filepath)))
     req <- any(grep("require", readLines(filepath)))
     ins <- any(grep("install.packages", readLines(filepath)))
-    
+
     unused_objects <- check_unused_objects(filepath)
-    
+
     if (length(unused_objects > 1)) {
       unused_objects <- paste0(unused_objects, collapse = " \n ")
     }
