@@ -1245,7 +1245,7 @@ capitals <- NULL
 #' Function to check whether the variable name is according the "stijlgids"
 #'
 #' @param name Variable name to check
-#' 
+#'
 #'
 check_variable <- function(name) {
   ## Turn variable name into variable value

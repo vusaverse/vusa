@@ -21,10 +21,10 @@ create_documentatie_tests <- function(df, Naam, Limietwaarden_bestandspad = NA) 
   ## dit betekent dat de waarden in het te testen dataframe alleen de waarden
   ## uit de list mogen hebben, die in deze functie zijn gedefinieerd.
   ## 3. Vervolgens maakt de functie een tabel, die wordt weggeschreven naar een csv bestand
-  
+
   ## _____________________________________________________________________________
   ## 1. A. MAAK VECTOREN VOOR DE KOLOMMEN VAN DE TESTDOCUMENTATIE
-  
+
   ## Sla de kolomnamen op
   Veldnamen <- names(df)
   ## Sla de veldtypes op
@@ -34,37 +34,39 @@ create_documentatie_tests <- function(df, Naam, Limietwaarden_bestandspad = NA) 
   Veldtypes <- purrr::map_chr(Veldnamen, veld_is_subset, df = df, Veldnamen = Veldnamen, Veldtypes = Veldtypes)
   ## Check voor het percentage missende waarden in de kolommen
   p_NAs <- purrr::map_dbl(df, bereken_na_waarden)
-  
+
   ## Vind de max en min waarden voor numerieke kolommen.
   Lower <- purrr::map_dbl(df, min_num, na.rm = TRUE)
-  
-  
+
+
   Upper <- purrr::map_dbl(df, max_num, na.rm = TRUE)
-  
+
   ## Vind patronen die kolommen met type character kunnen hebben mbv de match_kolom_met_patroon
   Pattern <- purrr::map_chr(df, match_kolom_met_patroon)
-  
+
   ## Voor pattern: gebruik XX. Documentatie/Testpatterns/Patterns om voor patronen te zoeken
   ## Ga voor elke variabele in de df na of deze matcht met Ã©Ã©n van deze patronen
   ## Als dit zo is, voeg patroon toe aan pattern kolom
-  
+
   Uniek <- purrr::map_lgl(Veldnamen, is_unieke_identifier, df = df)
-  
+
   ## Zet alle kolommen op In_gebruik is TRUE
   In_gebruik <- rep(TRUE, length(Veldnamen))
-  
+
   ## _____________________________________________________________________________
   ## 1. B. MAAK DATAFRAME OM LATER WEG TE SCHRIJVEN
   ## Vectoren samen vormen een table
-  Table <- tibble::tibble(Veldnaam = Veldnamen,
-                          In_gebruik = In_gebruik,
-                          Veldtype = Veldtypes,
-                          p_na = p_NAs,
-                          lower = Lower,
-                          upper = Upper,
-                          pattern = Pattern,
-                          Uniek = Uniek)
-  
+  Table <- tibble::tibble(
+    Veldnaam = Veldnamen,
+    In_gebruik = In_gebruik,
+    Veldtype = Veldtypes,
+    p_na = p_NAs,
+    lower = Lower,
+    upper = Upper,
+    pattern = Pattern,
+    Uniek = Uniek
+  )
+
   ## _____________________________________________________________________________
   ## 2. CHECK OF KOLOM TYPE SUBSET HEEFT
   ## Maak subdataframe met veldnamen en veldtypen
@@ -73,11 +75,11 @@ create_documentatie_tests <- function(df, Naam, Limietwaarden_bestandspad = NA) 
   ## Zoek voor elk veld van type subset (of list) naar de kolomwaarden
   Set_kolomwaarden <- purrr::pmap(df_veldnaam_en_type, vind_kolomwaarden, df = df) %>%
     unlist()
-  
+
   ## Voeg de kolomwaarden toe aan de tabel
   Table <- Table %>%
     dplyr::mutate(Kolomwaarden = Set_kolomwaarden)
-  
+
   ## 08-02-2019: JvZ: Dit bestand is een afhankelijkheid, er staat een bestandspad
   ## hard geprogrammeerd maar de gebruiker weet niet waar deze staat. In een
   ## ander project staat dit bestand niet, en krijg je een error. Kan je het bestandspad instelbaar
@@ -88,7 +90,7 @@ create_documentatie_tests <- function(df, Naam, Limietwaarden_bestandspad = NA) 
   if (file.exists(paste0(Sys.getenv("DOCUMENTATION_DIR"), Limietwaarden_bestandspad))) {
     ## Lees een tabel in met de vaste limiet-waarden voor sommige numerieke variabelen (bijv studentnummer)
     Tabel_limietwaarden <- read_documentation(Limietwaarden_bestandspad, readr = TRUE)
-    #Tabel_limietwaarden <- read_documentatie("Testdocumentatie/Numerieke_limietwaarden.csv", readr = TRUE)
+    # Tabel_limietwaarden <- read_documentatie("Testdocumentatie/Numerieke_limietwaarden.csv", readr = TRUE)
     ## Verander kolomtype naar double, zodat deze beter vergeleken kan worden met andere tabellen
     Tabel_limietwaarden <- Tabel_limietwaarden %>%
       dplyr::mutate(lower_new = as.double(lower_new), upper_new = as.double(upper_new))
@@ -96,8 +98,10 @@ create_documentatie_tests <- function(df, Naam, Limietwaarden_bestandspad = NA) 
     ## voorkomen naar de waarden uit de tabel
     Table <- Table %>%
       dplyr::left_join(Tabel_limietwaarden, by = "Veldnaam") %>%
-      dplyr::mutate(lower = dplyr::coalesce(lower_new, lower),
-                    upper = dplyr::coalesce(upper_new, upper)) %>%
+      dplyr::mutate(
+        lower = dplyr::coalesce(lower_new, lower),
+        upper = dplyr::coalesce(upper_new, upper)
+      ) %>%
       dplyr::select(-lower_new, -upper_new)
   }
   ## _____________________________________________________________________________
@@ -128,10 +132,10 @@ create_documentatie <- function(df, Naam, Limietwaarden_bestandspad = NA) {
   ## dit betekent dat de waarden in het te testen dataframe alleen de waarden
   ## uit de list mogen hebben, die in deze functie zijn gedefinieerd.
   ## 3. Vervolgens maakt de functie een tabel, die wordt weggeschreven naar een csv bestand
-  
+
   ## _____________________________________________________________________________
   ## 1. A. MAAK VECTOREN VOOR DE KOLOMMEN VAN DE TESTDOCUMENTATIE
-  
+
   ## Sla de kolomnamen op
   Veldnamen <- names(df)
   ## Sla de veldtypes op
@@ -141,49 +145,51 @@ create_documentatie <- function(df, Naam, Limietwaarden_bestandspad = NA) {
   Veldtypes <- purrr::map_chr(Veldnamen, veld_is_subset, df = df, Veldnamen = Veldnamen, Veldtypes = Veldtypes)
   ## Check voor het percentage missende waarden in de kolommen
   p_NAs <- colMeans(is.na(df)) * 100
-  
+
   ## Vind de max en min waarden voor numerieke kolommen.
-  Lower <- purrr::map_dbl(df, ~ifelse(all(is.na(.)), NA, minnum(.)))
-  Upper <- purrr::map_dbl(df, ~ifelse(all(is.na(.)), NA, maxnum(.)))
-  
-  
+  Lower <- purrr::map_dbl(df, ~ ifelse(all(is.na(.)), NA, minnum(.)))
+  Upper <- purrr::map_dbl(df, ~ ifelse(all(is.na(.)), NA, maxnum(.)))
+
+
   ## Vind patronen die kolommen met type character kunnen hebben mbv de match_kolom_met_patroon
   Pattern <- purrr::map_chr(df, match_kolom_met_patroon)
-  
+
   ## Voor pattern: gebruik XX. Documentatie/Testpatterns/Patterns om voor patronen te zoeken
   ## Ga voor elke variabele in de df na of deze matcht met Ã©Ã©n van deze patronen
   ## Als dit zo is, voeg patroon toe aan pattern kolom
-  
+
   Uniek <- purrr::map_lgl(Veldnamen, is_unieke_identifier, df = df)
-  
+
   ## Zet alle kolommen op In_gebruik is TRUE
   In_gebruik <- rep(TRUE, length(Veldnamen))
-  
+
   ##
   Percentages <- purrr::map_chr(df, get_ratio)
-  
+
   ##
   Distribution <- purrr::map_chr(df, get_dist)
-  
+
   ## Maak een lege kolom voor opmerkingen
   Opmerkingen <- ""
-  
+
   ## _____________________________________________________________________________
   ## 1. B. MAAK DATAFRAME OM LATER WEG TE SCHRIJVEN
   ## Vectoren samen vormen een table
-  Table <- tibble::tibble(Veldnaam = Veldnamen,
-                          Veldnaam_export = Veldnamen,
-                          In_gebruik = In_gebruik,
-                          Veldtype = Veldtypes,
-                          p_na = p_NAs,
-                          lower = Lower,
-                          upper = Upper,
-                          pattern = Pattern,
-                          Uniek = Uniek,
-                          Percentages = Percentages,
-                          Distribution = Distribution,
-                          Opmerkingen = Opmerkingen)
-  
+  Table <- tibble::tibble(
+    Veldnaam = Veldnamen,
+    Veldnaam_export = Veldnamen,
+    In_gebruik = In_gebruik,
+    Veldtype = Veldtypes,
+    p_na = p_NAs,
+    lower = Lower,
+    upper = Upper,
+    pattern = Pattern,
+    Uniek = Uniek,
+    Percentages = Percentages,
+    Distribution = Distribution,
+    Opmerkingen = Opmerkingen
+  )
+
   ## _____________________________________________________________________________
   ## 2. CHECK OF KOLOM TYPE SUBSET HEEFT
   ## Maak subdataframe met veldnamen en veldtypen
@@ -192,7 +198,7 @@ create_documentatie <- function(df, Naam, Limietwaarden_bestandspad = NA) {
   ## Zoek voor elk veld van type subset (of list) naar de kolomwaarden
   Set_kolomwaarden <- purrr::pmap(df_veldnaam_en_type, vind_kolomwaarden, df = df) %>%
     unlist()
-  
+
   ## 08-02-2019: JvZ: Dit bestand is een afhankelijkheid, er staat een bestandspad
   ## hard geprogrammeerd maar de gebruiker weet niet waar deze staat. In een
   ## ander project staat dit bestand niet, en krijg je een error. Kan je het bestandspad instelbaar
@@ -201,7 +207,7 @@ create_documentatie <- function(df, Naam, Limietwaarden_bestandspad = NA) {
   if (file.exists(paste0(Sys.getenv("DOCUMENTATION_DIR"), Limietwaarden_bestandspad))) {
     ## Lees een tabel in met de vaste limiet-waarden voor sommige numerieke variabelen (bijv studentnummer)
     Tabel_limietwaarden <- read_documentation(Limietwaarden_bestandspad, readr = TRUE)
-    #Tabel_limietwaarden <- read_documentatie("Testdocumentatie/Numerieke_limietwaarden.csv", readr = TRUE)
+    # Tabel_limietwaarden <- read_documentatie("Testdocumentatie/Numerieke_limietwaarden.csv", readr = TRUE)
     ## Verander kolomtype naar double, zodat deze beter vergeleken kan worden met andere tabellen
     Tabel_limietwaarden <- Tabel_limietwaarden %>%
       dplyr::mutate(lower_new = as.double(lower_new), upper_new = as.double(upper_new))
@@ -209,11 +215,13 @@ create_documentatie <- function(df, Naam, Limietwaarden_bestandspad = NA) {
     ## voorkomen naar de waarden uit de tabel
     Table <- Table %>%
       dplyr::left_join(Tabel_limietwaarden, by = "Veldnaam") %>%
-      dplyr::mutate(lower = dplyr::coalesce(lower_new, lower),
-                    upper = dplyr::coalesce(upper_new, upper)) %>%
+      dplyr::mutate(
+        lower = dplyr::coalesce(lower_new, lower),
+        upper = dplyr::coalesce(upper_new, upper)
+      ) %>%
       dplyr::select(-lower_new, -upper_new)
   }
-  
+
   ## _____________________________________________________________________________
   ## 3. SCHRIJF DATAFRAME WEG NAAR DE JUISTE LOCATIE
   ## Schrijf de tabel weg naar een csv bestand in de volgende map: XX. Documentatie/Testdocumentatie/
@@ -247,7 +255,7 @@ bereken_na_waarden <- function(x, ...) {
   ## percentage missende waarden: 10% van huidige missings. Dit wordt aan het huidige percentage
   ## NAs toegevoegd, om bij een kleine stijging in missende waarden de assertion niet meteen af te
   ## laten gaan.
-  return((sum((is.na(x))/length(x)) + (sum(is.na(x))/length(x))*0.10 + (1 - 1/log(length(x)))*0.10)*100)
+  return((sum((is.na(x)) / length(x)) + (sum(is.na(x)) / length(x)) * 0.10 + (1 - 1 / log(length(x))) * 0.10) * 100)
 }
 
 #' Veld is subset
@@ -293,10 +301,10 @@ min_num <- function(x, ...) {
     ## vind  minimum in vector x
     min_x <- min(x, ...)
     ## Behoud een range van 10% voor het minimum
-    if (min_x < 0 ) {
-      min_x <- min_x*1.1
+    if (min_x < 0) {
+      min_x <- min_x * 1.1
     } else {
-      min_x <- min_x*0.9
+      min_x <- min_x * 0.9
     }
     return(min_x)
   }
@@ -326,7 +334,7 @@ minnum <- function(x) {
     if (length(non_missing_values) > 0) {
       # Find the minimum value
       min_value <- min(non_missing_values)
-      
+
       # Apply standard rounding logic
       if (min_value >= 0 && min_value < 1) {
         # Round to 0 if < 0.5, otherwise round to 1
@@ -335,7 +343,7 @@ minnum <- function(x) {
         # Standard rounding for other numbers
         rounded_value <- round(min_value)
       }
-      
+
       return(rounded_value)
     } else {
       return(NA_real_)
@@ -379,9 +387,9 @@ max_num <- function(x, ...) {
   } else {
     max_x <- max(x, ...)
     if (max_x < 0) {
-      max_x <- max_x*0.9
+      max_x <- max_x * 0.9
     } else {
-      max_x <- max_x*1.1
+      max_x <- max_x * 1.1
     }
     return(max_x)
   }
@@ -453,32 +461,37 @@ match_kolom_met_patroon <- function(x) {
 #' @family assertions
 #' @family tests
 get_dist <- function(data_vector) {
-  if (is.numeric(data_vector) ) {
+  if (is.numeric(data_vector)) {
     quantiles <- stats::quantile(data_vector, probs = c(0.25, 0.5, 0.75), na.rm = TRUE)
-    summary_stats <- c(Mean = mean(data_vector, na.rm = TRUE),
-                       Std_Dev = stats::sd(data_vector, na.rm = TRUE))
-    quantiles <- paste("Q1 =", quantiles[1], " | median =", quantiles[2], " | Q3 = ", quantiles[3],
-                       " | mean =", format(summary_stats[1], digits = 3), " | stdev =", format(summary_stats[2], digits = 3))
+    summary_stats <- c(
+      Mean = mean(data_vector, na.rm = TRUE),
+      Std_Dev = stats::sd(data_vector, na.rm = TRUE)
+    )
+    quantiles <- paste(
+      "Q1 =", quantiles[1], " | median =", quantiles[2], " | Q3 = ", quantiles[3],
+      " | mean =", format(summary_stats[1], digits = 3), " | stdev =", format(summary_stats[2], digits = 3)
+    )
     return(quantiles)
-    
-  }
-  else if (is.character(data_vector)) {
+  } else if (is.character(data_vector)) {
     if (any(grepl("^\\d*\\.?\\d*$", sample(data_vector, 100)))) {
-      
-      data_vector <- data_vector[grepl("^\\d*\\.?\\d*$",  data_vector)]
+      data_vector <- data_vector[grepl("^\\d*\\.?\\d*$", data_vector)]
       data_vector <- data_vector[!is.na(data_vector)]
       data_vector <- as.double(data_vector)
       quantiles <- stats::quantile(data_vector, probs = c(0.25, 0.5, 0.75), na.rm = TRUE)
-      summary_stats <- c(Mean = mean(data_vector, na.rm = TRUE),
-                         Std_Dev = stats::sd(data_vector, na.rm = TRUE))
-      quantiles <- paste("Q1 =", quantiles[1], " | median =", quantiles[2], " | Q3 = ", quantiles[3],
-                         " | mean =", format(summary_stats[1], digits = 3), " | stdev =", format(summary_stats[2], digits = 3))
+      summary_stats <- c(
+        Mean = mean(data_vector, na.rm = TRUE),
+        Std_Dev = stats::sd(data_vector, na.rm = TRUE)
+      )
+      quantiles <- paste(
+        "Q1 =", quantiles[1], " | median =", quantiles[2], " | Q3 = ", quantiles[3],
+        " | mean =", format(summary_stats[1], digits = 3), " | stdev =", format(summary_stats[2], digits = 3)
+      )
       return(quantiles)
     } else {
       default_na <- as.double(NA_character_)
       return(default_na)
     }
-  } else{
+  } else {
     default_na <- as.double(NA_character_)
     return(default_na)
   }
@@ -491,26 +504,24 @@ get_dist <- function(data_vector) {
 #' @param data_vector column to check
 #' @family assertions
 #' @family tests
-get_ratio <-  function(data_vector) {
-  
+get_ratio <- function(data_vector) {
   # Initialize percent variable
   percent <- NULL
-  
+
   # Check if the data_vector meets certain conditions
   if (!lubridate::is.POSIXct(data_vector)) {
-    
     # Create frequency table of the data_vector and sort it by descending order
     frequency_table <- janitor::tabyl(data_vector) %>%
       dplyr::arrange(dplyr::desc(percent)) %>%
       utils::head(10) %>%
       dplyr::filter(!is.na(data_vector))
-    
+
     # Assign the categories to a variable
     categories <- frequency_table$data_vector
-    
+
     # Assign the percentages to a variable without rounding
     percentages <- frequency_table$percent * 100
-    
+
     # Only add "Overig" category if there are more than 10 unique elements
     if (sum(percentages) < 100 && length(unique(data_vector)) > 10) {
       percentages <- append(percentages, 100 - sum(percentages))
@@ -518,29 +529,27 @@ get_ratio <-  function(data_vector) {
     } else {
       percentages[length(percentages)] <- 100 - sum(percentages[-length(percentages)])
     }
-    
+
     # Round percentages to two decimal places for display
     percentages <- format(percentages, digits = 2)
-    
+
     # Combines the categories and percentages into a single string
     result <- paste0(categories, ": (", percentages, "%)", collapse = " | ")
     return(result)
-  }
-  else if (lubridate::is.POSIXct(data_vector)) {
-    
+  } else if (lubridate::is.POSIXct(data_vector)) {
     # Create frequency table of the data_vector and sort it by descending order and keep top 10 values
     frequency_table <- janitor::tabyl(data_vector) %>%
       dplyr::arrange(dplyr::desc(percent)) %>%
       dplyr::top_n(10, "valid_percent") %>%
       utils::head(10) %>%
       dplyr::filter(!is.na(data_vector))
-    
+
     # Assign the categories to a variable
     categories <- as.character(frequency_table$data_vector)
-    
+
     # Assign the percentages to a variable without rounding
     percentages <- frequency_table$percent * 100
-    
+
     # Only add "Overig" category if there are more than 10 unique elements
     if (sum(percentages) < 100 && length(unique(data_vector)) > 10) {
       percentages <- append(percentages, 100 - sum(percentages))
@@ -548,10 +557,10 @@ get_ratio <-  function(data_vector) {
     } else {
       percentages[length(percentages)] <- 100 - sum(percentages[-length(percentages)])
     }
-    
+
     # Round percentages to two decimal places for display
     percentages <- format(percentages, digits = 2)
-    
+
     # Check if first percentage is less than 1
     if (as.numeric(percentages[1]) < 0.01) {
       return("Not enough occurences")
@@ -560,8 +569,7 @@ get_ratio <-  function(data_vector) {
       result <- paste0(categories, ": (", percentages, "%)", collapse = " | ")
       return(result)
     }
-  }
-  else{
+  } else {
     return("Too many categories")
   }
 }
@@ -617,4 +625,3 @@ write_documentatie <- function(Table, Naam) {
   dir.create(dirname(path), showWarnings = FALSE, recursive = TRUE)
   return(readr::write_csv2(Table, path))
 }
-

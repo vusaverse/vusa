@@ -103,7 +103,7 @@ fixencoding <- function(df, originalEncoding = "latin1") {
     if (inherits(df[, col], "character")) {
       base::Encoding(df[, col]) <- originalEncoding
     }
-    
+
     if (inherits(df[, col], "factor")) {
       base::Encoding(levels(df[, col])) <- originalEncoding
     }

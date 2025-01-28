@@ -1,6 +1,3 @@
-
-
-
 #' Sort column names analysis set
 #'
 #' Function to sort analysis set column names by category and alphabetically.

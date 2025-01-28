@@ -13,7 +13,8 @@ schedule_job <- function(file) {
     # If the file exists, write the file path and branch to the txt file
     # Use cat with file argument to write directly to the file
     cat(paste(file, "branch: ", current_git_branch()),
-        file = Sys.getenv("SCHEDULE_PATH"),
-        append = TRUE, sep = "\n")
+      file = Sys.getenv("SCHEDULE_PATH"),
+      append = TRUE, sep = "\n"
+    )
   }
 }

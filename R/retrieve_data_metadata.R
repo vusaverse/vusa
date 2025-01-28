@@ -11,17 +11,17 @@
 #' @export
 retrieve_data_metadata <- function(filepath, verbose = FALSE) {
   column_names <- system(paste0('head -1 "', filepath, '"'), intern = T)
-  num_cols <- length(unlist(strsplit(column_names, split = ';')))
-  
-  
+  num_cols <- length(unlist(strsplit(column_names, split = ";")))
+
+
   row_number <- system(paste0('find /c /v "" "', filepath, '"'), intern = T)
   num_rows <- as.integer(sub(".*: ", "", row_number[2])) - 1
-  
+
   if (verbose) {
     print(paste("number of columns:", num_cols))
     print(paste("number of rows:", num_rows))
   }
-  
-  
+
+
   return(strsplit(column_names, "\\;|\\,|\t"))
 }

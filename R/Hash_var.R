@@ -8,7 +8,6 @@
 #' @return return_var (=hashed vector)
 #' @export
 hash_var <- function(Vector_to_hash, seed = NULL) {
-
   ## Check if system variable exists, when argument for seed is NULL.
   if (is.null(seed)) {
     message("Seed is missing, so checking for existing system variable for seed")

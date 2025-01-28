@@ -521,8 +521,8 @@ build_kolomwaarden <- function(df, Naming, Naam_bestand) {
   Waarde <- NULL
   ## Vind de kolommen die het subset-type hebben
   Waarden_te_gebruiken <- vind_subset_kolommen(Naming = Naming)
-  
-  if(length(Waarden_te_gebruiken) > 0) {
+
+  if (length(Waarden_te_gebruiken) > 0) {
     df_uniek <- df %>%
       ## Selecteer de kolommen uit de df
       dplyr::select(dplyr::one_of(Waarden_te_gebruiken)) %>%
@@ -531,7 +531,7 @@ build_kolomwaarden <- function(df, Naming, Naam_bestand) {
       ## Neem alleen de unieke waarden mee, geen NA
       dplyr::distinct() %>%
       dplyr::filter(!is.na(Waarde))
-    
+
     ## Sla de assertwaarden op in een tabel in een csv file
     path <- paste0(Sys.getenv("DOCUMENTATION_DIR"), "Kolomwaarden/Assert_", Naam_bestand, ".csv")
     utils::write.csv2(df_uniek, file = path, row.names = FALSE, fileEncoding = "UTF-8")
