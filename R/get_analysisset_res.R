@@ -2,7 +2,7 @@
 #'
 #' @param columns List of specific columns to read in.
 #' @param AS_path Path of the location for the analysis set
-#' @return Analysis set 1, 1R = random set, 7 or 7 Extra features from the branch set
+#' @return Results analysis set
 #' @export
 get_analysisset_res <- function(columns = NULL, AS_path = NULL) {
   if (is.null(AS_path)) {
