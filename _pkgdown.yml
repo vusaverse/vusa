@@ -150,6 +150,7 @@ reference:
   - export_results
   - get_analysisset
   - get_analysisset_7
+  - get_analysisset_res
   - get_archived_result_files
   - read_data_dictionary
   - read_documentation
