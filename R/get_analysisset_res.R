@@ -12,9 +12,14 @@ get_analysisset_res <- function(columns = NULL, AS_path = NULL) {
       stop("system variables for as_path are missing")
     }
   }
+  
+  if (is.null(columns)) {
+    returnvar <- readr::read_rds(AS)
+  } else {
+    returnvar <- readr::read_rds(AS) %>%
+      dplyr::select(columns)
+  }
 
-  returnvar <- readr::read_rds(AS) %>%
-    dplyr::select(columns)
-
-  return(returnvar)
+  returnvar
 }
+
