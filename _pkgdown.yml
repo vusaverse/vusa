@@ -151,6 +151,8 @@ reference:
   - get_analysisset
   - get_analysisset_7
   - get_analysisset_res
+  - get_analysisset_vak
+  - get_analysisset_opl
   - get_archived_result_files
   - read_data_dictionary
   - read_documentation
