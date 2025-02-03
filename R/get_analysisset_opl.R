@@ -7,7 +7,7 @@
 get_analysisset_opl <- function(columns = NULL, AS_path = NULL) {
   if (is.null(AS_path)) {
     if (!any(Sys.getenv(c("OUTPUT_DIR", "OPLAS_PATH")) == "")) {
-      AS <- paste0(Sys.getenv("OUTPUT_DIR"), Sys.getenv("BRANCH"), "/", Sys.getenv("OPLAS_PATH"))
+      AS <- paste0(Sys.getenv("OUTPUT_DIR"), Sys.getenv("OPLAS_PATH"))
     } else {
       stop("system variables for as_path are missing")
     }
@@ -22,3 +22,4 @@ get_analysisset_opl <- function(columns = NULL, AS_path = NULL) {
 
   returnvar
 }
+
