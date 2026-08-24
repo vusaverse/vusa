@@ -465,7 +465,7 @@ validate_no_warning_errors <- function(filepath, export_to_dataframe = FALSE) {
     }
 
     # Capture memory usage before execution
-    mem_before <- pryr::mem_used()
+    mem_before <- lobstr::mem_used()
 
     val <-
       tryCatch(
@@ -474,7 +474,7 @@ validate_no_warning_errors <- function(filepath, export_to_dataframe = FALSE) {
       )
 
     # Capture memory usage after execution
-    mem_after <- pryr::mem_used()
+    mem_after <- lobstr::mem_used()
 
     # Calculate memory usage during execution
     mem_usage <- mem_after - mem_before
