@@ -158,7 +158,7 @@ validate_script_addin <- function(filepath, export_to_dataframe = FALSE) {
   # compare_input_output(filepath, export_to_dataframe)
 
   base::cat("\n")
-  vusa::clear_script_objects(bestandspad = filepath, envir = globalenv())
+  vusa::clear_script_objects(filepath = filepath, envir = globalenv())
 }
 
 #' Retrieve the last N commit information for a file
@@ -465,7 +465,7 @@ validate_no_warning_errors <- function(filepath, export_to_dataframe = FALSE) {
     }
 
     # Capture memory usage before execution
-    mem_before <- pryr::mem_used()
+    # mem_before <- pryr::mem_used()
 
     val <-
       tryCatch(
@@ -474,13 +474,13 @@ validate_no_warning_errors <- function(filepath, export_to_dataframe = FALSE) {
       )
 
     # Capture memory usage after execution
-    mem_after <- pryr::mem_used()
+    # mem_after <- pryr::mem_used()
 
     # Calculate memory usage during execution
-    mem_usage <- mem_after - mem_before
+    # mem_usage <- mem_after - mem_before
 
     list(
-      warning = myWarnings, error = myError, memory_usage = mem_usage,
+      warning = myWarnings, error = myError, #memory_usage = mem_usage,
       no_error = no_error, no_warning = no_warning, no_message = no_message
     )
   }

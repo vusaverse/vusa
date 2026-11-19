@@ -91,7 +91,7 @@ validate_script <- function(filepath = NULL, export_naar_dataframe = FALSE) {
     }
     compare_input_output(filepath, export_naar_dataframe)
     base::cat("\n")
-    Clear_script_objects(bestandspad = filepath, envir = globalenv())
+    vusa::clear_script_objects(filepath = filepath, envir = globalenv())
   } else {
     Waarschuwingen_errors_messages <- validate_no_warning_errors(
       filepath,
