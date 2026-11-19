@@ -158,7 +158,7 @@ validate_script_addin <- function(filepath, export_to_dataframe = FALSE) {
   # compare_input_output(filepath, export_to_dataframe)
 
   base::cat("\n")
-  clear_script_objects(bestandspad = filepath, envir = globalenv())
+  vusa::clear_script_objects(bestandspad = filepath, envir = globalenv())
 }
 
 #' Retrieve the last N commit information for a file
@@ -320,8 +320,8 @@ variable_name_lint <- function() {
 #' # Validate the style of a script and export the results to a dataframe
 #' validate_style(filepath = "/path/to/script.R", export_to_dataframe = TRUE)
 #' }
-validate_style <-
-  function(filepath, export_to_dataframe = FALSE) {
+
+validate_style <- function(filepath, export_to_dataframe = FALSE) {
     ## Display a message indicating the style test is in progress
     if (export_to_dataframe == FALSE) {
       base::cat("Style check in progress: ")
@@ -351,35 +351,35 @@ validate_style <-
 
     output_improved <-
       output %>%
-      arrange(line_number) %>%
-      unite("messages", line, message, sep = " ") %>%
-      unite("line", line_number, messages, sep = " : ") %>%
-      select(filename, line) %>%
-      group_by(filename) %>%
-      summarise(across(everything(), str_c, collapse = "\n"))
+      dplyr::arrange(line_number) %>%
+      tidyr::unite("messages", line, message, sep = " ") %>%
+      tidyr::unite("line", line_number, messages, sep = " : ") %>%
+      dplyr::select(filename, line) %>%
+      dplyr::group_by(filename) %>%
+      dplyr::summarise(dplyr::across(everything(), str_c, collapse = "\n"))
     ## Add exclusions to the "line_length_linter". These ensure
     ## that strings (text within double quotes) do not trigger a warning
     ## if they exceed  50 characters. The same applies to variables (text between spaces).
     if (base::nrow(output) > 0) {
-      tmp <- output %>% filter(linter == "line_length_linter")
+      tmp <- output %>% dplyr::filter(linter == "line_length_linter")
       if (nrow(tmp) > 0) {
         tmp %>%
-          mutate(
+          dplyr::mutate(
             length_of_string =
               nchar(
                 stringi::stri_extract_all_regex(line, '(?<=").*?(?=")')
               )
           ) %>%
-          mutate_if(is.integer, ~ replace(., is.na(.), 0)) %>%
-          mutate(max_length_of_object_name = max(nchar(unlist(
+          dplyr::mutate_if(is.integer, ~ replace(., is.na(.), 0)) %>%
+          dplyr::mutate(max_length_of_object_name = max(nchar(unlist(
             strsplit(trimws(line), "\\s+")
           )))) %>%
-          filter(length_of_string >= 50 |
+          dplyr::filter(length_of_string >= 50 |
             max_length_of_object_name >= 50)
       }
       output <- output %>%
-        filter(!line_number %in% tmp$line_number) %>%
-        arrange(line_number)
+        dplyr::filter(!line_number %in% tmp$line_number) %>%
+        dplyr::arrange(line_number)
     }
 
     ## Check if there are style errors and report the test result
@@ -389,7 +389,7 @@ validate_style <-
         base::cat(cli::style_bold(cli::col_red("Style errors detected. See Markers\n")))
       }
       markers <- output %>%
-        select(
+        dplyr::select(
           type,
           filename,
           line_number,
