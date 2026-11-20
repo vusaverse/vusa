@@ -158,7 +158,7 @@ validate_script_addin <- function(filepath, export_to_dataframe = FALSE) {
   # compare_input_output(filepath, export_to_dataframe)
 
   base::cat("\n")
-  vusa::clear_script_objects(filepath = filepath, envir = globalenv())
+  clear_script_objects(filepath = filepath, envir = globalenv())
 }
 
 #' Retrieve the last N commit information for a file
