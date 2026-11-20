@@ -46,6 +46,8 @@ clear_global_proj <- function() {
 #' @param line_end until which line
 #' @param silent whether to mute console output
 #' @export
+
+
 #' Remove objects assigned in the calling script
 #'
 #' A scope-aware alternative to `vusa::clear_script_objects()` that works in
