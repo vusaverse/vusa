@@ -28,7 +28,7 @@ df_compare <- function(df1, df2) {
     dplyr::select(
       variable,
       Type_equal,
-      sort(dplyr::current_vars())
+      sort(current_vars())
     )
   return(df_merged)
 }

@@ -91,7 +91,7 @@ validate_script <- function(filepath = NULL, export_naar_dataframe = FALSE) {
     }
     compare_input_output(filepath, export_naar_dataframe)
     base::cat("\n")
-    Clear_script_objects(bestandspad = filepath, envir = globalenv())
+    clear_script_objects(filepath = filepath, envir = globalenv())
   } else {
     Waarschuwingen_errors_messages <- validate_no_warning_errors(
       filepath,
@@ -263,8 +263,7 @@ extract_filepaths_readrds_csv <- function(bestandspad) {
 #'
 #' @family Script validatie
 #'
-validate_clear_script_objects <-
-  function(filepath, export_naar_dataframe = FALSE) {
+validate_clear_script_objects <- function(filepath, export_naar_dataframe = FALSE) {
     if (export_naar_dataframe == FALSE) {
       base::cat("Clearing objects: ")
     }
@@ -1269,10 +1268,12 @@ check_variable <- function(name) {
     ""
   )
   ## Get the position of all capital letters
+  # ik heb hier een vraag over, dit lijkt alleen een vergelijking te zijn waar true of false uitkomt
+  # geen assignment, dus misschien dient dit ook aangepast te worden
   capitals < unlist(gregexpr("[A-Z]", name))
   ## Check if variable has correct name
   if (replacer == substr(name, 1, nchar(replacer)) &
-    str_detect(substr(name, nchar(replacer) + 1, nchar(replacer) + 1), "^[:upper:]+$")) {
+    stringr::str_detect(substr(name, nchar(replacer) + 1, nchar(replacer) + 1), "^[:upper:]+$")) {
     return(name)
     ## If there is no prefix or it is incorrect. Capitalize and add correct prefix
   } else {
